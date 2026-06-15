@@ -1,0 +1,55 @@
+\section{Equilibrium Solution Method}
+\label{sec:solution}
+This section introduces the investment demand shock to the model and the solution method. The solution requires multiple parallel models---one for solving the endogenous investment demand, and two for solving the natural output.
+
+\subsection{Investment Demand Shock and Second-stage Model}
+The starting point is the investment level decided by the baseline model, which is denoted as $I^*_t$. After the equilibrium is established in the baseline model, the investment demand shock $\varepsilon_{d, t}$ is revealed, causing total investment to increase exogenously. Specifically, $\mu_{d, t}$ is the exogenous investment demand process, following
+\begin{equation}
+    \ln \mu_{d, t} = (1 - \rho_d) \ln \mu_d + \rho_d \ln \mu_{d, t-1} + \varepsilon_{d, t},\,\, \varepsilon_{d, t} \sim \mathcal{N}(0, \sigma_{d, t}^2)
+\end{equation}
+and the total investment becomes
+\begin{equation}\label{eq:invest_law}
+    I_t = \mu_{d, t} I^*_t .
+\end{equation}
+
+As all households are representative, the increase in aggregate investment is equivalent to each household increasing its investment $i_t^*$ by $\mu_{d,t}$. Therefore, we can specify the new optimal problem for each household.
+\begin{equation}\label{eq:new_hh_optimal}
+    \begin{aligned}
+        \max\limits_{c, b, k, l, u} \, &\mathbb{E}_t \sum_{k=0}^{\infty} \beta^k \left(\frac{(c_{t+k} / \gamma^{t+k})^{1-\sigma} - 1}{1 - \sigma} - \chi\frac{\ell_{t+k}^{\psi + 1}(j)}{\psi + 1}\right) \\
+        \text{s.t.  } & c_t + \mu_{d, t} i^*_t + \frac{b_{t+1}}{R_{t+1}P_t} = r^k_t k_{t-1}u_t - a(u_t)k_{t-1} + \frac{b_t}{P_t} + w_t \ell_t - \frac{\tau_t}{P_t} + \frac{d_t}{P_t} \\
+        &k_{t+1} = (1 - \delta) k_t + \mu_{s, t}\left[1 - S\left(\frac{\mu_{d, t} i^*_t}{i_{t-1}}\right)\right] \mu_{d,t} i^*_t
+    \end{aligned}
+\end{equation}
+
+The difference between this optimal problem and the one in Section~\ref{sec:model} lies in the control variables. Equation \eqref{eq:new_hh_optimal} states that investment is no longer a control variable. Instead, it is decided by the investment law described in equation \eqref{eq:invest_law}, and thus we do not have the first-order condition with respect to investment. This kind of specification is not common because it actually says households are making the investment decision irrationally---the investment is not decided by the first-order condition. However, \cite{nireiOriginsPropagationAnimal} provides the micro-foundation of such shock, which is generated from firms' idiosyncratic productivity shocks and the complementary movement between firms.
+
+Following the exogenous investment required by the household, the economy should solve the equilibrium again, which will be finally used to calculate the likelihood. The reason why the investment demand shock cannot be compounded with the baseline model is that the household will adjust their investment according to the realization of the shock otherwise. 
+
+\subsection{Frictionless Parallel Models}
+To solve the natural output used in the Taylor's rule, two frictionless parallel models should be introduced, one of which corresponds to the baseline model, and the other of which corresponds to the second-stage model. The two frictionless parallel models are nearly the same, except for the setting related with the investment demand shock.
+
+Inside each frictionless parallel model, all nominal variables are excluded, and the wage sticky parameter $\theta_w$ is set to zero so that the real wage equals the marginal rate of substitution between hours worked and consumption.
+
+\begin{figure}[htbp]
+    \centering
+    \resizebox{0.9\textwidth}{!}{%
+    \input{figures/plot_model_relation.tex}
+    }
+    \caption{Link between the baseline model, the second-stage model with investment demand shock, and the frictionless parallel models used to compute endogenous investment and natural output.}
+    \label{fig:parallel_model}
+\end{figure}
+
+The relations between all models are illustrated in Figure~\ref{fig:parallel_model}. Basically, starting from the frictionless baseline model, we solve the endogenous investment and natural output. The endogenous investment is then sent to the frictionless second-stage model, and the natural output to the sticky baseline model. Next, another endogenous investment is solved from the sticky baseline model and another natural output from the frictionless second-stage model. Finally, combining the new endogenous investment and natural output, I solve the second-stage model.
+
+\subsection{Detrend and Log-linearization}
+As the model is endowed with a growth trend, the detrended state variables should be defined before solving the steady state. Specifically, define
+\begin{equation}
+    \tilde{Y}_t = \frac{Y_t}{\gamma^t},\,\,
+    \tilde{C}_t = \frac{C_t}{\gamma^t},\,\,
+    \tilde{I}_t = \frac{I_t}{\gamma^t},\,\,
+    \tilde{K}_t = \frac{K_t}{\gamma^t},\,\,
+    \tilde{K}^s_t = \frac{K_t^s}{\gamma^t},\,\,
+    \tilde{w}_t = \frac{w_t}{\gamma^t}
+\end{equation}
+
+After rewriting the first-order conditions in terms of the detrended model, we can solve the steady state and the log-linearized model. The detailed derivation is put in Appendix~\ref{app:model}. 

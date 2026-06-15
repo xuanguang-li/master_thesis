@@ -1,0 +1,170 @@
+% --- Define standard styles for consistency ---
+\tikzset{
+    % Basic model box style
+    base_model/.style={
+        rectangle, 
+        minimum width=6.5cm,
+        minimum height=3.5cm,
+        align=center,
+        font=\sffamily\normalsize,
+        inner sep=10pt
+    },
+    % Model title style
+    model_title/.style={
+        font=\sffamily\bfseries\normalsize,
+        yshift=-8pt
+    },
+    % Model description style
+    model_desc/.style={
+        font=\sffamily\normalsize,
+        color=black,
+        align=center,
+        text width=6cm,
+        yshift=2pt
+    },
+    % Pre-stage models (Blue theme)
+    pre_model_style/.style={
+        base_model,
+        draw=black,
+        top color=white,
+        bottom color=white,
+    },
+    % Post-stage models (Green theme)
+    post_model_style/.style={
+        base_model,
+        draw=black,
+        top color=white,
+        bottom color=white,
+    },
+    % Connection arrows for investment
+    inv_arrow/.style={
+        draw,
+        -Latex,
+        line width=1.5pt,
+        color=black
+    },
+    % Connection arrows for natural output/Taylor rule
+    yn_arrow/.style={
+        draw,
+        -Latex,
+        line width=1.5pt,
+        color=black
+    },
+    % Parallel relationship style
+    parallel_link/.style={
+        draw,
+        Latex-Latex,
+        dashed,
+        line width=1pt,
+        color=black
+    },
+    % Labels for arrows
+    label_node/.style={
+        midway,
+        fill=white,
+        draw=white,
+        font=\sffamily\bfseries\small,
+        inner sep=3pt,
+        opacity=1,
+        text opacity=1
+    },
+    % ERROR / MISTAKE STYLE
+    error_arrow/.style={
+        draw,
+        -Latex,
+        line width=1.5pt,
+        color=red!70,
+        dashed
+    },
+    error_label/.style={
+        midway,
+        fill=red!10,
+        draw=red!50,
+        text=red!70!black,
+        font=\sffamily\bfseries\small,
+        rounded corners=3pt,
+        align=center
+    }
+}
+
+\begin{tikzpicture}[node distance=3cm and 2.5cm]
+
+% =========================================
+% ROW 1: PRE-STAGE MODELS
+% =========================================
+
+% Pre Flexible Model
+\node (preFlex) [pre_model_style] {};
+\node [model_title, anchor=north] at (preFlex.north) {Pre-Flexible Model};
+\node [model_desc, anchor=center] at (preFlex.center) {
+    Frictionless parallel model.\\
+    No investment demand variables.\\
+    Solves for natural output ($Y^n$).
+};
+
+% Pre Model
+\node (pre) [pre_model_style, right=of preFlex] {};
+\node [model_title, anchor=north] at (pre.north) {Pre Model};
+\node [model_desc, anchor=center] at (pre.center) {
+    Sticky price model.\\
+    No investment demand variables.\\
+    Uses $Y^n$ in the Taylor rule.
+};
+
+
+% =========================================
+% ROW 2: POST-STAGE MODELS
+% =========================================
+
+% Post Flexible Model
+\node (postFlex) [post_model_style, below=of preFlex] {};
+\node [model_title, anchor=north] at (postFlex.north) {Post-Flexible Model};
+\node [model_desc, anchor=center] at (postFlex.center) {
+    Frictionless parallel model.\\
+    Investment is fixed.\\
+    Solves for post-stage $Y^n$.
+};
+
+% Post Model
+\node (post) [post_model_style, right=of postFlex] {};
+\node [model_title, anchor=north] at (post.north) {Post Model};
+\node [model_desc, anchor=center] at (post.center) {
+    Sticky price model.\\
+    Contains investment demand.\\
+    Investment is fixed (from Pre Model).
+};
+
+
+% =========================================
+% CONNECTIONS
+% =========================================
+
+% Investment Connections (Vertical)
+\draw [inv_arrow] (preFlex.south) -- (postFlex.north)
+    node [label_node] {$I^*$};
+
+\draw [inv_arrow] (pre.south) -- (post.north)
+    node [label_node] {$I^*$};
+
+% Natural Output Connections (Horizontal)
+\draw [yn_arrow] (preFlex.east) -- (pre.west)
+    node [label_node] {$Y^n$};
+
+\draw [yn_arrow] (postFlex.east) -- (post.west)
+    node [label_node] {$Y^n$};
+
+
+% =========================================
+% ANNOTATIONS
+% =========================================
+\begin{pgfonlayer}{background}
+    % Track Backgrounds
+    \node [fit=(preFlex)(postFlex), rounded corners=15pt, inner sep=15pt, label={[font=\sffamily\bfseries\normalsize, color=black]above:Frictionless Track}] (flexTrack) {};
+    \node [fit=(pre)(post), rounded corners=15pt, inner sep=15pt, label={[font=\sffamily\bfseries\normalsize, color=black]above:Sticky Track}] (stickyTrack) {};
+    
+    % Stage Backgrounds (invisible but used for labels)
+    \node [left=1.5cm of preFlex, font=\sffamily\bfseries\normalsize, anchor=south, color=black] {Pre-stage};
+    \node [left=1.5cm of postFlex, font=\sffamily\bfseries\normalsize, anchor=south, color=black] {Post-stage};
+\end{pgfonlayer}
+
+\end{tikzpicture}

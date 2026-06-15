@@ -1,0 +1,151 @@
+\begin{thebibliography}{20}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Ben~Zeev and Khan(2015)]{benzeevInvestmentSpecificNewsShocks2015}
+N.~Ben~Zeev and H.~Khan.
+\newblock Investment-{{Specific News Shocks}} and {{U}}.{{S}}. {{Business
+  Cycles}}.
+\newblock \emph{Journal of Money, Credit and Banking}, 47\penalty0
+  (7):\penalty0 1443--1464, Oct. 2015.
+\newblock ISSN 0022-2879, 1538-4616.
+
+\bibitem[Christiano et~al.(2005)Christiano, Eichenbaum, and
+  Evans]{christianoNominalRigiditiesDynamic2005}
+L.~J. Christiano, M.~Eichenbaum, and C.~L. Evans.
+\newblock Nominal {{Rigidities}} and the {{Dynamic Effects}} of a {{Shock}} to
+  {{Monetary Policy}}.
+\newblock \emph{Journal of Political Economy}, 113\penalty0 (1):\penalty0
+  1--45, Feb. 2005.
+\newblock ISSN 0022-3808.
+
+\bibitem[Christiano et~al.(2014)Christiano, Motto, and
+  Rostagno]{christianoRiskShocks2014}
+L.~J. Christiano, R.~Motto, and M.~Rostagno.
+\newblock Risk {{Shocks}}.
+\newblock \emph{American Economic Review}, 104\penalty0 (1):\penalty0 27--65,
+  Jan. 2014.
+\newblock ISSN 0002-8282.
+
+\bibitem[Erceg et~al.(2000)Erceg, Henderson, and Levin]{erceg2000optimal}
+C.~J. Erceg, D.~W. Henderson, and A.~T. Levin.
+\newblock Optimal monetary policy with staggered wage and price contracts.
+\newblock \emph{Journal of monetary Economics}, 46\penalty0 (2):\penalty0
+  281--313, 2000.
+
+\bibitem[Fisher(2006)]{fisherDynamicEffectsNeutral2006}
+J.~D.~M. Fisher.
+\newblock The {{Dynamic Effects}} of {{Neutral}} and {{Investment}}-{{Specific
+  Technology Shocks}}.
+\newblock \emph{Journal of Political Economy}, 114\penalty0 (3):\penalty0
+  413--451, 2006.
+\newblock ISSN 0022-3808.
+
+\bibitem[Greenwood et~al.(1988)Greenwood, Hercowitz, and
+  Huffman]{greenwoodInvestmentCapacityUtilization1988}
+J.~Greenwood, Z.~Hercowitz, and G.~W. Huffman.
+\newblock Investment, {{Capacity Utilization}} and the {{Real Business Cycle}}.
+\newblock \emph{The American Economic Review}, 1988.
+
+\bibitem[Greenwood et~al.(1997)Greenwood, Hercowitz, and
+  Krusell]{greenwoodLongRunImplicationsInvestmentSpecific1997a}
+J.~Greenwood, Z.~Hercowitz, and P.~Krusell.
+\newblock Long-{{Run Implications}} of {{Investment-Specific Technological
+  Change}}.
+\newblock \emph{The American Economic Review}, 87\penalty0 (3):\penalty0
+  342--362, 1997.
+
+\bibitem[Herbst and Schorfheide(2015)]{herbstBayesianEstimationDSGE2015}
+E.~P. Herbst and F.~Schorfheide.
+\newblock \emph{Bayesian {{Estimation}} of {{DSGE Models}}}.
+\newblock Princeton University Press, 2015.
+\newblock ISBN 978-0-691-16108-2.
+
+\bibitem[Justiniano et~al.(2010)Justiniano, Primiceri, and
+  Tambalotti]{justinianoInvestmentShocksBusiness2010}
+A.~Justiniano, G.~E. Primiceri, and A.~Tambalotti.
+\newblock Investment shocks and business cycles.
+\newblock \emph{Journal of Monetary Economics}, 57\penalty0 (2):\penalty0
+  132--145, Mar. 2010.
+\newblock ISSN 0304-3932.
+
+\bibitem[Justiniano et~al.(2011)Justiniano, Primiceri, and
+  Tambalotti]{justinianoInvestmentShocksRelative2011}
+A.~Justiniano, G.~E. Primiceri, and A.~Tambalotti.
+\newblock Investment shocks and the relative price of investment.
+\newblock \emph{Review of Economic Dynamics}, 14\penalty0 (1):\penalty0
+  102--121, Jan. 2011.
+\newblock ISSN 1094-2025.
+
+\bibitem[Kamber et~al.(2015)Kamber, Smith, and
+  Thoenissen]{kamberFinancialFrictionsRole2015}
+G.~Kamber, C.~Smith, and C.~Thoenissen.
+\newblock Financial frictions and the role of investment-specific technology
+  shocks in the business cycle.
+\newblock \emph{Economic Modelling}, 51:\penalty0 571--582, Dec. 2015.
+\newblock ISSN 0264-9993.
+
+\bibitem[Leeper et~al.(2010)Leeper, Plante, and
+  Traum]{leeperDynamicsFiscalFinancing2010}
+E.~M. Leeper, M.~Plante, and N.~Traum.
+\newblock Dynamics of fiscal financing in the {{United States}}.
+\newblock \emph{Journal of Econometrics}, 156\penalty0 (2):\penalty0 304--321,
+  June 2010.
+\newblock ISSN 0304-4076.
+
+\bibitem[Liao and Chen(2023)]{liaoNewsShocksInvestmentspecific2023}
+S.-Y. Liao and B.-L. Chen.
+\newblock News shocks to investment-specific technology in business cycles.
+\newblock \emph{European Economic Review}, 152:\penalty0 104363, Feb. 2023.
+\newblock ISSN 00142921.
+
+\bibitem[Moura(2018)]{mouraInvestmentShocksSticky2018}
+A.~Moura.
+\newblock Investment shocks, sticky prices, and the endogenous relative price
+  of investment.
+\newblock \emph{Review of Economic Dynamics}, 27:\penalty0 48--63, Jan. 2018.
+\newblock ISSN 1094-2025.
+
+\bibitem[Nieri and Ragot(2025)]{nireiOriginsPropagationAnimal}
+M.~Nieri and X.~Ragot.
+\newblock The {{Origins}} and {{Propagation}} of {{Animal Spirits Shocks}}.
+\newblock \emph{working paper}, 2025.
+
+\bibitem[{Ruge-Murcia}(2007)]{ruge-murciaMethodsEstimateDynamic2007}
+F.~J. {Ruge-Murcia}.
+\newblock {Methods to estimate dynamic stochastic general equilibrium models}.
+\newblock \emph{Journal of Economic Dynamics and Control}, 31\penalty0
+  (8):\penalty0 2599--2636, Aug. 2007.
+\newblock ISSN 01651889.
+
+\bibitem[Schmitt-Grohé and Uribe(2012)]{schmitt-groheWhatsNewsBusiness2012}
+S.~Schmitt-Grohé and M.~Uribe.
+\newblock What's {{News}} in {{Business Cycles}}.
+\newblock \emph{Econometrica}, 80\penalty0 (6):\penalty0 2733--2764, 2012.
+\newblock ISSN 1468-0262.
+
+\bibitem[Smets and Wouters(2007)]{smetsShocksFrictionsUS2007}
+F.~Smets and R.~Wouters.
+\newblock Shocks and {{Frictions}} in {{US Business Cycles}}: {{A Bayesian DSGE
+  Approach}}.
+\newblock \emph{American Economic Review}, 97\penalty0 (3):\penalty0 586--606,
+  2007.
+\newblock ISSN 0002-8282.
+
+\bibitem[Sveen and Weinke(2005)]{sveen2005new}
+T.~Sveen and L.~Weinke.
+\newblock New perspectives on capital, sticky prices, and the taylor principle.
+\newblock \emph{Journal of Economic Theory}, 123\penalty0 (1):\penalty0 21--39,
+  2005.
+
+\bibitem[Winberry(2021)]{winberryLumpyInvestmentBusiness2021}
+T.~Winberry.
+\newblock Lumpy {{Investment}}, {{Business Cycles}}, and {{Stimulus Policy}}.
+\newblock \emph{American Economic Review}, 111\penalty0 (1):\penalty0 364--396,
+  Jan. 2021.
+\newblock ISSN 0002-8282.
+
+\end{thebibliography}

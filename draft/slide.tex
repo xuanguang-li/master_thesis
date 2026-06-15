@@ -1,0 +1,242 @@
+
+\documentclass[10pt]{beamer}
+
+% --- Packages ---
+\usepackage{amsmath, amssymb}
+\usepackage[authoryear]{natbib}
+\bibliographystyle{abbrvnat}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+% (Optional) compile with XeLaTeX/LuaLaTeX for fonts
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{unicode-math}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, decorations.pathreplacing, calc, fit, backgrounds}
+
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+
+\title{Investment Demand Shock and the Business Cycle}
+\author{Li Xuanguang}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+% ==================================================
+% Intro
+% ==================================================
+\section{Introduction}
+
+\begin{frame}{Background: Why investment shocks?}
+	\begin{itemize}
+		\item Investment is highly volatile over the business cycle.
+		\item Classic view: \textbf{supply-side} investment shocks (IST/MEI) explain a large share of macro fluctuations
+			(e.g., \citealp{greenwoodInvestmentCapacityUtilization1988, fisherDynamicEffectsNeutral2006, justinianoInvestmentShocksBusiness2010}).
+		\item Puzzle: standard IST-type shocks struggle to generate the \textbf{comovement} of consumption with investment and inflation.
+		\item Idiosyncratic productivity shock in heterogeneous-firm models suggest a \textbf{demand-side} investment shock and can create such comovement (\citealp{nireiOriginsPropagationAnimal}).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Research question and headline result}
+	\begin{block}{Research question}
+		Quantitatively, how important is an investment demand shock for the U.S. business cycle?
+	\end{block}
+
+	\vspace{0.4em}
+	\begin{block}{Main result (baseline estimation)}
+		Investment demand shock is a competitive driver of fluctuations: it explains about \textbf{40\%} of output FEVD and about \textbf{50\%} of investment.
+	\end{block}
+
+	\vspace{0.4em}
+	\begin{itemize}
+		\item Key qualitative contrast: ID shock generates an \textbf{inflationary} expansion, while IST shock is \textbf{deflationary} in the estimated baseline.
+		\item Robustness: relative-price identification and a Smets--Wouters-style expansion both preserve quantitative importance of ID shock.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{IST vs investment demand shock}
+	\begin{block}{Investment-specific technology (IST) shock}
+		Supply-side: changes the efficiency of turning investment into capital.
+		\\[0.25em]
+		\centering
+		$K_{t+1} = (1-\delta)K_t + \mu_{s,t}\,\big[1-S(\cdot)\big] I_t$
+	\end{block}
+
+	\vspace{0.4em}
+	\begin{block}{Investment demand (ID) shock}
+		Demand-side: shifts total investment after the baseline endogenous investment decision.
+		\\[0.25em]
+		\centering
+		$I_t = \mu_{d,t} I_t^{*}$
+	\end{block}
+
+	\vspace{0.4em}
+	\begin{itemize}
+		\item Identification intuition: IST moves the (model-implied) relative price of investment; ID does not.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Two-step solution method}
+	\begin{itemize}
+		\item \textbf{Step 1 (pre-stage):} solve the baseline DSGE without ID shock to obtain endogenous investment $I_t^{*}$.
+		\item \textbf{Step 2 (post-stage):} reveal $\mu_{d,t}$ and set total investment $I_t = \mu_{d,t} I_t^{*}$; re-solve equilibrium for other choices (consumption, labor, bonds, utilization).
+		\item For the Taylor rule output gap, use \textbf{frictionless parallel models} to compute natural output in both stages.
+	\end{itemize}
+
+	\vspace{0.1em}
+	\centering
+	\resizebox{0.78\textwidth}{!}{\input{figures/plot_model_relation.tex}}
+\end{frame}
+
+% ==================================================
+% Model
+% ==================================================
+\section{Model}
+
+\begin{frame}{Baseline DSGE model: ingredients}
+	\begin{itemize}
+		\item Framework: estimated DSGE based on \citealp{smetsShocksFrictionsUS2007} / \citealp{herbstBayesianEstimationDSGE2015}, augmented with ID shock (two-step equilibrium).
+		\item Nominal rigidities: Calvo price setting; sticky wage via a reduced-form contract-reset rule.
+		\item Real frictions: investment adjustment costs; endogenous capital utilization with utilization cost.
+		\item Policy: Taylor rule responding to inflation and the output gap; output stablizing fiscal policy.
+		\item Shocks: aggregate technology, IST, monetary policy, government spending, and investment demand.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Key equations}
+	\small
+	\begin{itemize}
+		\item \textbf{Capital accumulation with IST and adjustment costs}
+			\[
+				K_{t+1} = (1-\delta)K_t + \mu_{s,t}\left[1-S\left(\frac{I_t}{I_{t-1}}\right)\right] I_t,
+				\quad S(x)=\frac{\phi_i}{2}(x-\gamma)^2.
+			\]
+		\item \textbf{ID shock enters only in post-stage:} $I_t=\mu_{d,t} I_t^*$.
+		\item \textbf{Endogenous capital utilization:} $K_t^s = u_t K_{t-1}$.
+		\item \textbf{Government spending:} $G_t = \left(\frac{Y_t}{Y}\right)^{-\phi_g}\mu_{g, t}$
+		\item \textbf{Sticky wages (baseline):} partial adjustment toward MRS
+			\[
+				w_t = \left(\frac{L_t^{\psi}}{C_t^{-\sigma}}\right)^{\theta_w} w^{1-\theta_w}.
+			\]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Estimation: data (baseline)}
+	\begin{itemize}
+		\item Six observables (quarterly):
+			\begin{itemize}
+				\item per-capita real output growth
+				\item CPI inflation (annualized)
+				\item effective federal funds rate
+				\item (log) hours worked
+				\item per-capita real investment growth
+				\item per-capita real government spending growth
+			\end{itemize}
+		\item Measurement error used to mitigate stochastic singularity.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Summary: What changed vs the last time slide?}
+	\begin{itemize}
+        \item This version uses two different frictionless parallel models to solve natural output separately in pre-stage and post-stage.
+        \item Stochastic growth trend is changed to deterministic growth trend.
+		\item Adds investment adjustment cost, and endogenous capital utilization with utilization cost.
+		\item Data set includes hours worked, investment growth and government spending growth.
+		\item Robustness is formalized in two directions:
+			(i) add \textbf{relative price of investment} to discipline IST;
+			(ii) expand toward a \textbf{Smets--Wouters-style} model with extra shocks and extra observables.
+	\end{itemize}
+\end{frame}
+
+% ==================================================
+% Results
+% ==================================================
+\section{Results}
+
+\begin{frame}{Model fit: moments (baseline)}
+	\begin{itemize}
+		\item The model matches most means/variances reasonably.
+		\item Main tension: implied variance of hours is too high, suggesting missing frictions (e.g., habit) would dampen labor volatility.
+	\end{itemize}
+
+	\vspace{0.4em}
+	\centering
+	{\scriptsize\input{tables/variance_data_vs_model_gov_data.tex}}
+\end{frame}
+
+\begin{frame}{Forecast error variance decomposition (baseline)}
+	\begin{itemize}
+		\item IST + ID together explain about \textbf{65\%} of output FEVD, \textbf{45\%} of inflation, and \textbf{90\%} of hours.
+		\item ID shock alone: about \textbf{40\%} of output FEVD and about \textbf{50\%} of investment.
+	\end{itemize}
+
+	\vspace{0.3em}
+	\centering
+	{\scriptsize\input{tables/variance_decomp_gov_data.tex}}
+\end{frame}
+
+\begin{frame}{Impulse responses: inflationary ID vs deflationary IST}
+	\centering
+	\includegraphics[width=\textwidth]{figures/compare_irf_gov_data.pdf}
+\end{frame}
+
+\begin{frame}{Historical decomposition (baseline)}
+	\centering
+	\includegraphics[width=0.6\textwidth]{figures/hd_gov_data.pdf}
+\end{frame}
+
+\begin{frame}{Robustness I: relative price disciplines IST}
+	\begin{itemize}
+		\item Add relative price of investment as an observable and interpret detrended relative price as inverse IST.
+		\item Result: the inferred volatility/importance of IST falls; ID shock becomes more important in explaining macro fluctuations.
+	\end{itemize}
+
+	\vspace{0.4em}
+	\centering
+	{\scriptsize\input{tables/variance_decomp_rel_price_data.tex}}
+\end{frame}
+
+\begin{frame}{Robustness II: Smets--Wouters-style expansion}
+	\begin{itemize}
+		\item Add key SW mechanisms: habit formation, monopolistic labor market structure, and additional shocks (preference + markup shocks).
+		\item Add extra observables: consumption and wage growth.
+		\item ID remains quantitatively important: about \textbf{25\%} of output FEVD and \textbf{78\%} of investment.
+	\end{itemize}
+
+	\vspace{0.2em}
+	\centering
+    {\scriptsize\input{tables/variance_decomp_sw_type.tex}}
+\end{frame}
+
+\begin{frame}{Takeaways}
+	\begin{itemize}
+		\item Estimated evidence supports an investment-demand-side driver of fluctuations in addition to IST.
+		\item Baseline: ID shock delivers sizable FEVD shares and an inflationary expansion (vs IST deflationary).
+		\item Robustness checks (relative price + SW-type model) preserve the main conclusion.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+	\bibliography{reference}
+\end{frame}
+
+\begin{frame}{If we drop investment adjustment cost}
+    \begin{figure}
+        \includegraphics[width=\textwidth]{figures/CompareIRF_capital_utility_ratio.pdf}
+        \caption{IRF: 1 s.d. monetary shock in the model with and without investment adjustment cost}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{If we don't use government spending data}
+    \input{tables/variance_decomp_invest_friction_without_z.tex}
+\end{frame}
+\end{document}
+

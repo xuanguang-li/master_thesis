@@ -1,0 +1,94 @@
+\begin{frame}{Solving the Model}
+    Define detrended variables as:
+    \begin{equation}
+        \tilde{c}_t = \frac{C_t}{A_t}, \quad \tilde{y}_t = \frac{Y_t}{A_t}, \quad \tilde{k}_t = \frac{K_t}{A_t}, \quad \tilde{i}_t = \frac{I_t}{A_t}, \quad \tilde{w}_t = \frac{w_t}{A_t}, \quad
+        \tilde{g}_t = \frac{G_t}{A_t}
+    \end{equation}
+\end{frame}
+
+\begin{frame}{A Simple NK model}
+    \begin{block}{Household}
+        Current model uses the linear form $\sigma_l=0$.
+        \begin{equation}
+            \begin{aligned}
+                \max\limits_{c, i, k, l} \,&\mathbb{E}_t \sum_{k=0}^{\infty} \beta^k \left(\frac{(c_{t+k} / A_{t+k})^{1-\sigma} - 1}{1 - \sigma} - \chi\frac{l_{t+k}^{\sigma_l + 1}}{\sigma_l + 1}\right)\\
+                \text{s.t. }& c_t + i_t + \frac{b_t}{P_t} = r^k_t k_t + \frac{R_{t-1} b_{t-1}}{P_t} + w_t l_t - \frac{T_t}{P_t}\\
+                & k_t = (1 - \delta) k_{t-1} + i_t \\
+                & c_t \geq 0, \, 0 \leq l_t \leq 1
+            \end{aligned}
+        \end{equation}
+
+        Introducing $c_t / A_t$ is a method to fit the growing consumption in the data. $A_t$ is the labor-augmenting technology, following an exogenous process.
+
+    \end{block} 
+\end{frame}
+
+\begin{frame}{A Simple NK model}
+    \begin{block}{Intermediate Goods Producers}
+        \begin{equation}
+            \begin{aligned}
+                \mathrm{mc}_t(i) &= \min\limits_{k, l} \,  w_t l_t(i) + r^k_t k_t(i)\\
+                \text{s.t. }& k(i)_t^\alpha \left(A_t l_t(i)\right)^{1 - \alpha} = 1
+            \end{aligned}
+        \end{equation}
+        \begin{equation}
+            \scriptsize
+            \begin{aligned}
+                \max\limits_{p(i)}\, & \mathbb{E}_t \sum_{k=0}^{\infty} \Lambda_{t+k, t} \left(p_{t+k}(i)y_{t+k}(i) - \mathrm{mc}_{t+k}(i) y_{t+k}(i) - \frac{\phi}{2}\left(\frac{p_{t+k}(i)}{P_{t+k}} - \pi\right)^2 y_{t+k}(i)\right)\\
+                \text{s.t. }& y_t(i) = \left(\frac{p_t(i)}{P_t}\right)^{-\nu}
+            \end{aligned}
+        \end{equation}
+
+        $\pi$ is the steady-state inflation rate. In the model, it is determined by the central bank's target inflation rate, helping fit the steady-state inflation rate in the data.
+    \end{block}
+\end{frame}
+
+\begin{frame}{A Simple NK model}
+    \begin{block}{Central Bank}
+        Simplified Taylor rule
+        \begin{equation}
+            R_t = \left(\pi^* r \left(\frac{\pi_t}{\pi^*}\right)^{\psi_{\pi}} \right)^{1 - \rho_R} R_{t-1}^{\rho_R}e^{\varepsilon_{R,t}}
+        \end{equation}
+        \begin{itemize}
+            \item $\pi^*$ is the target inflation rate.
+            \item $r$ is the steady-state real interest rate.
+            \item $\varepsilon_{R,t}$ is the monetary policy shock.
+        \end{itemize}
+    \end{block}
+    
+    \begin{block}{Government}
+        \begin{equation}
+            P_t G_t + R_{t-1} B_{t-1} = B_t + T_t
+        \end{equation}
+        Government spending, $G_t$, follows an exogenous process.
+    \end{block}
+\end{frame}
+
+\begin{frame}{A Simple NK model}
+    \begin{block}{Final Goods}
+        \begin{equation}
+            Y_t = \left(\int_{0}^{1} y_t(i)^{\frac{\nu - 1}{\nu}}\, di\right)^{\frac{\nu}{\nu - 1}}
+        \end{equation}
+    \end{block}
+    \begin{block}{Market Clearing}
+        \begin{equation}
+            P_t =\left( \int_{0}^{1} p_t(i)^{1 - \nu} \, di\right)^\frac{1}{1 - \nu}, \quad
+            C_t = \int_{0}^{1} c_t(j) \, dj, \, ...
+        \end{equation}
+
+        \begin{align}
+            Y_t &= C_t + I_t + G_t + AC_t\\
+            K_t &= (1 - \delta) K_{t-1} + I_t
+        \end{align}
+    \end{block}
+\end{frame}
+
+\begin{frame}{A Simple NK model}
+    \begin{block}{Exogenous Processes}
+        \begin{align}
+            \hat{g}_t &= \ln \left(\frac{\tilde{g}_t}{\tilde{g}_{ss}}\right), \quad \hat{g}_t = \rho_g \hat{g}_{t-1} +\varepsilon_{g, t}\\
+            A_t &= \gamma z_t A_{t-1}, \quad \hat{z}_t = \rho_z \hat{z}_{t-1} + \varepsilon_{z, t}
+        \end{align}
+    \end{block}
+\end{frame}
+

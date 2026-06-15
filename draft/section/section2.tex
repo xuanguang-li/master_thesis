@@ -1,0 +1,166 @@
+\section{Baseline Model}\label{sec:model}
+    The baseline model is based on \cite{herbstBayesianEstimationDSGE2015} and \cite{smetsShocksFrictionsUS2007}. I selected some model settings to keep the fitness to the data, including price and wage rigidity, investment adjustment cost, and endogenous capital utilization ratio. However, some settings are left out in the baseline model to keep the solution clean, such as habit formation and price indexation.
+
+    I first specify the model without the investment demand shock, and then add the shock in Section~\ref{sec:solution}.
+
+    \subsection{Household}
+    There is a continuum of households indexed on $[0,1]$. For simplicity of notation, the index of the household is omitted in the following equations. The representative household owns the firms and solves the dynamic optimal problem over consumption $c_t$, hours worked $\ell_t$, nominal bonds $B_t$, investment $i_t$, capital $k_t$, and capital utilization $u_t$.
+        \begin{equation}
+            \max\limits_{c, b, i, k, l, u} \,\mathbb{E}_t \sum_{k=0}^{\infty} \beta^k \left(\frac{(c_{t+k} / \gamma^{t+k})^{1-\sigma} - 1}{1 - \sigma} - \chi\frac{\ell_{t+k}^{\psi + 1}(j)}{\psi + 1}\right)
+        \end{equation}
+    
+    In the objective function, $\gamma$ is the growth rate of the labor-augmented technology, which is used to generate a trend in the state variables. Usually, if we use detrended data, there is no need to add this term. However, the process of detrending itself includes some operations on the data, which are not explained in the model. To maintain the integration of the estimation process, I use $\gamma$ to fit the non-detrended data.
+
+    Following \cite{herbstBayesianEstimationDSGE2015}, I assume the representative household derives utility from effective consumption, defined as absolute consumption scaled by the trend in labor-augmenting technology. This formulation mathematically guarantees the existence of a balanced growth path and the convenience of representing the marginal utility, as we can directly define the detrended consumption $\tilde{c}_{t+k} = c_{t+k} / \gamma^{t+k}$ inside.
+    
+    The budget constraint appears in the following equation:
+    \begin{equation}
+        c_t + i_t + \frac{b_{t+1}}{R_{t+1}P_t} = r^k_t k_{t-1}u_t - a(u_t)k_{t-1} + \frac{b_t}{P_t} + w_t \ell_t - \frac{\tau_t}{P_t} + \frac{d_t}{P_t}.
+    \end{equation}
+    where $b_t$ and $R_t$ denote nominal bonds and the nominal interest rate. $\tau_t$ is the nominal tax, and $d_t$ is the nominal dividend from the firms they own. $a(u_t)k_{t-1}$ is the adjustment cost of capital utilization. $a(\cdot)$ is a function defined on $[0, 1]$, satisfying $a(1)=0$ and $a''(1) > 0$. Endogenous capital utilization allows capital to be adjusted when facing shocks, even though capital is still a predetermined variable, and the adjustment cost of capital utilization smooths the adjustment process.
+
+    The law of motion of capital adds several additional terms compared with the standard one.
+    \begin{equation}
+        k_{t+1} = (1 - \delta) k_t + \mu_{s, t}\left[1 - S\left(\frac{i_t}{i_{t-1}}\right)\right] i_t
+    \end{equation}
+
+    The first one is the investment specific technology shock $\mu_{s, t}$, which can be assumed to follow a stationary AR(1) process without incorporating the relative price of investment.
+    \begin{equation}
+        \ln \mu_{s, t} = (1 - \rho_{i}) \ln \mu_{s} + \rho_{s}\ln \mu_{s, t-1} + \varepsilon_{s, t}, \,\, \varepsilon_{s, t} \sim \text{i.i.d. } \mathcal{N}(0, \sigma_s^2)
+    \end{equation}
+
+    The second one is the investment adjustment cost $S\left(\frac{i_t}{i_{t-1}}\right)$. I use the function form $S(x) = \frac{\phi_i}{2}(x - \gamma)^2$, indicating that if the growth of the investment is above or below the balanced path growth rate, then an additional adjustment cost should be charged. The setting is important because the investment would be very sensitive to the shocks otherwise, which fails to match to the comovement in the data \citep{winberryLumpyInvestmentBusiness2021} and causes unrealistic impulse response function.
+
+    From the household's optimal problem, we obtain the following first-order conditions. Let $Q_t$ denote the ratio of the Lagrange multiplier on the law of motion of capital to the Lagrange multiplier on the budget constraint, which captures the relative marginal utility between consumption and investment. $Q_t$ has the following relation to Tobin's $Q$: $\text{Tobin's }Q = Q_t \mu_{s, t}$. Define gross inflation as $\pi_{t+1}\equiv P_{t+1}/P_t$.
+    \begin{align}
+        &\Lambda_{t,t+1} \equiv \frac{\beta}{\gamma}\left(\frac{c_{t+1}/\gamma^{t+1}}{c_t/\gamma^t}\right)^{-\sigma}
+        \label{eq:sdf}\\
+        &\begin{aligned}
+        \label{eq:inv_foc}
+        1 &= Q_t\,\mu_{s,t}\left(1 - S\left(\frac{i_t}{i_{t-1}}\right) - S'\left(\frac{i_t}{i_{t-1}}\right)\frac{i_t}{i_{t-1}}\right)
+        \\
+        &\qquad+ \mathbb{E}_t\left[\Lambda_{t,t+1}\,Q_{t+1}\,\mu_{s,t+1}\,S'\left(\frac{i_{t+1}}{i_t}\right)\left(\frac{i_{t+1}}{i_t}\right)^2\right],\\
+        \end{aligned}\\
+        &Q_t = \mathbb{E}_t\left[\Lambda_{t,t+1}\,\big(r_{t+1}^k u_{t+1} - a(u_{t+1}) + (1-\delta)Q_{t+1}\big)\right],
+        \label{eq:q_euler}\\
+        &1 = \mathbb{E}_t\left[\Lambda_{t,t+1}\,\frac{R_{t+1}}{\pi_{t+1}}\right]
+        \label{eq:euler_bond},\\
+        &w_t = \chi\,\ell_t^{\psi}\,\gamma^t\left(\frac{c_t}{\gamma^t}\right)^{\sigma}, \\
+        &r_t^k = a'(u_t)
+        \label{eq:util_foc}.
+    \end{align}
+
+    \subsection{Final Goods Producer}
+    This part of model is standard, where perfectly competitive firms produce the final goods $Y_t$ using a CES aggregator. They solve the optimal problem,
+    \begin{equation}
+        \begin{aligned}
+             \max\limits_{Y_t, y_t(j)}\, & P_t Y_t - \int_{0}^{1} p_t(j)y_t(j)\, dj \\
+             \text{s.t.  } & Y_t = \left(\int_{0}^{1} y_{t}(j)^{\nu - 1}\, dj\right)^{\frac{1}{\nu - 1}}.
+        \end{aligned}
+    \end{equation}
+    
+    Therefore, from the first-order condition, the demand for each intermediate good follows:
+    \begin{equation}
+        y_t(j) = \left(\frac{p_t(j)}{P_t}\right)^{-\nu} Y_t,
+    \end{equation}
+    where $P_t$ follows
+    \begin{equation}
+        P_t = \left(\int_{0}^{1} p(j)^{\frac{\nu - 1}{\nu}}\, dj\right)^{\frac{\nu}{\nu - 1}}.
+    \end{equation}
+
+    Alternatively, we could define the price markup shock by replacing the fixed parameter $\nu$ by a time-varying random variable.
+
+    \subsection{Intermediate Goods Producer}
+    Each intermediate goods producer has to solve both the cost minimization problem and the dynamic pricing problem.
+    
+    The cost minimization problem is
+    \begin{equation}
+        \min\limits_{k^s_t(j), n_t(j)}\, r_t^k k^s_t(j) + w_t n_t(j)
+    \end{equation}
+    subject to their production technology,
+    \begin{equation}
+        y_t(j) = \mu_{a, t} k^s_t(j)^{\alpha}\left(\gamma^t n_t(j)\right)^{1-\alpha},
+    \end{equation}
+    where $\mu_{a, t}$ is the aggregate productivity technology, following
+    \begin{equation}
+        \ln \mu_{a, t} = (1 - \rho_a) \ln \mu_{a} + \rho_a \ln \mu_{a, t-1} + \varepsilon_{a, t}, \,\, \varepsilon_{a, t} \sim \text{i.i.d. } \mathcal{N}(0, \sigma_a^2).
+    \end{equation}
+
+    $\gamma^t$ ($\gamma>1$) is the labor-augmented technology, which helps derive the balanced growth path. In addition, $K^s_t$ means the capital service, which will be influenced by the capital utilization $u_t$ under general equilibrium conditions.
+
+    The cost minimization solves the cost function. However, as the production function has constant returns to scale, the marginal cost is solved as well:
+    \begin{equation}
+        mc_t(j) = \frac{1}{\alpha^\alpha (1-\alpha)^{1-\alpha} \gamma^{t(1-\alpha)}}\frac{w_t^{1-\alpha} (k_t^s)^{\alpha}}{\mu_{a,t}}.
+    \end{equation}
+
+    The Calvo pricing problem is described below.
+    \begin{equation}
+        \begin{aligned}
+        \max\limits_{p_t(j)}\, &\mathbb{E}_t \sum_{k=0}^{\infty} \theta_p^k \Lambda_{t+k, t} \left(p_t(j) y_{t+k}(j) - P_{t+k} mc_{t+k}(j)\right) \\
+        \text{s.t.   } & y_{t+k}(j) = \left(\frac{p_t(j)}{P_{t+k}}\right)^{-\nu},
+        \end{aligned}
+    \end{equation}
+    where $\theta_p$ is the Calvo probability of not being allowed to reoptimize one's price, and $\Lambda_{t+k, t}$ is the stochastic discount factor between period $t+k$ and period $t$ defined in equation~\eqref{eq:sdf}.
+
+    I drop the price indexation, which allows firms to move their prices according to the inflation in the last period even though they are not allowed to reoptimize their prices, because \cite{smetsShocksFrictionsUS2007} shows the model has a higher posterior likelihood without this setting.
+
+    \subsection{Wage Setting}
+    Instead of modeling detailed intermediate labor sector, the baseline model uses a simplified wage setting equation to introduce the sticky wage, following \cite{nireiOriginsPropagationAnimal}.
+    \begin{equation}
+        w_t = \left(\frac{L_t^{\psi}}{C_t^{-\sigma}}\right)^{\theta_w} w^{1 - \theta_w}
+    \end{equation}
+    where $w$ is the steady-state real wage. Similar to the Calvo pricing problem, the equation roughly means that only a $\theta_w \in (0,1)$ part of wage contracts can be reset to match the current marginal rate of substitution between hours worked and consumption. Meanwhile, the rest of the $1 - \theta_w$ part can only keep the steady-state real wage.
+
+    Comparing with the standard sticky wage setting in \cite{erceg2000optimal}, this simplified wage-setting equation assumes a perfectly competitive labor market, and thus there is no wage markup if the firms are allowed to reset the wage contract. In addition, the trapped wage is on the steady-state level, which can be taken as the optimal wage setting before a shock has happened.
+
+    Another property of this equation is that the implied wage markup is not constant. To see this, we can simply calculate 
+    
+    $$\frac{w_t}{MRS_t} = \left(\frac{L_t^{\psi}}{C_t^{-\sigma}}\right)^{ \theta_w - 1} w^{1 - \theta_w} = MRS_t^{\theta_w - 1}w^{1 - \theta_w}.$$
+
+    The wage markup increases a lot when the $MRS_t$ approaches $0$, which means the wage markup can absorb much of the decrease of the $MRS_t$ in this regime and keeps the change of the real wage smooth. This mechanism is shown to be important to account the investment shock to the business cycle by \cite{justinianoInvestmentShocksBusiness2010}.
+
+    \subsection{Government}
+    The government performs the monetary and fiscal policy. The central bank follows a standard Taylor rule,
+    \begin{equation}
+        R_t = \left(\pi^* r \left(\frac{\pi_t}{\pi^*}\right)^{\psi_{\pi}} \left(\frac{Y_t}{Y_t^{n}}\right)^{\psi_y}\right)^{1 - \rho_R} R_{t-1}^{\rho_R}\exp(\varepsilon_{R,t})
+    \end{equation}
+
+    $\pi^*$ is the targeted inflation rate of the central bank, and $r$ is the steady-state real interest rate. The nominal interest rate is set according to the deviation of inflation $\pi_t$ from the targeted inflation rate and of output $Y_t$ from the natural output $Y^n_t$. Finally, $R^{\rho_R}_{t-1}$ smooths the change of the nominal interest rate, and $\varepsilon_{R,t}$ is the monetary policy shock, with $\varepsilon_{R,t} \sim \text{i.i.d. } \mathcal{N}(0, \sigma_R^2)$ across time.
+
+    The fiscal policy part includes a government budget constraint and an exogenous government spending process.
+    \begin{equation}
+            P_t G_t + R_{t-1} B_{t-1} = B_t + T_t
+    \end{equation}
+    
+    Government spending, $G_t$, follows an output stabilization rule and an exogenous government spending process \citep{leeperDynamicsFiscalFinancing2010}.
+    \begin{equation}
+        G_t = \left(\frac{Y_t}{Y}\right)^{-\phi_g} \mu_{g, t}
+    \end{equation}
+
+    $\mu_{g, t}$ follows,
+    \begin{equation}
+        \ln \mu_{g, t} = (1 - \rho_g) \ln \mu_{g} + \rho_{g}\ln\mu_{g, t-1} + \varepsilon_{g, t}, \,\, \varepsilon_{g, t} \sim \text{i.i.d. } \mathcal{N}(0, \sigma_g^2).
+    \end{equation}
+
+    \subsection{Resource Constraint}
+    First we define the aggregate variables from the integration of households' optimal choices,
+    \begin{equation}
+        \begin{aligned}
+            &C_t = \int_{0}^{1} c_t(j) \, dj, \,\, 
+            I_t = \int_{0}^{1} i_t(j) \, dj, \,\,
+            L_t = \int_{0}^{1} \ell_t(j) \, dj,\,\,\\
+            &K_t = \int_{0}^{1} k_t(j) \, dj, \,\,
+            B_t = \int_{0}^{1} b_t(j)\, dj,
+        \end{aligned}
+    \end{equation}
+
+    Since capital utilization $u_t$ is only associated with the real interest rate of capital in equation~\eqref{eq:util_foc}, it is the same across all households. After integrating on the variables of $k^s_t(j)$ and $n_t(j)$ on the firms' side, and then applying the equilibrium condition, we can get
+    \begin{equation}
+        \begin{aligned}
+            Y_t &= C_t + I_t + G_t + a(u_t)K_{t-1} \\
+            K_t^s &= u_t K_{t-1} \\
+            N_t & = L_t
+        \end{aligned}
+    \end{equation}
+
+    Government bond market is cleared according to Walras' law. 

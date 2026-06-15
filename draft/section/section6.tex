@@ -1,0 +1,93 @@
+\section{Robustness Test}
+\label{sec:robustness}
+In this section, three alternative settings are used to test the baseline result regarding the investment demand shock - the first one uses the standard \cite{smetsShocksFrictionsUS2007} model; the second discuss the case that investment demeaned is i.i.d.; the last one further differentiate IST shock and marginal efficiency of investment (MEI) shock referring \cite{justinianoInvestmentShocksRelative2011}.
+
+\subsection{Smets--Wouters-style Model}
+In this section, the baseline model is expaned referring \cite{smetsShocksFrictionsUS2007} to address the underlying concerns of oversimplification. Specifically, I add the habit formation term in the utility function, competitive monopoly structure in the labor market. In addition, preference shock, price markup shock and wage markup shock are added as well. In terms of data, consumption and wage growth rate are added.
+
+The utility function of households becomes
+\begin{equation}
+    \mathbb{E}_t \left[ \sum_{s=0}^{\infty} \beta^s \mu_{b, t+s} \left( \ln(C_{t+s} - h C_{t+s-1}) - \chi \frac{L_{t+s}(j)^{1+\psi}}{1+\psi} \right) \right],
+\end{equation}
+where $\mu_{b, t}$ is the intertemporal preference shock, following
+\begin{equation}
+    \ln \mu_{b, t} = (1 - \rho_b) \mu_b + \rho_b \ln \mu_{b, t-1} + \varepsilon_{b, t}, \,\, \varepsilon_{b, t}\sim \text{i.i.d. } N (0, \sigma_b^2).
+\end{equation}
+
+It is worth to mention that the consumption part in the utility function becomes logarithmic instead of the more general CRRA form. This is because with habit formation and separable utility function between $C_t$ and $L_t$, general CRRA utility function doesn't have a balanced growth path unless it reduces to a logarithmic form.
+
+The stochastic discount factor becomes
+\begin{equation}
+    SDF_t = \beta \left(\frac{c_{t+1} - hc_t}{c_t - hc_{t-1}}\right)^{-1} = \beta \left(\frac{\gamma \tilde{c}_{t+1} - h\tilde{c}_t}{\tilde{c}_t - \frac{h}{\gamma}\tilde{c}_{t-1}}\right)^{-1},
+\end{equation}
+where $\tilde{c}_t = c_t / \gamma^t$ is the detrended variable.
+
+The labor market and wage Calvo pricing problem follow \cite{erceg2000optimal}, which gives us the wage Phillips curve
+\begin{equation}
+    \hat{\pi}_t^w = \beta \mathbb{E}_t \hat{\pi}_{t+1}^w - \kappa_w \left(\hat{w}_t - \hat{MRS}_t\right) + \mu_{w, t},
+\end{equation}
+where $\kappa_w = \frac{(1 - \theta_w)(1 - \beta\theta_w)}{\theta_w(1+\nu_{w} \psi)}$. Because of the weak identification problem \footnote{$\nu_w$, $\theta_w$ only play a role in $\kappa_w$, but $\kappa_w$ can be the same under different value combinations of $\nu_w$ and $\theta_w$. Thus the model will be unable to identify $\nu_w$ and $\theta_w$ parameters separately.}, $\nu_w$ is set as $3$ following \cite{smetsShocksFrictionsUS2007}.
+
+$\mu_{w, t}$ is the wage markup shock following
+\begin{equation}
+    \ln \mu_{w, t} = (1 - \rho_w) \mu_w + \rho_b \ln \mu_{w, t-1} + \varepsilon_{w, t}, \,\, \varepsilon_{w, t}\sim \text{i.i.d. } N (0, \sigma_w^2).
+\end{equation}
+
+The price markup shock $\mu_{p, t}$ is added in the same way -- right after the Phillips curve. I assume the markup shocks follow AR(1) processes for simplicity while \cite{smetsShocksFrictionsUS2007} uses ARMA(1, 1) processes for these two shocks.
+
+Two added observation equations are
+\begin{equation}
+    \begin{bmatrix}
+        \Delta \ln CONS_t\\
+        \Delta \ln WAGE_t
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+        \bar{\gamma}\\
+        \bar{\gamma}
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        \hat{c}_t - \hat{c}_{t-1} \\
+        \hat{w}_t - \hat{w}_{t-1}
+    \end{bmatrix}
+    +
+    \Sigma_t^{meas}.
+\end{equation}
+
+Posteriors can be found in Table~\ref{tab:posterior-params:sw-type-no-rel} in Appendix \ref{app:result}. Espcially, both Phillips curve and wage Phillips curve become very flat, with $\kappa$ estimated as $0.03$, and $\kappa_w$ roughly $0.02$, which are much more sticky than the baseline result. A simple test to mute price and wage markup shock shows that the low $\kappa$ and $\kappa_w$ is partially benefitted by these shocks, as they can alter price and wage exogenously, even though the endogenous part is rather sticky. Moments comparison is shown in Table~\ref{tab:varcmp:sw-type-no-rel}. As explained in Section~\ref{sec:results:moments}, the variance of hours worked is fitted much more better.
+
+It is clear that investment demand shock has only marginal effect on various macroeconomic variables as shown in Table~\ref{tab:vd:sw-type-no-rel}. Investment demand shock can only contribute $4.37\%$ of output forecast variance, $13.62\%$ of investment, and nearly cannot explain other variables such as inflation. Thus I flag the fragility of the baseline result in Table~\ref{tab:fevd-frequency:gov-data}.
+
+\input{tables/variance_decomp_sw_type_no_rel.tex}
+
+\subsection{Independent Investment Demand Shock}
+Although using AR(1) process to specify shocks is standard, it is natural to think that households will realize the exogenous investment demand in $t+1$ period, and thus adjust their investment decision in $t+1$ to dampen the effect of investment demand shock. Equivalently, this is to say that investment demand shock only has the transitory effect in $t$ period, which motivates the exercise in this section.
+
+All other settings are unchanged compared with the baseline, except that $\rho_s$ is manually set as $0$. To be concise, I only present FEVD result here in Table~\ref{tab:varcmp:per-add-mei}, and others can be found in Table~\ref{tab:posterior-params:per-add-mei} and Table~\ref{tab:varcmp:per-add-mei} in Appendix~\ref{app:result}.
+
+\input{tables/variance_decomp_per_add_mei.tex}
+
+Investment demand shock contributes $22.95\%$ of output and $15.18\%$ of investment forecast error variance. Compared with the baseline result in Table~\ref{tab:fevd-frequency:gov-data}, the influence of investment demand shock also decreases as expected, since the zero persistence cut off the future influence.
+
+\subsection{Marginal Efficiency of Investment Shock}
+The topic in this section is sutble -- it further distinguishes IST shock and marginal efficiency (MEI) of investment shock. Specifically, IST shock means the efficiency from consumption goods to investment goods, and MEI shock means the efficiency from investment goods to capital. However, without modelling the detailed investment goods producers and capital producers, both shocks stay in the capital law of motion in thier reduced form,
+\begin{equation}\label{eq:mei}
+    k_{t+1} = (1 - \delta) k_t + \mu_{s, t}\mu_{m, t}\left[1 - S\left(\frac{i_t}{i_{t-1}}\right)\right] i_t,
+\end{equation}
+and thus there will be weak identification problem within the previous data set.
+
+This test is motivated by \cite{justinianoInvestmentShocksRelative2011}, who claim that IST shock will become less important if it is identified by data, and that MEI shock becomes the one that matters. However, this raises the doubt about the estimation result -- does the important thing is just the residual in capital law of motion? Although we can write multiple shocks in the capital law of motion, the equation suffers misspecification problem that we cannot make sure what are the really shocks. We can claim IST shock, investment demand shock, or MEI shock in the capital law of motion, but which shocks to add depends on our assumptions. If data-identified shock is less important, then the other part maybe just the residual in the equation, and it is significant no matter what shock is named.
+
+To alleviate the concern, the best thing to do is to identify investment shock directly by some data. However, as this shock is originated from idiosyncratic productivity shocks, the micro data that we need can hardly be incorporated into the current framework, where we only consider aggregate variables. Therefore, I can only conduct a horse-race test in this section by adding MEI shock into the mdoel. The result cannot confirmly tell the importance of investment demand shock, but only some suggestions.
+
+I use the relative price data to solve the weak identification problem mentioned in equation \eqref{eq:mei}. As pointed out by \cite{greenwoodLongRunImplicationsInvestmentSpecific1997a} and \cite{fisherDynamicEffectsNeutral2006}, relative price of invesetment reflects the investment specific technology level in a one-sector model \footnote{If we model the production of consumption goods and investment goods as two sectors such as \cite{mouraInvestmentShocksSticky2018}, relative price of investment goods is represented as the relative productivity, markup and the marginal cost between these two sectors. Therefore, relative price should have more complex dynamics in a more realistic model, rather than as only an exogenous stochastic process.}. Therefore, using the detrended relative price data, I assume that the detrended relative price represents the inverse of the IST level state variable. The data, relative price of investment goods (PIRIC) is collected from FRED, and then I take $100\ln PIRIC_t$. As the data has an obvious trend, it should be detrended to match the model assumption that the logarithm of IST level is a stationary process. Although it is more realistic to model the logarithm of IST level as a random walk process given the data, such modeling requires recalculating the balanced growth path, steady state and log-linearized model, as another growth term is added into the model. Thus, using the detrended data is a more straightforward approach.
+
+\input{tables/variance_decomp_para_add_mei.tex}
+
+Table \ref{tab:vd:para-add-mei} reports the FEVD in the model incorporating MEI shock and relative price data. Similar to \cite{justinianoInvestmentShocksRelative2011}, IST shock contributes much less to the output, labor and investment forecast error compared with the baseline result in Table \ref{tab:fevd-frequency:gov-data}. Directly, this is because the relative price ties the scale of the IST shock, reducing the posterior mean of its standard deviation from $1.4$ to $0.35$. Investment demand shock still shows strong impact on output and investment, contributing $43.16\%$ and $48.64\%$ of variances of these variables.
+
+
+
+
+

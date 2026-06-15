@@ -1,0 +1,112 @@
+\section{Data}
+\label{app:data}
+
+This appendix documents the construction of the observable data used in the estimation in Section~\ref{sec:estimation}. All series are downloaded from the Federal Reserve Economic Data (FRED) database and converted to quarterly frequency. When FRED provides a series at monthly frequency, we take the within-quarter average.
+
+\subsection{Raw series}
+\label{app:data:fred}
+
+Table~\ref{tab:data_fred} lists the raw FRED series used to construct the observables.
+
+\begin{table}[h]
+\centering
+\caption{Raw FRED series (mnemonics) used to construct the observables for estimation and robustness exercises.}
+\label{tab:data_fred}
+\begin{tabular}{ll}
+\hline
+\textbf{Observable / input} & \textbf{FRED mnemonic} \\
+\hline
+Real GDP (level) & GDPC1 \\
+CPI price level (level) & CPIAUCSL \\
+Effective federal funds rate (level, percent) & FEDFUNDS \\
+Civilian non-institutional population (level) & CNP16OV \\
+Civilian employment (level) & CE16OV \\
+Average weekly hours (index/level) & PRS85006023 \\
+GDP deflator (price level) & GDPDEF \\
+Personal consumption expenditures (nominal) & PCEC \\
+Private fixed investment (nominal) & FPI \\
+Real government consumption expenditures and investment & GCEC1 \\
+Relative price of investment goods (index) & PIRIC \\
+Compensation per hour (nominal) & COMPNFB \\
+\hline
+\end{tabular}
+\end{table}
+
+\subsection{Transformations and scaling}
+\label{app:data:transform}
+
+The estimation uses six observables: (i) per-capita real output growth, (ii) annualized CPI inflation, (iii) the effective federal funds rate, (iv) (log) labor input, (v) per-capita real investment growth, and (vi) per-capita real government spending growth. The transformations follow the measurement conventions in \citet{smetsShocksFrictionsUS2007} and \citet{justinianoInvestmentShocksBusiness2010}.
+
+\paragraph{Per-capita real output growth.}
+Let $GDP_t$ denote real GDP (GDPC1) and $POP_t$ denote population (CNP16OV), both at quarterly frequency. Define real GDP per capita $GDP^{pc}_t \equiv GDP_t/POP_t$. The observable is quarterly percent growth,
+\begin{equation}
+	\Delta \ln GDP^{pc}_t \equiv 100\big(\ln GDP^{pc}_t - \ln GDP^{pc}_{t-1}\big).
+\end{equation}
+
+\paragraph{Annualized inflation.}
+Let $P_t$ denote the CPI price level (CPIAUCSL). The observable inflation rate is computed as annualized log inflation,
+\begin{equation}
+	\pi_t \equiv 400\big(\ln P_t - \ln P_{t-1}\big).
+\end{equation}
+
+\paragraph{Federal funds rate.}
+Let $FFR_t$ denote the effective federal funds rate (FEDFUNDS). This series is used in levels (percent). If downloaded at monthly frequency, it is converted to quarterly frequency by averaging within the quarter.
+
+\paragraph{Labor input.}
+Labor input combines average weekly hours (PRS85006023), employment (CE16OV), and population (CNP16OV). Let $H_t$ denote hours, $EMP_t$ employment, and $POP_t$ population. The (log) labor-input observable is
+\begin{equation}
+	HOURS_t \equiv 100\,\ln\Big( H_t\,\frac{EMP_t}{POP_t} \Big),
+\end{equation}
+
+and we subtract its sample mean so that $HOURS_t$ is centered at zero, consistent with the log-linear model representation.
+
+\paragraph{Per-capita real investment growth.}
+Let $INV_t$ denote nominal private fixed investment (FPI) and $DEF_t$ the GDP deflator (GDPDEF). The script constructs a real per-capita series
+\begin{equation}
+	INV^{pc}_t \equiv \frac{INV_t}{POP_t\,DEF_t},
+\end{equation}
+
+and then computes quarterly percent growth,
+\begin{equation}
+	\Delta \ln INV^{pc}_t \equiv 100\big(\ln INV^{pc}_t - \ln INV^{pc}_{t-1}\big).
+\end{equation}
+
+\paragraph{Per-capita real government spending growth.}
+Let $GOV_t$ denote real government consumption expenditures and gross investment (GCEC1). The per-capita series is $GOV^{pc}_t\equiv GOV_t/POP_t$, and the observable is quarterly percent growth,
+\begin{equation}
+	\Delta \ln GOV^{pc}_t \equiv 100\big(\ln GOV^{pc}_t - \ln GOV^{pc}_{t-1}\big).
+\end{equation}
+
+\paragraph{Per-capita real consumption growth.}
+For the SW-type robustness exercise in Section~\ref{sec:robustness}, I construct consumption growth using nominal consumption (PCEC), the GDP deflator (GDPDEF), and population (CNP16OV). Define the real per-capita consumption level
+\begin{equation}
+	CONS_t \equiv \frac{PCEC_t}{POP_t\,DEF_t},
+\end{equation}
+
+where $DEF_t$ denotes the GDP deflator. The observable is quarterly percent growth,
+\begin{equation}
+	\Delta \ln CONS_t \equiv 100\big(\ln CONS_t - \ln CONS_{t-1}\big).
+\end{equation}
+
+\paragraph{Real wage growth.}
+Wage growth is based on nominal compensation per hour (COMPNFB) deflated by the GDP deflator (GDPDEF). Define the real wage level
+\begin{equation}
+	WAGE_t \equiv \frac{COMPNFB_t}{DEF_t},
+\end{equation}
+
+and the observable wage growth
+\begin{equation}
+	\Delta \ln WAGE_t \equiv 100\big(\ln WAGE_t - \ln WAGE_{t-1}\big).
+\end{equation}
+
+\paragraph{Detrended relative price of investment.}
+Section~\ref{sec:robustness} uses the relative price of investment goods (PIRIC) as an additional observable to help identify the investment-specific technology (IST) shock. I first take logs and scale the series,
+\begin{equation}
+	RP_t \equiv 100\ln PIRIC_t,
+\end{equation}
+
+and then remove a linear trend,
+\begin{equation}
+	\widetilde{RP}_t \equiv \text{detrend}(RP_t).
+\end{equation}
+

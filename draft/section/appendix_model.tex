@@ -1,0 +1,272 @@
+
+\section{Model Solution}
+\label{app:model}
+
+This appendix derives (i) a stationary representation of the baseline model in Section~\ref{sec:model} by detrending the real variables, (ii) the deterministic steady state, and (iii) a log-linear approximation around the steady state.
+
+\subsection{Balanced growth and detrended variables}
+\label{app:detrending}
+
+The model features labor-augmenting growth at gross rate $\gamma>1$. Define the deterministic trend
+\begin{equation}
+	Z_t \equiv \gamma^t.
+\end{equation}
+
+For any real quantity that shares the balanced-growth trend (output, absorption, capital, etc.), define a stationary (detrended) counterpart by dividing by $Z_t$:
+\begin{equation}
+	\tilde X_t \equiv \frac{X_t}{Z_t} = \frac{X_t}{\gamma^t},
+	\; X_t\in\{Y_t, C_t, I_t, G_t, K_t\}.
+\end{equation}
+
+Inflation and the gross nominal interest rate are already stationary:
+\begin{equation}
+	\pi_t \equiv \frac{P_t}{P_{t-1}},\; R_t.
+\end{equation}
+
+Because production uses effective labor $Z_t L_t$, the real wage grows on the balanced-growth path. It is sometimes convenient to define a detrended real wage
+\begin{equation}
+	\tilde w_t \equiv \frac{w_t}{Z_t},
+\end{equation}
+
+while the (gross) real return objects (e.g. $R_t/\pi_{t+1}$, the rental rate of capital services) are stationary.
+
+Capital services and the utilization cost term also become stationary after detrending. Using $K_t^s=u_t K_{t-1}$ and $K_{t-1}=Z_{t-1}\tilde K_{t-1}$,
+\begin{equation}
+	\tilde K_t^s \equiv \frac{K_t^s}{Z_t} = \frac{u_t K_{t-1}}{Z_t} = \frac{u_t}{\gamma}\tilde K_{t-1}.
+\end{equation}
+
+\paragraph{Stationary capital accumulation.}
+The law of motion for capital in Section~\ref{sec:model} is
+\begin{equation}
+	K_{t+1} = (1-\delta)K_t + \mu_{s,t}\Big[1-S\Big(\frac{I_t}{I_{t-1}}\Big)\Big]I_t.
+\end{equation}
+
+Divide by $Z_{t+1}=\gamma Z_t$ and use $I_t/I_{t-1}=\gamma\,(\tilde I_t/\tilde I_{t-1})$ to obtain the stationary representation
+\begin{equation}
+	\gamma\,\tilde K_{t+1} = (1-\delta)\tilde K_t + \mu_{s,t}\Big[1-S\Big(\gamma\frac{\tilde I_t}{\tilde I_{t-1}}\Big)\Big]\tilde I_t.
+	\label{eq:cap_detrended}
+\end{equation}
+
+Under $S(x)=\frac{\phi_i}{2}(x-\gamma)^2$, the balanced-growth steady state satisfies $\tilde I_t/\tilde I_{t-1}=1$, so that $S(\gamma)=0$ and $S'(\gamma)=0$.
+
+\paragraph{Stationary production.}
+For each intermediate producer, the production function is
+\begin{equation}
+	Y_t(j)=\mu_{a,t}\,K_t^s(j)^{\alpha}\,(Z_t N_t(j))^{1-\alpha}.
+\end{equation}
+
+Aggregating and dividing by $Z_t$ yields the stationary aggregate production function
+\begin{equation}
+	\tilde Y_t = \mu_{a,t}\,(\tilde K_t^s)^{\alpha}\,L_t^{1-\alpha}.
+	\label{eq:prod_detrended}
+\end{equation}
+
+\paragraph{Stochastic discount factors.}
+From equation~\eqref{eq:sdf},
+\begin{equation}
+	\Lambda_{t,t+1}
+	=\frac{\beta}{\gamma}\,\Big(\frac{\tilde C_{t+1}}{\tilde C_t}\Big)^{-\sigma}.
+	\label{eq:sdf_real}
+\end{equation}
+
+\paragraph{Investment optimality condition.}
+Let $x_t\equiv I_t/I_{t-1}=\gamma\,(\tilde I_t/\tilde I_{t-1})$. The (detrended) investment FOC is given in the main text as \eqref{eq:inv_foc}.
+
+\subsection{Deterministic steady state}
+\label{app:ss}
+
+Consider the non-stochastic steady state of the detrended system where shocks are at their means
+\begin{equation}
+	\mu_{a,t}=\mu_a,\; \mu_{s,t}=\mu_s,\; \mu_{g,t}=\mu_g,
+\end{equation}
+and all stationary variables are constant: $\tilde X_t=\tilde X$, $u_t=u$, $\pi_t=\pi$, $R_t=R$, $Q_t=Q$.
+
+\paragraph{Inflation and nominal interest rate.}
+In steady state, $\pi=\pi^*$ and $Y=Y^n$ in the Taylor rule, implying a constant $R$. From Euler's equation,
+\begin{equation}
+	1 = \frac{\beta}{\gamma}\frac{R}{\pi}
+	\Longrightarrow
+	R = \frac{\gamma}{\beta}\,\pi.
+\end{equation}
+
+\paragraph{Investment.}
+With $x=\gamma$ and $S(\gamma)=S'(\gamma)=0$, the investment FOC \eqref{eq:inv_foc} reduces to
+\begin{equation}
+	1 = Q\,\mu_s \Longrightarrow Q = \mu_s^{-1}.
+\end{equation}
+
+Under the usual normalization $\mu_s=1$, we have $Q=1$.
+
+\paragraph{Capital accumulation.}
+From \eqref{eq:cap_detrended} (with $S(\gamma)=0$),
+\begin{equation}
+	\tilde I = \big(\gamma-1+\delta\big)\tilde K\,\mu_s^{-1}.
+\end{equation}
+
+In particular, if $\mu_s=1$ then $\tilde I/\tilde K = \gamma-1+\delta$.
+
+\paragraph{Return to capital.}
+With $u=1$, $a(1)=0$, and constant $Q$, the capital Euler equation \eqref{eq:q_euler} implies
+\begin{equation}
+	Q = \frac{\beta}{\gamma}\,\big(r^k + (1-\delta)Q\big)
+	\Longrightarrow
+	r^k = \Big(\frac{\gamma}{\beta}-(1-\delta)\Big)Q.
+\end{equation}
+
+When $Q=1$, the steady-state rental rate is $r^k = \gamma/\beta-(1-\delta)$.
+
+\paragraph{Marginal cost and factor prices.}
+With monopolistic competition and a constant elasticity of substitution $\nu$, the desired steady-state markup is
+\begin{equation}
+	\mu_p \equiv \frac{\nu}{\nu-1},\; mc \equiv \mu_p^{-1}=\frac{\nu-1}{\nu}.
+\end{equation}
+
+Cost minimization implies factor pricing conditions (real terms)
+\begin{equation}
+	w = mc\,(1-\alpha)\,\frac{Y}{L},\qquad r^k = mc\,\alpha\,\frac{Y}{K^s}.
+\end{equation}
+
+In detrended form, $Y=Z\tilde Y$ and $w=Z\tilde w$, while $L$ and $r^k$ are stationary.
+
+\paragraph{Wage and labor.}
+Under preferences in effective consumption $\tilde C_t=C_t/Z_t$, the marginal rate of substitution implied by the household problem is
+\begin{equation}
+	MRS_t\equiv-\frac{U_{L,t}}{U_{C,t}}=\chi\,L_t^{\psi}\,Z_t\,\tilde C_t^{\sigma}.
+\end{equation}
+
+Hence the stationary (detrended) MRS is $\widetilde{MRS}_t\equiv MRS_t/Z_t=\chi L_t^{\psi}\tilde C_t^{\sigma}$.
+Writing the simplified sticky wage rule in stationary form,
+\begin{equation}
+	\tilde w_t = \big(\widetilde{MRS}_t\big)^{\theta_w}\,\tilde w^{\,1-\theta_w},
+\end{equation}
+the steady state satisfies $\tilde w=\widetilde{MRS}$, i.e.
+\begin{equation}
+	\tilde w = \chi L^{\psi}\tilde C^{\sigma}.
+\end{equation}
+
+Together with goods market clearing and production, this pins down $(\tilde C,\tilde I,\tilde Y,\tilde K,L)$.
+
+\subsection{Log-linearized equilibrium conditions}
+\label{app:loglin}
+
+For any stationary variable $\tilde X_t$, define the log-deviation from steady state as
+\begin{equation}
+	\hat x_t \equiv \log\Big(\frac{\tilde X_t}{\tilde X}\Big).
+\end{equation}
+For gross rates, define $\hat\pi_t\equiv\log(\pi_t/\pi)$ and $\hat R_t\equiv\log(R_t/R)$.
+
+\paragraph{(1) Consumption Euler equation.}
+Log-linearizing \eqref{eq:euler_bond} yields
+\begin{equation}
+	\sigma\,(\hat c_t-\mathbb{E}_t\hat c_{t+1}) = \hat R_{t+1} - \mathbb{E}_t\hat\pi_{t+1}.
+	\label{eq:loglin_euler_c}
+\end{equation}
+
+\paragraph{(2) Investment.}
+Under $S(x)=\frac{\phi_i}{2}(x-\gamma)^2$ and around $x=\gamma$, the investment first-order condition \eqref{eq:inv_foc} log-linearizes to
+\begin{equation}
+	\hat q_t = \hat\mu_{s,t}
+	+ \varphi_i\,\big(\hat i_t-\hat i_{t-1}\big)
+	- \frac{\beta}{\gamma}\,\varphi_i\,\mathbb{E}_t\big(\hat i_{t+1}-\hat i_t\big),
+	\label{eq:loglin_inv}
+\end{equation}
+
+where $\varphi_i\equiv \phi_i\gamma^2$ and $\hat q_t\equiv\log(Q_t/Q)$.
+
+\paragraph{(3) Detrended capital accumulation.}
+Since $S(\gamma)=S'(\gamma)=0$, the adjustment cost is second order and drops out of the first-order approximation of \eqref{eq:cap_detrended}:
+\begin{equation}
+	\hat k_{t+1} = \frac{1-\delta}{\gamma}\,\hat k_t + \frac{\tilde I}{\gamma\tilde K}\,\big(\hat\mu_{s,t}+\hat i_t\big).
+	\label{eq:loglin_k}
+\end{equation}
+
+\paragraph{(4) Capital Euler equation.}
+Let $\hat u_t\equiv\log(u_t)$ so that $\hat u_t\approx u_t-1$ around $u=1$.
+Using \eqref{eq:q_euler} and $Lambda_{t,t+1}$ in \eqref{eq:sdf_real}, the log-linearized capital Euler equation can be written as
+\begin{equation}
+	\hat q_t = -\sigma\,\mathbb{E}_t\big(\hat c_{t+1}-\hat c_t\big)
+	+ \frac{\beta}{\gamma}(1-\delta)\,\mathbb{E}_t\hat q_{t+1}
+	+ \frac{\beta}{\gamma}r^k\,\mathbb{E}_t\hat r^k_{t+1}.
+	\label{eq:loglin_q}
+\end{equation}
+where the utilization term drops out at first order under the normalization $a(1)=0$ and $a'(1)=r^k$.
+
+\paragraph{(5) Utilization optimality.}
+Linearizing \eqref{eq:util_foc} around $u=1$ yields
+\begin{equation}
+	\hat r^k_t = \frac{a''(1)}{a'(1)}\,\hat u_t \equiv \frac{\psi_u}{1 - \psi_u}\,\hat u_t.
+	\label{eq:loglin_u}
+\end{equation}
+
+\paragraph{(6) Production and factor demands.}
+From \eqref{eq:prod_detrended},
+\begin{equation}
+	\hat y_t = \hat\mu_{a,t} + \alpha\,\hat k_t^s + (1-\alpha)\,\hat \ell_t,
+\end{equation}
+and since $\tilde K_t^s=(u_t/\gamma)\tilde K_{t-1}$,
+\begin{equation}
+	\hat k_t^s = \hat k_{t-1} + \hat u_t.
+\end{equation}
+
+Cost minimization implies
+\begin{equation}
+	\hat w_t = \hat{mc}_t + \hat y_t - \hat \ell_t,
+	\;
+	\hat r^k_t = \hat{mc}_t + \hat y_t - \hat k_t^s.
+	\label{eq:loglin_factorprices}
+\end{equation}
+
+\paragraph{(7) New Keynesian Phillips curve.}
+With Calvo pricing, no indexation, and a constant desired markup, inflation obeys
+\begin{equation}
+	\hat\pi_t = \frac{\beta}{\gamma}\,\mathbb{E}_t\hat\pi_{t+1} + \kappa_p\,\hat{mc}_t,
+	\label{eq:nkpc}
+\end{equation}
+where
+\begin{equation}
+	\kappa_p \equiv \frac{(1-\theta_p)(1-\theta_p\,\beta/\gamma)}{\theta_p}.
+\end{equation}
+
+\paragraph{(8) Sticky wage rule.}
+Using $\widetilde{MRS}_t=\chi L_t^{\psi}\tilde C_t^{\sigma}$ and $\tilde w_t=(\widetilde{MRS}_t)^{\theta_w}\tilde w^{1-\theta_w}$, the log-linear wage equation is
+\begin{equation}
+	\hat w_t = \theta_w\big(\sigma\hat c_t + \psi\hat \ell_t\big).
+	\label{eq:loglin_wage}
+\end{equation}
+
+\paragraph{(9) Monetary policy.}
+Log-linearizing the Taylor rule around $(\pi, Y/Y^n)=(\pi^*,1)$ yields
+\begin{equation}
+	\hat R_t = \rho_R\hat R_{t-1} + (1-\rho_R)\Big(\psi_{\pi}\hat\pi_t + \psi_y\,(\hat y_t-\hat y_t^{n})\Big) + \varepsilon_{R,t}.
+	\label{eq:loglin_taylor}
+\end{equation}
+
+\paragraph{(10) Government spending.}
+From $G_t=(Y_t/Y)^{-\phi_g}\mu_{g,t}$, the log-linearized rule is
+\begin{equation}
+	\hat g_t = -\phi_g\,\hat y_t + \hat\mu_{g,t}.
+	\label{eq:loglin_g}
+\end{equation}
+
+\paragraph{(11) Resource constraint.}
+The aggregate resource constraint $Y_t=C_t+I_t+G_t+a(u_t)K_{t-1}$ implies in detrended form
+\textbf{Check}
+\begin{equation}
+	\tilde Y_t = \tilde C_t + \tilde I_t + \tilde G_t + \frac{1}{\gamma}a(u_t)\tilde K_{t-1}.
+	\label{eq:rc_detrended}
+\end{equation}
+
+Linearizing around $a(1)=0$ gives
+\begin{equation}
+	\hat y_t = s_c\hat c_t + s_i\hat i_t + s_g\hat g_t + s_{ku}\,\hat u_t,
+	\label{eq:loglin_rc}
+\end{equation}
+where $s_c\equiv \tilde C/\tilde Y$, $s_i\equiv \tilde I/\tilde Y$, $s_g\equiv \tilde G/\tilde Y$ and $s_{ku}\equiv (r^k\tilde K)/(\gamma\tilde Y)$ under the normalization $a'(1)=r^k$.
+
+\paragraph{(12) Shock processes.}
+For $x\in\{a,s,g\}$, the shock processes in Section~\ref{sec:model} imply the stationary AR(1) laws
+\begin{equation}
+	\hat\mu_{x,t} = \rho_x\hat\mu_{x,t-1} + \varepsilon_{x,t},
+\end{equation}
+with $\varepsilon_{x,t} \sim \text{i.i.d. } \mathcal{N}(0, \sigma_x^2)$.
+

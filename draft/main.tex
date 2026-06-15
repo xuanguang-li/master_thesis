@@ -1,0 +1,70 @@
+\documentclass[12pt]{article}
+
+% packages
+\usepackage{amsmath, amssymb}
+\usepackage{amsthm}
+\usepackage{newtxtext, newtxmath}
+\usepackage{geometry}
+\usepackage{caption, subfigure}
+\usepackage{comment}
+\usepackage{natbib}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, shadows, calc, fit, backgrounds}
+\usepackage[hidelinks]{hyperref}
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear}
+
+% page settings
+\geometry{a4paper}
+
+% theorem styles
+\theoremstyle{plain}    % bold title + italics content
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition} % bold title + normal content
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}     %bold title + normal content
+\newtheorem{remark}[theorem]{Remark}
+
+\title{Investment Demand Shock and Business Cycle}
+\author{Li Xuanguang}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\input{section/abstract.tex}
+
+\newpage
+
+\input{section/intro.tex}
+
+\input{section/section1.tex}
+
+\input{section/section2.tex}
+
+\input{section/section3.tex}
+
+\input{section/section4.tex}
+
+\input{section/section5.tex}
+
+\input{section/section6.tex}
+
+\input{section/section7.tex}
+
+\newpage
+\bibliography{reference.bib}
+
+\newpage
+\appendix
+
+\input{section/appendix_model.tex}
+
+\input{section/appendix_data.tex}
+
+\input{section/appendix_other_results.tex}
+\end{document}
