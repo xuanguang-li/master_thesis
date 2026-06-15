@@ -1,0 +1,26 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.vrb
+*.fff
+*.ttt
+
+# Compiled PDF output (keep figure assets in draft/figures/)
+*.pdf
+!draft/figures/*.pdf
