@@ -20,7 +20,3 @@
 *.vrb
 *.fff
 *.ttt
-
-# Compiled PDF output (keep figure assets in draft/figures/)
-*.pdf
-!draft/figures/*.pdf
