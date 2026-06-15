@@ -47,6 +47,7 @@ Compared with \cite{smetsShocksFrictionsUS2007} and \cite{justinianoInvestmentSh
 \label{sec:estimation:dist}
 To facilitate the setting of the priors, I reparametrize some of the parameters. Specifically,
 \begin{equation}
+    \label{eq:reparametrize}
     \begin{aligned}
         \bar{\gamma} &= 100(\gamma - 1) \approx 100\ln\gamma,\\
         \bar{\pi} &= 400\pi_{ss},\\
@@ -54,9 +55,7 @@ To facilitate the setting of the priors, I reparametrize some of the parameters.
     \end{aligned}
 \end{equation}
 
-Accordingly, $R_ss$ is calculated as $\bar{\pi} + \bar{r}$.
-
-Additionally, there are some parameters that suffer from weak identification problems, and therefore I set their values following \cite{smetsShocksFrictionsUS2007,leeperDynamicsFiscalFinancing2010,nireiOriginsPropagationAnimal}. The inverse Frisch elasticity in the final goods production function $\nu_p$ is set as 6, indicating that the steady-state markup is 0.12. The depreciation rate of capital $\delta$ is set as 0.025, and the steady ratio of government spending to output $s_g$ is set as $0.2$.
+The steady state nominal interest rate, $R_{ss}$, is calculated as $\bar{\pi} + \bar{r}$ according to equation~\eqref{eq:reparametrize}. Additionally, there are some parameters that suffer from weak identification problems, and therefore I set their values following \cite{smetsShocksFrictionsUS2007,leeperDynamicsFiscalFinancing2010,nireiOriginsPropagationAnimal}. The inverse Frisch elasticity in the final goods production function $\nu_p$ is set as 6, indicating that the steady-state markup is 0.12. The depreciation rate of capital $\delta$ is set as 0.025, and the steady ratio of government spending to output $s_g$ is set as $0.2$.
 
 The details about the priors and posteriors are summarized in table \ref{tab:prior_posterior_params}, where the posterior is based on the Metropolis-Hastings algorithm with 100,000 sample size and 0.5 burn-in rate. The priors of the parameters are relatively flat so that less restrictions are imposed on the posteriors.
 
@@ -64,4 +63,4 @@ The details about the priors and posteriors are summarized in table \ref{tab:pri
 
 $\varphi_i$ is the parameter in investment adjustment function, which is defined in equation~\eqref{eq:loglin_inv} in Appendix~\ref{app:model}. $\psi_u$ is the parameter in the capital utilization adjustment cost function defined in equation~\eqref{eq:loglin_u}. Moreover, $\kappa_p$ is the coefficient in the Phillips curve, defined in equation~\eqref{eq:nkpc}.
 
-There are a few posteriors worth to be examined. The first one is $\psi_u$, whose posteriors are quite different among literature. \cite{smetsShocksFrictionsUS2007} estimates $\psi_u$ about $0.5$,\cite{justinianoInvestmentShocksBusiness2010} gives about $0.8$, and Section~\ref{sec:robustness} gives about $0.1$, even though the model structure is quite similar. The second one is $\rho_s$, as it is pretty much to the unit root. This extreme value may be a result of lacking enough shocks to interpret the volatility in the data, as the result Section~\ref{sec:robustness} shows a more temperate persistence in IST shock. Finally, $kappa_p$ and $\theta_w$ are around $0.5$, which indicates the Calvo parameter is near $0.5$ for the final goods, and $0.2$ for the wage. This means $50\%$ of final goods producers can reset their price, and $80\%$ of households can reset their wage. I flag these problematic posteriors here and will investigate their implications for other results in the next section.
+There are a few posteriors worth to be examined. The first one is $\psi_u$, whose posteriors are quite different among literature. \cite{smetsShocksFrictionsUS2007} estimates $\psi_u$ about $0.5$,\cite{justinianoInvestmentShocksBusiness2010} gives about $0.8$, and Section~\ref{sec:robustness} gives about $0.1$, even though the model structure is quite similar. The second one is $\rho_s$, as it is pretty much to the unit root. This extreme value may be a result of lacking enough shocks to interpret the volatility in the data, as the result Section~\ref{sec:robustness} shows a more temperate persistence in IST shock. Finally, $\kappa_p$ and $\theta_w$ are around $0.5$, which indicates the Calvo parameter is near $0.5$ for the final goods, and $0.2$ for the wage. This means $50\%$ of final goods producers can reset their price, and $80\%$ of households can reset their wage. I flag these problematic posteriors here and will investigate their implications for other results in the next section.

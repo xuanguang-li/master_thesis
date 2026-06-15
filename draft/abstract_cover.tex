@@ -1,0 +1,62 @@
+% =====================================================================
+% Abstract page of the Master's Thesis (Graduate School of Economics, UTokyo)
+% Layout follows the official sample. Compile with XeLaTeX (Japanese title).
+%     xelatex abstract_cover.tex   ->   abstract_cover.pdf  (submit as Abstract.pdf)
+%
+% >>> FILL IN / VERIFY the marked fields below before submission. <<<
+% =====================================================================
+\documentclass[12pt]{article}
+
+\usepackage{natbib}
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear}
+
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif JP}
+
+\usepackage{parskip}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.4em}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\begin{center}
+{\Large Abstract of Master's Thesis}\par
+\vspace{0.8cm}
+{\large Investment Demand Shock and Business Cycle}\par
+\vspace{0.3cm}
+{\normalsize 投資需要ショックと景気循環}\par   % <<< VERIFY this translation
+\vspace{0.8cm}
+\end{center}
+\begin{flushright}
+
+Graduate School of Economics\\
+Department of Economics (UTIPE)\\
+Student ID : 29246603\\          % <<< FILL IN your student ID
+Name : LI Xuanguang             % <<< VERIFY your name
+
+\end{flushright}
+
+\vspace{0.6cm}
+
+This paper asks whether an investment demand shock can serve as an alternative to the investment specific technology (IST) shock in accounting for the U.S. business cycle. The two shocks have a common observable footprint---both move investment---but a different economic origin: the IST shock raises the technology that converts consumption goods into investment goods, whereas the investment demand shock, following Nirei and Ragot (2025), traces back to idiosyncratic productivity shocks under lumpy investment and, in the aggregate, appears as a deviation of investment from the decision that households would otherwise have made. Because the shock perturbs investment after the endogenous investment decision is formed, I represent it in a representative-agent setting through a two-step solution: the first step solves the rational-expectations equilibrium with all frictions and shocks except the investment demand shock and pins down the endogenous investment decision; the second step holds that decision fixed, adds the exogenous shift in investment, and lets households re-optimize over consumption, labor, and other margins. I embed this device in a DSGE model with nominal rigidities, investment adjustment costs, and endogenous capital utilization, and estimate it on U.S. data from 1983:Q1 to 2002:Q4 using Bayesian methods.
+
+In the baseline estimation the investment demand shock accounts for a sizable share of fluctuations. Under the unconditional forecast error variance decomposition it explains roughly 40\% of the variance of output and 50\% of investment, comparable in magnitude to the IST shock, and---unlike the IST shock---it generates an inflationary expansion. These figures should be read with caution rather than as a headline result. They are sensitive to how the variance is measured and to how the model is specified. At business-cycle frequencies (6--32 quarters) the same shock explains only about 10\% of output and 16\% of investment, because its effects largely die out within six quarters. Its contribution falls further, to about 4\% of output and 14\% of investment, in a larger Smets--Wouters-type model that adds habit formation, wage and price markup shocks, and consumption and wage data; and it changes again, to about 23\% of output, when the shock is restricted to be transitory. The one specification in which its baseline importance survives is the model that uses the relative price of investment to discipline the IST shock and separates the marginal efficiency of investment shock, where it still accounts for roughly 43\% of output and 49\% of investment.
+
+Beyond the variance shares, the estimates speak to the mechanism that distinguishes the two shocks. 
+In the impulse responses the IST shock works mainly through intertemporal substitution---cheaper investment raises labor supply but depresses wages and consumption, leaving output nearly flat---while the investment demand shock operates through a wealth channel that shifts labor demand, raising hours, wages, and output together. 
+This difference drives the inflation result: writing inflation as the present value of marginal cost, the investment demand shock raises both the wage and the capital-rental components and so is inflationary across the posterior draws and parameter sweeps, whereas the sign of the IST shock's inflation response is itself fragile, flipping with the shock persistence and the capital-utilization elasticity. 
+The positive consumption--investment comovement emphasized by Nirei and Ragot (2025) appears only under specific combinations of the Phillips-curve slope, the Taylor-rule inflation coefficient, and wage rigidity, when the model is sticky enough to mute the short-run substitution effect. A historical decomposition shows the investment demand shock to be the more volatile and procyclical of the two over the sample, moving closely with output and inflation.
+
+A few limitations qualify these findings. Identification is indirect: no series pins down the investment demand shock, so in the baseline its separation from the IST shock rests only on their differing effects on inflation and consumption, which the high-dimensional parameter space lets me check only along one-parameter sweeps rather than exhaustively. The horse race against the marginal efficiency of investment shock sharpens this concern---because several shocks can be written into the same capital law of motion, an estimated shock may capture little more than that equation's residual, whatever name it is given. The model also fits the data imperfectly: the variance of hours worked is substantially overstated, traceable to an excessively volatile consumption process, and several posteriors settle at near-extreme values.
+
+Taken together, the results suggest that the investment demand shock can be quantitatively important and is a plausible competitor to the IST shock, but that this conclusion is fragile: it depends materially on the measurement of variance, the richness of the model, the assumed shock process, and an identification strategy that the data only partially support. The broader lesson is methodological---structural estimation can surface economically meaningful mechanisms, but the quantitative weight it assigns to a weakly identified shock should be treated as conditional on specification rather than as a robust fact.
+\end{document}
