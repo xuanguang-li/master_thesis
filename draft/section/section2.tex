@@ -1,5 +1,5 @@
 \section{Baseline Model}\label{sec:model}
-    The baseline model is based on \cite{herbstBayesianEstimationDSGE2015} and \cite{smetsShocksFrictionsUS2007}. I selected some model settings to keep the fitness to the data, including price and wage rigidity, investment adjustment cost, and endogenous capital utilization ratio. However, some settings are left out in the baseline model to keep the solution clean, such as habit formation and price indexation.
+    The baseline model is based on \cite{herbstBayesianEstimationDSGE2015} and \cite{smetsShocksFrictionsUS2007}. I selected some model settings to maintain the fit to the data, including price and wage rigidity, investment adjustment cost, and endogenous capital utilization ratio. However, some settings are left out in the baseline model to keep the solution clean, such as habit formation and price indexation.
 
     I first specify the model without the investment demand shock, and then add the shock in Section~\ref{sec:solution}.
 
@@ -11,7 +11,7 @@
     
     In the objective function, $\gamma$ is the growth rate of the labor-augmented technology, which is used to generate a trend in the state variables. Usually, if we use detrended data, there is no need to add this term. However, the process of detrending itself includes some operations on the data, which are not explained in the model. To maintain the integration of the estimation process, I use $\gamma$ to fit the non-detrended data.
 
-    Following \cite{herbstBayesianEstimationDSGE2015}, I assume the representative household derives utility from effective consumption, defined as absolute consumption scaled by the trend in labor-augmenting technology. This formulation mathematically guarantees the existence of a balanced growth path and the convenience of representing the marginal utility, as we can directly define the detrended consumption $\tilde{c}_{t+k} = c_{t+k} / \gamma^{t+k}$ inside.
+    Following \cite{herbstBayesianEstimationDSGE2015}, I assume the representative household derives utility from effective consumption, defined as absolute consumption scaled by the trend in labor-augmenting technology. This formulation mathematically guarantees the existence of a balanced growth path and the convenience of representing the marginal utility, as we can directly define the detrended consumption $\tilde{c}_{t+k} = c_{t+k} / \gamma^{t+k}$ within it.
     
     The budget constraint appears in the following equation:
     \begin{equation}
@@ -29,7 +29,7 @@
         \ln \mu_{s, t} = (1 - \rho_{i}) \ln \mu_{s} + \rho_{s}\ln \mu_{s, t-1} + \varepsilon_{s, t}, \,\, \varepsilon_{s, t} \sim \text{i.i.d. } \mathcal{N}(0, \sigma_s^2)
     \end{equation}
 
-    The second one is the investment adjustment cost $S\left(\frac{i_t}{i_{t-1}}\right)$. I use the function form $S(x) = \frac{\phi_i}{2}(x - \gamma)^2$, indicating that if the growth of the investment is above or below the balanced path growth rate, then an additional adjustment cost should be charged. The setting is important because the investment would be very sensitive to the shocks otherwise, which fails to match to the comovement in the data \citep{winberryLumpyInvestmentBusiness2021} and causes unrealistic impulse response function.
+    The second one is the investment adjustment cost $S\left(\frac{i_t}{i_{t-1}}\right)$. I use the function form $S(x) = \frac{\phi_i}{2}(x - \gamma)^2$, indicating that if the growth of the investment is above or below the balanced path growth rate, then an additional adjustment cost should be charged. The setting is important because the investment would otherwise be very sensitive to the shocks, which fails to match the comovement in the data \citep{winberryLumpyInvestmentBusiness2021} and causes unrealistic impulse response functions.
 
     From the household's optimal problem, we obtain the following first-order conditions. Let $Q_t$ denote the ratio of the Lagrange multiplier on the law of motion of capital to the Lagrange multiplier on the budget constraint, which captures the relative marginal utility between consumption and investment. $Q_t$ has the following relation to Tobin's $Q$: $\text{Tobin's }Q = Q_t \mu_{s, t}$. Define gross inflation as $\pi_{t+1}\equiv P_{t+1}/P_t$.
     \begin{align}
@@ -105,7 +105,7 @@
     I drop the price indexation, which allows firms to move their prices according to the inflation in the last period even though they are not allowed to reoptimize their prices, because \cite{smetsShocksFrictionsUS2007} shows the model has a higher posterior likelihood without this setting.
 
     \subsection{Wage Setting}
-    Instead of modeling detailed intermediate labor sector, the baseline model uses a simplified wage setting equation to introduce the sticky wage, following \cite{nireiOriginsPropagationAnimal}.
+    Instead of modeling a detailed intermediate labor sector, the baseline model uses a simplified wage setting equation to introduce the sticky wage, following \cite{nireiOriginsPropagationAnimal}.
     \begin{equation}
         w_t = \left(\frac{L_t^{\psi}}{C_t^{-\sigma}}\right)^{\theta_w} w^{1 - \theta_w}
     \end{equation}
@@ -117,7 +117,7 @@
     
     $$\frac{w_t}{MRS_t} = \left(\frac{L_t^{\psi}}{C_t^{-\sigma}}\right)^{ \theta_w - 1} w^{1 - \theta_w} = MRS_t^{\theta_w - 1}w^{1 - \theta_w}.$$
 
-    The wage markup increases a lot when the $MRS_t$ approaches $0$, which means the wage markup can absorb much of the decrease of the $MRS_t$ in this regime and keeps the change of the real wage smooth. This mechanism is shown to be important to account the investment shock to the business cycle by \cite{justinianoInvestmentShocksBusiness2010}.
+    The wage markup increases a lot when the $MRS_t$ approaches $0$, which means the wage markup can absorb much of the decrease of the $MRS_t$ in this regime and keeps the change of the real wage smooth. This mechanism is shown by \cite{justinianoInvestmentShocksBusiness2010} to be important in accounting for the role of the investment shock in the business cycle.
 
     \subsection{Government}
     The government performs the monetary and fiscal policy. The central bank follows a standard Taylor rule,
@@ -163,4 +163,4 @@
         \end{aligned}
     \end{equation}
 
-    Government bond market is cleared according to Walras' law. 
+    The government bond market clears according to Walras' law.
