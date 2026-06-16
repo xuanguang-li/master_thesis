@@ -1,6 +1,6 @@
 \section{Robustness Test}
 \label{sec:robustness}
-In this section, three alternative settings are used to test the baseline result regarding the investment demand shock---the first one uses the standard \cite{smetsShocksFrictionsUS2007} model; the second discusses the case where the investment demand shock is i.i.d.; the last one further differentiates the IST shock and the marginal efficiency of investment (MEI) shock, following \cite{justinianoInvestmentShocksRelative2011}.
+Three alternative settings are used to test the baseline result regarding the investment demand shock---the first one uses the standard \cite{smetsShocksFrictionsUS2007} model; the second discusses the case where the investment demand shock is i.i.d.; the last one further differentiates the IST shock and the marginal efficiency of investment (MEI) shock, following \cite{justinianoInvestmentShocksRelative2011}.
 
 \subsection{Smets--Wouters-style Model}
 \label{sec:robustness:sw}
@@ -62,6 +62,17 @@ It is clear that the investment demand shock has only a marginal effect on vario
 
 \input{tables/variance_decomp_sw_type_no_rel.tex}
 
+Figure~\ref{fig:irf:sw} plots the IRF of the same state variables with the IRF of baseline result. There are three points that are different from the baseline result in Figure~\ref{fig:compare_irf}. First, investment demand shock generates much less fluctuation than IST shock due to the smaller standard deviation; second, IST shock now generates inflationary result, and the positive wage impact as well; third, consumption impact under investment demand shock becomes smoother---consumption impact is only $0.2\%$ of investment impact, whereas it is $12\%$ in the baseline result.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/compare_irf_sw_type_no_rel.pdf}
+    \caption{Impulse responses of output, investment, inflation, labor input, wage, and consumption to one-standard-deviation IST and investment demand shocks (Smets--Wouters-style model; horizon: 20 quarters).}
+    \label{fig:irf:sw}
+\end{figure}
+
+Altogether, this section shows the sensitivity of the baseline result under an alternative model setting. However, its result can still be understood from the mechanisms analyzed in Section~\ref{sec:results}.
+
 \subsection{Independent Investment Demand Shock}
 \label{sec:robustness:iid}
 Although using an AR(1) process to specify shocks is standard, it is natural to think that households will realize the exogenous investment demand in the $t+1$ period, and thus adjust their investment decision in $t+1$ to dampen the effect of the investment demand shock. Equivalently, this is to say that the investment demand shock only has a transitory effect in period $t$, which motivates the exercise in this section.
@@ -89,8 +100,3 @@ I use the relative price data to solve the weak identification problem mentioned
 \input{tables/variance_decomp_para_add_mei.tex}
 
 Table \ref{tab:vd:para-add-mei} reports the FEVD in the model incorporating the MEI shock and relative price data, and other results are shown in Table~\ref{tab:posterior-params:para-add-mei} and Table~\ref{tab:varcmp:para-add-mei} in Appendix~\ref{app:result:mei}. Similar to \cite{justinianoInvestmentShocksRelative2011}, the IST shock contributes much less to the output, labor and investment forecast error compared with the baseline result in Table \ref{tab:fevd-frequency:gov-data}. Directly, this is because the relative price ties the scale of the IST shock, reducing the posterior mean of its standard deviation from $1.4$ to $0.35$. The investment demand shock still shows a strong impact on output and investment, contributing $43.16\%$ and $48.64\%$ of the variances of these variables.
-
-
-
-
-
