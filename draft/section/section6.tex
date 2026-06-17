@@ -8,14 +8,14 @@ In this section, the baseline model is expanded following \cite{smetsShocksFrict
 
 The utility function of households becomes
 \begin{equation}
-    \mathbb{E}_t \left[ \sum_{s=0}^{\infty} \beta^s \mu_{b, t+s} \left( \ln(C_{t+s} - h C_{t+s-1}) - \chi \frac{L_{t+s}(j)^{1+\psi}}{1+\psi} \right) \right],
+    \mathbb{E}_t \left[ \sum_{s=0}^{\infty} \beta^s \mu_{b, t+s} \left( \ln(C_{t+s} - h C_{t+s-1}) - \chi \frac{L_{t+s}(j)^{1+\sigma_\ell}}{1+\sigma_\ell} \right) \right],
 \end{equation}
 where $\mu_{b, t}$ is the intertemporal preference shock, following
 \begin{equation}
     \ln \mu_{b, t} = (1 - \rho_b) \mu_b + \rho_b \ln \mu_{b, t-1} + \varepsilon_{b, t}, \,\, \varepsilon_{b, t}\sim \text{i.i.d. } N (0, \sigma_b^2).
 \end{equation}
 
-It is worth to mention that the consumption part in the utility function becomes logarithmic instead of the more general CRRA form. This is because with habit formation and separable utility function between $C_t$ and $L_t$, general CRRA utility function doesn't have a balanced growth path unless it reduces to a logarithmic form.
+It is worth mentioning that the consumption part in the utility function becomes logarithmic instead of the more general CRRA form. This is because with habit formation and a separable utility function between $C_t$ and $L_t$, a general CRRA utility function does not have a balanced growth path unless it reduces to a logarithmic form.
 
 The stochastic discount factor becomes
 \begin{equation}
@@ -27,7 +27,7 @@ The labor market and wage Calvo pricing problem follow \cite{erceg2000optimal}, 
 \begin{equation}
     \hat{\pi}_t^w = \beta \mathbb{E}_t \hat{\pi}_{t+1}^w - \kappa_w \left(\hat{w}_t - \hat{MRS}_t\right) + \mu_{w, t},
 \end{equation}
-where $\kappa_w = \frac{(1 - \theta_w)(1 - \beta\theta_w)}{\theta_w(1+\nu_{w} \psi)}$. Because of the weak identification problem \footnote{$\nu_w$, $\theta_w$ only play a role in $\kappa_w$, but $\kappa_w$ can be the same under different value combinations of $\nu_w$ and $\theta_w$. Thus the model will be unable to identify $\nu_w$ and $\theta_w$ parameters separately.}, $\nu_w$ is set as $3$ following \cite{smetsShocksFrictionsUS2007}.
+where $\kappa_w = \frac{(1 - \theta_w)(1 - \beta\theta_w)}{\theta_w(1+\nu_{w} \sigma_\ell)}$. Because of the weak identification problem \footnote{$\nu_w$, $\theta_w$ only play a role in $\kappa_w$, but $\kappa_w$ can be the same under different value combinations of $\nu_w$ and $\theta_w$. Thus the model will be unable to identify $\nu_w$ and $\theta_w$ parameters separately.}, $\nu_w$ is set as $3$ following \cite{smetsShocksFrictionsUS2007}.
 
 $\mu_{w, t}$ is the wage markup shock following
 \begin{equation}
@@ -71,11 +71,11 @@ Figure~\ref{fig:irf:sw} plots the IRF of the same state variables with the IRF o
     \label{fig:irf:sw}
 \end{figure}
 
-I revisit the consumption impact in Figure~\ref{fig:sw:con}. Compared with the similar exercise in baseline result (Figure~\ref{fig:inv_demand_c1_kappa_psipi_heatmap}), I choose the parameters, the inverse Frisch elasticity $\psi$ and Taylor-rule output-gap coefficient $\psi_y$, to be varied. This is because the Phillips curve, as well as the wage Phillips curve, becomes quite flat. Thus, the slopes themselves have already approached to the \cite{nireiOriginsPropagationAnimal} calibration, and further, the inflation feedback in the Taylor's rule becomes less important because inflation hardly moves. However, the logic keeps the same---consumption impact is decided by the path of real interest rate, so nominal interest rate helps. If nominal interest rate is low enough, real interest can also be very low, and thus intertemporal substitution effect will be tempered. Smaller $\psi_y$ explicitly does this job by lowering output gap feedback in Taylor's rule. Smaller $\psi$ works through the output gap by suppressing the real wage---because nominal wage is very stikcy, the wage gap is smaller if real wage barely moves, and thus the output gap becomes smaller.
+I revisit the consumption impact in Figure~\ref{fig:sw:con}. Compared with the similar exercise in baseline result (Figure~\ref{fig:inv_demand_c1_kappa_psipi_heatmap}), I choose the parameters, the inverse Frisch elasticity $\sigma_\ell$ and Taylor-rule output-gap coefficient $\psi_y$, to be varied. This is because the Phillips curve, as well as the wage Phillips curve, becomes quite flat. Thus, the slopes themselves have already approached the \cite{nireiOriginsPropagationAnimal} calibration, and further, the inflation feedback in the Taylor rule becomes less important because inflation hardly moves. However, the logic stays the same---the consumption impact is decided by the path of the real interest rate, so the nominal interest rate helps. If the nominal interest rate is low enough, the real interest rate can also be very low, and thus the intertemporal substitution effect will be tempered. Smaller $\psi_y$ explicitly does this job by lowering output gap feedback in Taylor's rule. Smaller $\sigma_\ell$ works through the output gap by suppressing the real wage---because the nominal wage is very sticky, the wage gap is smaller if the real wage barely moves, and thus the output gap becomes smaller.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{figures/inv_demand_c1_psiy_sigmal_heatmap.pdf}
-    \caption{Impact consumption response \(\hat c_1\) to a unit investment-demand shock as a function of the inverse Frisch elasticity \(\psi\) and the Taylor-rule output-gap coefficient \(\psi_y\). All other parameters are held at the posterior mean. }
+    \caption{Impact consumption response \(\hat c_1\) to a unit investment-demand shock as a function of the inverse Frisch elasticity \(\sigma_\ell\) and the Taylor-rule output-gap coefficient \(\psi_y\). All other parameters are held at the posterior mean. }
     \label{fig:sw:con}
 \end{figure}
 
@@ -97,7 +97,7 @@ The topic in this section is subtle---it further distinguishes the IST shock fro
 \begin{equation}\label{eq:mei}
     k_{t+1} = (1 - \delta) k_t + \mu_{s, t}\mu_{m, t}\left[1 - S\left(\frac{i_t}{i_{t-1}}\right)\right] i_t,
 \end{equation}
-and thus there will be weak identification problem within the previous data set.
+and thus there will be a weak identification problem with the previous data set.
 
 This test is motivated by \cite{justinianoInvestmentShocksRelative2011}, who claim that the IST shock will become less important if it is identified by data, and that the MEI shock becomes the one that matters. However, this raises a doubt about the estimation result---is the important thing just the residual in the capital law of motion? Although we can write multiple shocks in the capital law of motion, the equation suffers from a misspecification problem, in that we cannot be sure what the real shocks are. We can claim an IST shock, an investment demand shock, or an MEI shock in the capital law of motion, but which shocks to add depends on our assumptions. If the data-identified shock is less important, then the other part may be just the residual in the equation, and it is significant no matter what shock is named.
 

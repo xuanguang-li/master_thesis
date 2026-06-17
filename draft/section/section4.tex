@@ -20,7 +20,7 @@ All data are collected from the FRED database, and are processed to represent pe
         100 \ln \gamma \\
         400\pi_{ss} \\
         400R_{ss} \\
-        \bar{\ell}\\
+        \bar{N}\\
         400\ln \gamma \\
         400\ln \gamma \\
     \end{bmatrix}
@@ -29,7 +29,7 @@ All data are collected from the FRED database, and are processed to represent pe
         \hat{y}_t - \hat{y}_{t-1} \\
         \hat{\pi}_t \\
         \hat{R}_t \\
-        \hat{\ell}_t\\
+        \hat{N}_t\\
         \hat{i}_t - \hat{i}_{t-1}\\
         \hat{g}_t - \hat{g}_{t-1}
     \end{bmatrix}
@@ -37,7 +37,7 @@ All data are collected from the FRED database, and are processed to represent pe
     \Sigma_t^{meas}
 \end{equation}
 
-Equation \eqref{eq:observation} describes the relationship between the observed data and the state variables, which is called the observation equation. $\pi_{ss}$ and $R_{ss}$ are steady-state values of these variables, and variables with hats indicate the log-linearized variables. $\pi_{ss}$ and $R_{ss}$ are multiplied by 4 to indicate the year-to-year inflation rate and the federal funds rate. Moreover, because I use the demeaned $HOURS_t$, $\bar{\ell} = \ell_{ss} - \mu_{hours}$, where $\ell_{ss}$ is the steady-state labor input level and $\mu_{hours}$ is the mean of the data.
+Equation \eqref{eq:observation} describes the relationship between the observed data and the state variables, which is called the observation equation. $\pi_{ss}$ and $R_{ss}$ are steady-state values of these variables, and variables with hats indicate the log-linearized variables. $\pi_{ss}$ and $R_{ss}$ are multiplied by 4 to indicate the year-to-year inflation rate and the federal funds rate. Moreover, because I use the demeaned $HOURS_t$, $\bar{N} = N_{ss} - \mu_{hours}$, where $N_{ss}$ is the steady-state labor input level and $\mu_{hours}$ is the mean of the data.
 
 $\Sigma^{meas}_t$ is a $6 \times 1$ vector, containing the measurement error for each data variable. The measurement error helps the model to adjust the number of shocks flexibly, while the stochastic singularity problem may be raised with fewer shocks than the data \citep{ruge-murciaMethodsEstimateDynamic2007}. The value of the measurement error is set as 4\% of the variance of each series, meaning that there is a small part of variance in the data caused by the data collection process.
 
@@ -55,12 +55,12 @@ To facilitate the setting of the priors, I reparametrize some of the parameters.
     \end{aligned}
 \end{equation}
 
-The steady state nominal interest rate, $R_{ss}$, is calculated as $\bar{\pi} + \bar{r}$ according to equation~\eqref{eq:reparametrize}. Additionally, there are some parameters that suffer from weak identification problems, and therefore I set their values following \cite{smetsShocksFrictionsUS2007,leeperDynamicsFiscalFinancing2010,nireiOriginsPropagationAnimal}. The elasticity of substitution between intermediate goods $\nu_p$ is set as 6, indicating that the steady-state markup is 1.2. The depreciation rate of capital $\delta$ is set as 0.025, and the steady ratio of government spending to output $s_g$ is set as $0.2$.
+The steady state nominal interest rate, $R_{ss}$, is calculated as $\bar{\pi} + \bar{r}$ according to equation~\eqref{eq:reparametrize}. Additionally, there are some parameters that suffer from weak identification problems, and therefore I set their values following \cite{smetsShocksFrictionsUS2007,leeperDynamicsFiscalFinancing2010,nireiOriginsPropagationAnimal}. The elasticity of substitution between intermediate goods $\nu_p$ is set as 6, indicating that the steady-state markup is 1.2. The depreciation rate of capital $\delta$ is set as 0.025, and the steady-state ratio of government spending to output $s_g$ is set as $0.2$.
 
 The details about the priors and posteriors are summarized in table \ref{tab:prior_posterior_params}, where the posterior is based on the Metropolis-Hastings algorithm with a sample size of 100,000 and a burn-in rate of 0.5. The priors of the parameters are relatively flat so that fewer restrictions are imposed on the posteriors.
 
 \input{tables/prior_posterior_table.tex}
 
-$\varphi_i$ is the parameter in investment adjustment function, which is defined in equation~\eqref{eq:loglin_inv} in Appendix~\ref{app:model}. $\psi_u$ is the parameter in the capital utilization adjustment cost function defined in equation~\eqref{eq:loglin_u}. Moreover, $\kappa_p$ is the coefficient in the Phillips curve, defined in equation~\eqref{eq:nkpc}.
+$\varphi_i$ is the parameter in the investment adjustment function, which is defined in equation~\eqref{eq:loglin_inv} in Appendix~\ref{app:model}. $\psi_u$ is the parameter in the capital utilization adjustment cost function defined in equation~\eqref{eq:loglin_u}. Moreover, $\kappa_p$ is the coefficient in the Phillips curve, defined in equation~\eqref{eq:nkpc}.
 
-There are a few posteriors worth examining. The first one is $\psi_u$, whose posteriors differ quite a lot across the literature. \cite{smetsShocksFrictionsUS2007} estimates $\psi_u$ at about $0.5$, \cite{justinianoInvestmentShocksBusiness2010} gives about $0.8$, and Section~\ref{sec:robustness} gives about $0.1$, even though the model structure is quite similar. The second one is $\rho_s$, as it is very close to the unit root. This extreme value may be a result of lacking enough shocks to interpret the volatility in the data, as the result Section~\ref{sec:robustness} shows a more temperate persistence in IST shock. Finally, $\kappa_p$ and $\theta_w$ are around $0.5$, which indicates the Calvo parameter is near $0.5$ for the final goods, and $0.2$ for the wage. This means $50\%$ of final goods producers can reset their price, and $80\%$ of households can reset their wage. I flag these problematic posteriors here and will investigate their implications for other results in the next section.
+There are a few posteriors worth examining. The first one is $\psi_u$, whose posteriors differ quite a lot across the literature. \cite{smetsShocksFrictionsUS2007} estimates $\psi_u$ at about $0.5$, \cite{justinianoInvestmentShocksBusiness2010} gives about $0.8$, and Section~\ref{sec:robustness} gives about $0.1$, even though the model structure is quite similar. The second one is $\rho_s$, as it is very close to the unit root. This extreme value may be a result of lacking enough shocks to interpret the volatility in the data, as the result in Section~\ref{sec:robustness} shows a more temperate persistence in the IST shock. Finally, $\kappa_p$ and $\theta_w$ are around $0.5$, which indicates the Calvo parameter is near $0.5$ for the final goods, and $0.2$ for the wage. This means $50\%$ of final goods producers can reset their price, and $80\%$ of households can reset their wage. I flag these problematic posteriors here and will investigate their implications for other results in the next section.

@@ -6,10 +6,10 @@
     \subsection{Household}
     There is a continuum of households indexed on $[0,1]$. For simplicity of notation, the index of the household is omitted in the following equations. The representative household owns the firms and solves the dynamic optimal problem over consumption $c_t$, hours worked $\ell_t$, nominal bonds $B_t$, investment $i_t$, capital $k_t$, and capital utilization $u_t$.
         \begin{equation}
-            \max\limits_{c, b, i, k, l, u} \,\mathbb{E}_t \sum_{k=0}^{\infty} \beta^k \left(\frac{(c_{t+k} / \gamma^{t+k})^{1-\sigma} - 1}{1 - \sigma} - \chi\frac{\ell_{t+k}^{\psi + 1}(j)}{\psi + 1}\right)
+            \max\limits_{c, b, i, k, l, u} \,\mathbb{E}_t \sum_{k=0}^{\infty} \beta^k \left(\frac{(c_{t+k} / \gamma^{t+k})^{1-\sigma} - 1}{1 - \sigma} - \chi\frac{\ell_{t+k}^{\sigma_\ell + 1}(j)}{\sigma_\ell + 1}\right)
         \end{equation}
     
-    In the objective function, $\gamma$ is the growth rate of the labor-augmented technology, which is used to generate a trend in the state variables. Usually, if we use detrended data, there is no need to add this term. However, the process of detrending itself includes some operations on the data, which are not explained in the model. To maintain the integration of the estimation process, I use $\gamma$ to fit the non-detrended data.
+    In the objective function, $\gamma$ is the growth rate of the labor-augmented technology, which is used to generate a trend in the state variables. Usually, if we use detrended data, there is no need to add this term. However, the process of detrending itself includes some operations on the data, which are not explained in the model. To maintain the integrity of the estimation process, I use $\gamma$ to fit the non-detrended data.
 
     Following \cite{herbstBayesianEstimationDSGE2015}, I assume the representative household derives utility from effective consumption, defined as absolute consumption scaled by the trend in labor-augmenting technology. This formulation mathematically guarantees the existence of a balanced growth path and the convenience of representing the marginal utility, as we can directly define the detrended consumption $\tilde{c}_{t+k} = c_{t+k} / \gamma^{t+k}$ within it.
     
@@ -45,7 +45,7 @@
         \label{eq:q_euler}\\
         &1 = \mathbb{E}_t\left[\Lambda_{t,t+1}\,\frac{R_{t+1}}{\pi_{t+1}}\right]
         \label{eq:euler_bond},\\
-        &w_t = \chi\,\ell_t^{\psi}\,\gamma^t\left(\frac{c_t}{\gamma^t}\right)^{\sigma}, \\
+        &w_t = \chi\,\ell_t^{\sigma_\ell}\,\gamma^t\left(\frac{c_t}{\gamma^t}\right)^{\sigma}, \\
         &r_t^k = a'(u_t)
         \label{eq:util_foc}.
     \end{align}
@@ -86,9 +86,9 @@
         \ln \mu_{a, t} = (1 - \rho_a) \ln \mu_{a} + \rho_a \ln \mu_{a, t-1} + \varepsilon_{a, t}, \,\, \varepsilon_{a, t} \sim \text{i.i.d. } \mathcal{N}(0, \sigma_a^2).
     \end{equation}
 
-    $\gamma^t$ ($\gamma>1$) is the labor-augmented technology, which helps derive the balanced growth path. In addition, $K^s_t$ means the capital service, which will be influenced by the capital utilization $u_t$ under general equilibrium conditions.
+    $\gamma^t$ ($\gamma>1$) is the labor-augmented technology, which helps derive the balanced growth path. In addition, $K^s_t$ denotes the capital service, which will be influenced by the capital utilization $u_t$ under general equilibrium conditions.
 
-    The cost minimization solves the cost function. However, as the production function has constant returns to scale, the marginal cost is solved as well:
+    Cost minimization yields the cost function. However, as the production function has constant returns to scale, the marginal cost is solved as well:
     \begin{equation}
         mc_t(j) = \frac{1}{\alpha^\alpha (1-\alpha)^{1-\alpha} \gamma^{t(1-\alpha)}}\frac{w_t^{1-\alpha} (k_t^s)^{\alpha}}{\mu_{a,t}}.
     \end{equation}
@@ -107,7 +107,7 @@
     \subsection{Wage Setting}
     Instead of modeling a detailed intermediate labor sector, the baseline model uses a simplified wage setting equation to introduce the sticky wage, following \cite{nireiOriginsPropagationAnimal}.
     \begin{equation}
-        w_t = \left(\frac{L_t^{\psi}}{C_t^{-\sigma}}\right)^{\theta_w} w^{1 - \theta_w}
+        w_t = \left(\frac{L_t^{\sigma_\ell}}{C_t^{-\sigma}}\right)^{\theta_w} w^{1 - \theta_w}
     \end{equation}
     where $w$ is the steady-state real wage. Similar to the Calvo pricing problem, the equation roughly means that only a $\theta_w \in (0,1)$ part of wage contracts can be reset to match the current marginal rate of substitution between hours worked and consumption. Meanwhile, the rest of the $1 - \theta_w$ part can only keep the steady-state real wage.
 
@@ -115,7 +115,7 @@
 
     Another property of this equation is that the implied wage markup is not constant. To see this, we can simply calculate 
     
-    $$\frac{w_t}{MRS_t} = \left(\frac{L_t^{\psi}}{C_t^{-\sigma}}\right)^{ \theta_w - 1} w^{1 - \theta_w} = MRS_t^{\theta_w - 1}w^{1 - \theta_w}.$$
+    $$\frac{w_t}{MRS_t} = \left(\frac{L_t^{\sigma_\ell}}{C_t^{-\sigma}}\right)^{ \theta_w - 1} w^{1 - \theta_w} = MRS_t^{\theta_w - 1}w^{1 - \theta_w}.$$
 
     The wage markup increases a lot when the $MRS_t$ approaches $0$, which means the wage markup can absorb much of the decrease of the $MRS_t$ in this regime and keeps the change of the real wage smooth. This mechanism is shown by \cite{justinianoInvestmentShocksBusiness2010} to be important in accounting for the role of the investment shock in the business cycle.
 

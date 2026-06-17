@@ -23,7 +23,7 @@ Inflation and the gross nominal interest rate are already stationary:
 	\pi_t \equiv \frac{P_t}{P_{t-1}},\; R_t.
 \end{equation}
 
-Because production uses effective labor $Z_t L_t$, the real wage grows on the balanced-growth path. It is sometimes convenient to define a detrended real wage
+Because production uses effective labor $Z_t N_t$, the real wage grows on the balanced-growth path. It is sometimes convenient to define a detrended real wage
 \begin{equation}
 	\tilde w_t \equiv \frac{w_t}{Z_t},
 \end{equation}
@@ -52,12 +52,12 @@ Under $S(x)=\frac{\phi_i}{2}(x-\gamma)^2$, the balanced-growth steady state sati
 \paragraph{Stationary production.}
 For each intermediate producer, the production function is
 \begin{equation}
-	Y_t(j)=\mu_{a,t}\,K_t^s(j)^{\alpha}\,(Z_t N_t(j))^{1-\alpha}.
+	Y_t(j)=\mu_{a,t}\,K_t^s(j)^{\alpha}\,(Z_t n_t(j))^{1-\alpha}.
 \end{equation}
 
 Aggregating and dividing by $Z_t$ yields the stationary aggregate production function
 \begin{equation}
-	\tilde Y_t = \mu_{a,t}\,(\tilde K_t^s)^{\alpha}\,L_t^{1-\alpha}.
+	\tilde Y_t = \mu_{a,t}\,(\tilde K_t^s)^{\alpha}\,N_t^{1-\alpha}.
 	\label{eq:prod_detrended}
 \end{equation}
 
@@ -131,17 +131,17 @@ In detrended form, $Y=Z\tilde Y$ and $w=Z\tilde w$, while $L$ and $r^k$ are stat
 \paragraph{Wage and labor.}
 Under preferences in effective consumption $\tilde C_t=C_t/Z_t$, the marginal rate of substitution implied by the household problem is
 \begin{equation}
-	MRS_t\equiv-\frac{U_{L,t}}{U_{C,t}}=\chi\,L_t^{\psi}\,Z_t\,\tilde C_t^{\sigma}.
+	MRS_t\equiv-\frac{U_{L,t}}{U_{C,t}}=\chi\,L_t^{\sigma_\ell}\,Z_t\,\tilde C_t^{\sigma}.
 \end{equation}
 
-Hence the stationary (detrended) MRS is $\widetilde{MRS}_t\equiv MRS_t/Z_t=\chi L_t^{\psi}\tilde C_t^{\sigma}$.
+Hence the stationary (detrended) MRS is $\widetilde{MRS}_t\equiv MRS_t/Z_t=\chi L_t^{\sigma_\ell}\tilde C_t^{\sigma}$.
 Writing the simplified sticky wage rule in stationary form,
 \begin{equation}
 	\tilde w_t = \big(\widetilde{MRS}_t\big)^{\theta_w}\,\tilde w^{\,1-\theta_w},
 \end{equation}
 the steady state satisfies $\tilde w=\widetilde{MRS}$, i.e.
 \begin{equation}
-	\tilde w = \chi L^{\psi}\tilde C^{\sigma}.
+	\tilde w = \chi L^{\sigma_\ell}\tilde C^{\sigma}.
 \end{equation}
 
 Together with goods market clearing and production, this pins down $(\tilde C,\tilde I,\tilde Y,\tilde K,L)$.
@@ -201,7 +201,7 @@ Linearizing \eqref{eq:util_foc} around $u=1$ yields
 \paragraph{(6) Production and factor demands.}
 From \eqref{eq:prod_detrended},
 \begin{equation}
-	\hat y_t = \hat\mu_{a,t} + \alpha\,\hat k_t^s + (1-\alpha)\,\hat \ell_t,
+	\hat y_t = \hat\mu_{a,t} + \alpha\,\hat k_t^s + (1-\alpha)\,\hat N_t,
 \end{equation}
 and since $\tilde K_t^s=(u_t/\gamma)\tilde K_{t-1}$,
 \begin{equation}
@@ -210,7 +210,7 @@ and since $\tilde K_t^s=(u_t/\gamma)\tilde K_{t-1}$,
 
 Cost minimization implies
 \begin{equation}
-	\hat w_t = \hat{mc}_t + \hat y_t - \hat \ell_t,
+	\hat w_t = \hat{mc}_t + \hat y_t - \hat N_t,
 	\;
 	\hat r^k_t = \hat{mc}_t + \hat y_t - \hat k_t^s.
 	\label{eq:loglin_factorprices}
@@ -228,9 +228,9 @@ where
 \end{equation}
 
 \paragraph{(8) Sticky wage rule.}
-Using $\widetilde{MRS}_t=\chi L_t^{\psi}\tilde C_t^{\sigma}$ and $\tilde w_t=(\widetilde{MRS}_t)^{\theta_w}\tilde w^{1-\theta_w}$, the log-linear wage equation is
+Using $\widetilde{MRS}_t=\chi L_t^{\sigma_\ell}\tilde C_t^{\sigma}$ and $\tilde w_t=(\widetilde{MRS}_t)^{\theta_w}\tilde w^{1-\theta_w}$, the log-linear wage equation is
 \begin{equation}
-	\hat w_t = \theta_w\big(\sigma\hat c_t + \psi\hat \ell_t\big).
+	\hat w_t = \theta_w\big(\sigma\hat c_t + \sigma_\ell\hat N_t\big).
 	\label{eq:loglin_wage}
 \end{equation}
 
