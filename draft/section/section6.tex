@@ -71,6 +71,14 @@ Figure~\ref{fig:irf:sw} plots the IRF of the same state variables with the IRF o
     \label{fig:irf:sw}
 \end{figure}
 
+I revisit the consumption impact in Figure~\ref{fig:sw:con}. Compared with the similar exercise in baseline result (Figure~\ref{fig:inv_demand_c1_kappa_psipi_heatmap}), I choose the parameters, the inverse Frisch elasticity $\psi$ and Taylor-rule output-gap coefficient $\psi_y$, to be varied. This is because the Phillips curve, as well as the wage Phillips curve, becomes quite flat. Thus, the slopes themselves have already approached to the \cite{nireiOriginsPropagationAnimal} calibration, and further, the inflation feedback in the Taylor's rule becomes less important because inflation hardly moves. However, the logic keeps the same---consumption impact is decided by the path of real interest rate, so nominal interest rate helps. If nominal interest rate is low enough, real interest can also be very low, and thus intertemporal substitution effect will be tempered. Smaller $\psi_y$ explicitly does this job by lowering output gap feedback in Taylor's rule. Smaller $\psi$ works through the output gap by suppressing the real wage---because nominal wage is very stikcy, the wage gap is smaller if real wage barely moves, and thus the output gap becomes smaller.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/inv_demand_c1_psiy_sigmal_heatmap.pdf}
+    \caption{Impact consumption response \(\hat c_1\) to a unit investment-demand shock as a function of the inverse Frisch elasticity \(\psi\) and the Taylor-rule output-gap coefficient \(\psi_y\). All other parameters are held at the posterior mean. }
+    \label{fig:sw:con}
+\end{figure}
+
 Altogether, this section shows the sensitivity of the baseline result under an alternative model setting. However, its result can still be understood from the mechanisms analyzed in Section~\ref{sec:results}.
 
 \subsection{Independent Investment Demand Shock}

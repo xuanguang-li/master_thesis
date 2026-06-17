@@ -24,9 +24,9 @@ In such decomposition, the high volatility of hours worked mainly comes from the
 However, the variance of labor input differs quite a lot. This is because \cite{smetsShocksFrictionsUS2007} adds a wage markup shock $\mu_{w,t}$ between the marginal rate of substitution and the real wage
 $$\hat{\pi}_t^w = \beta \mathbb{E}_t \hat{\pi}_{t+1}^w - \kappa_w \underbrace{\left(\hat{w}_t - \hat{mrs}_t+ \frac{1}{\kappa_w}\mu_{w, t}\right) }_{\text{wage markup}} .$$
 
-By adding such shock, wage is less tied with $MRS_t$, and thus it has more freedom to fit with the data. In \ref{sec:robustness}, the estimation based on the \cite{smetsShocksFrictionsUS2007} model shows a much better fit for the variance of hours worked, and the FEVD analysis in Table~\ref{tab:vd:sw-type-no-rel} also shows the strong influence of the wage markup shock on hours worked and wage growth.
+By adding such shock, wage is less tied with $MRS_t$, and thus it has more freedom to fit with the data. In Section~\ref{sec:robustness:sw}, the estimation based on the \cite{smetsShocksFrictionsUS2007} model shows a much better fit for the variance of hours worked, and the FEVD analysis in Table~\ref{tab:vd:sw-type-no-rel} also shows the strong influence of the wage markup shock on hours worked and wage growth.
 
-Nevertheless, from the wage Phillips curve equation, it is natural to think that $\kappa_w$ will play an important role on the connection between consumption and labor input. Actually, by computing $\kappa_w$ under posterior in Section~\ref{sec:robustness}, it is only tiny $0.006$. But if we drop the wage markup shock, the weak link between $MRS_t$ and wage effectively let the wage to be nearly static, and it is why even if the parameter $\theta_w$ exists in the simplified wage setting equation, its posterior still stays about $0.5$.
+Nevertheless, from the wage Phillips curve equation, it is natural to think that $\kappa_w$ will play an important role on the connection between consumption and labor input. Actually, by computing $\kappa_w$ under posterior in Section~\ref{sec:robustness:sw}, it is only tiny $0.006$. But if we drop the wage markup shock, the weak link between $MRS_t$ and wage effectively let the wage to be nearly static, and it is why even if the parameter $\theta_w$ exists in the simplified wage setting equation, its posterior still stays about $0.5$.
 
 \subsection{Forecast Error Variance Decomposition}
 \label{sec:results:fevd}
@@ -125,7 +125,7 @@ However, as shown in the IRF plot, Figure~\ref{fig:compare_irf}, the consumption
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/inv_demand_c1_kappa_psipi_heatmap.pdf}
-    \caption{Impact consumption response \(\hat c_1\) to a unit investment-demand shock as a function of the Phillips-curve slope \(\kappa_p\) and the Taylor-rule inflation coefficient \(\psi_\pi\) four values of the wage-rigidity parameter \(\theta_w\). The remaining parameters are held at the calibration in \cite{nireiOriginsPropagationAnimal}: an i.i.d. shock (\(\rho_d \approx 0\)), a non-inertial pure-inflation rule (\(\rho_R\approx 0\)), and near-linear labor disutility (\(\sigma_l \approx 0\)). Gray cells are indeterminate configurations.}
+    \caption{Impact consumption response \(\hat c_1\) to a unit investment-demand shock as a function of the Phillips-curve slope \(\kappa_p\) and the Taylor-rule inflation coefficient \(\psi_\pi\) four values of the wage-rigidity parameter \(\theta_w\). The remaining parameters are held at the calibration in \cite{nireiOriginsPropagationAnimal}: an i.i.d. shock (\(\rho_d \approx 0\)), a non-inertial pure-inflation rule (\(\rho_R\approx 0\)), and near-linear labor disutility (\(\psi \approx 0\)). Gray cells are indeterminate configurations.}
     \label{fig:inv_demand_c1_kappa_psipi_heatmap}
 \end{figure}
 
