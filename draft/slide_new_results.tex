@@ -1,0 +1,286 @@
+\documentclass[10pt]{beamer}
+
+% --- Packages ---
+\usepackage{amsmath, amssymb}
+\usepackage[authoryear]{natbib}
+\bibliographystyle{abbrvnat}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+% (Optional) compile with XeLaTeX/LuaLaTeX for fonts
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{unicode-math}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning, decorations.pathreplacing, calc, fit, backgrounds}
+
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{caption}{\insertcaption}  % keep figure captions plain
+
+\title{Investment Demand Shock and the Business Cycle}
+\subtitle{New Results}
+\author{Li Xuanguang}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+% ==================================================
+% Roadmap
+% ==================================================
+\begin{frame}{What is new in this version}
+	Five new results that dig into the baseline mechanism and its fragility:
+	\begin{enumerate}
+		\item Where does the high \textbf{Labor input} variance come from?
+		\item Are the \textbf{inflation and wage} signs (IST vs.\ ID) stable across parameters?
+		\item Why is the estimated \textbf{consumption} impact negative, while theory predicts positive?
+		\item How does a full \textbf{Smets--Wouters (2007)} model change the picture?
+		\item How does an \textbf{i.i.d.\ (independent)} investment demand shock change the result?
+	\end{enumerate}
+
+	\vspace{0.6em}
+	\footnotesize
+	Notation: $\varepsilon_s$ = IST shock, $\varepsilon_d$ = investment demand (ID) shock,
+	$\varepsilon_m$ = MEI shock, $\varepsilon_a$ = technology, $\varepsilon_R$ = monetary,
+	$\varepsilon_g$ = government, $\varepsilon_b,\varepsilon_p,\varepsilon_w$ = preference / price- / wage-markup.
+\end{frame}
+
+% ==================================================
+% 1. Labor input
+% ==================================================
+\section{Labor input}
+
+\begin{frame}{1. Why model hours are too volatile}
+	\begin{itemize}
+		\item Baseline matches most moments, but $\mathrm{Var}(\hat N_t)$ is far above the data (see model-fit table).
+		\item Decompose the log-linear labor demand/supply block:
+		\[
+			\hat N_t = \frac{\hat{mc}_t + \alpha \hat{k}^s_t + \hat{\mu}_{a,t} - \theta_w \sigma \hat{c}_t}{\alpha + \theta_w \sigma_\ell}.
+		\]
+		\item $R^2$ of each component on $\hat N_t$: \textbf{consumption co-movement explains $\approx 82\%$} of hours volatility; all other channels are negligible.
+	\end{itemize}
+
+	\vspace{1em}
+	\centering
+	\footnotesize
+	\begin{tabular}{l r r}
+		\hline\hline
+		Component & $\mathrm{corr}(N_t,x_t)$ & $R^2$ (\%) \\ 
+		\hline
+		Consumption, $\hat{c}_t$ & +0.907 & 82.29 \\
+		Marginal cost, $\hat{mc}_t$ & +0.061 & 0.37 \\ 
+		Capital services, $\hat{k}_t^s$ & -0.030 & 0.09 \\ 
+		Technology, $\hat{\mu}_{a, t}$ & +0.087 & 0.76 \\ 
+		\hline
+	\end{tabular}
+\end{frame}
+
+\begin{frame}{1. The root cause is volatile consumption}
+	\begin{itemize}
+		\item Model $\mathrm{Var}(\hat c_t)$ (level) is $39.2$ vs.\ $2.8$ in the data, and this is not because consumption is excluded from the baseline data set.
+		\item The \textbf{same pathology exists in Smets--Wouters (2007)}: their level variance of consumption is $33.8$ (computed from their replication package).
+		\item Difference is hours: SW (2007) fits $\mathrm{Var}(\hat N_t)$ much better because the \textbf{wage markup shock} $\mu_{w,t}$ loosens the wage--$MRS$ link:
+		\[
+			\hat{\pi}_t^w = \beta \mathbb{E}_t \hat{\pi}_{t+1}^w - \kappa_w \underbrace{\Big(\hat{w}_t - \hat{mrs}_t + \tfrac{1}{\kappa_w}\mu_{w,t}\Big)}_{\text{wage markup}}.
+		\]
+		\item Without that shock, the wage is nearly static, so consumption volatility passes straight into hours.
+	\end{itemize}
+
+	\vspace{0.2em}
+	\centering
+	{\footnotesize
+	\begin{tabular}{lccc}
+		\hline\hline
+		Variable & \cite{smetsShocksFrictionsUS2007} & Baseline model & Data \\
+		\hline
+		Consumption ($\hat{c}_t$) & 33.75 & 39.23 & 2.80 \\
+		\quad $\rho_1$    & 0.993 & 0.996 & 0.901 \\
+		Hours worked ($\hat{N}_t$)& 8.85  & 32.22 & 6.29 \\
+		\quad $\rho_1$    & 0.975 & 0.993 & 0.907 \\
+		\hline
+	\end{tabular}}
+\end{frame}
+
+% ==================================================
+% 2. Inflation & wage sign stability
+% ==================================================
+\section{Sign stability}
+
+\begin{frame}{2. Is the inflation/wage sign stable across parameters?}
+	\textbf{Question:} the IRFs show \emph{deflationary IST} and \emph{inflationary ID}. How robust are these signs to the parameters?
+	\begin{itemize}
+		\item Inflation $=$ PDV of marginal cost: $\displaystyle \hat\pi_t = \kappa_p \sum_{j\ge0}\beta^j \mathbb{E}_t[\widehat{mc}_{t+j}]$.
+		\item Two marginal-cost channels: wage and capital rental rate.
+	\end{itemize}
+	\vspace{0.4em}
+	\begin{columns}[T]
+		\column{0.5\textwidth}
+		\centering \textbf{IST shock $\varepsilon_s$}
+		\begin{itemize}\small
+			\item Inflation sign \textbf{not robust}: flips to inflationary in many cases.
+			\item But the \textbf{wage sign is stable} (negative) across the sweep.
+		\end{itemize}
+		\column{0.5\textwidth}
+		\centering \textbf{ID shock $\varepsilon_d$}
+		\begin{itemize}\small
+			\item Inflation \textbf{robustly positive} across all 500 posterior draws and every parameter sweep.
+			\item Wage \textbf{robustly positive} as well.
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{2. IST: inflation sign flips, wage sign does not}
+	\centering
+	\includegraphics[width=\textwidth]{figures/ist_sign_robustness.pdf}
+	\\[0.3em]
+	{\footnotesize Each panel varies one parameter over a wide grid. The impact \emph{inflation} sign is fragile; the \emph{wage} sign stays negative.}
+\end{frame}
+
+\begin{frame}{2. The role of $\psi_u$: why the IST inflation sign flips}
+	\small
+	$\psi_u$ is the curvature of the utilization-cost function. The utilization FOC plus the firm's cost minimization give
+	\[
+		\hat r^k_t = \frac{\psi_u}{1-\psi_u}\,\hat u_t,
+		\qquad
+		\hat r^k_t = \psi_u\big(\hat w_t + \hat N_t - \hat k_{t-1}\big),
+	\]
+	so $\hat r^k_t$ moves only a \textbf{fraction $\psi_u$} of $(\hat w_t+\hat N_t)$.
+	\begin{itemize}
+		\item \textbf{Low $\psi_u$ (baseline $\approx 0.1$):} rental channel muted; inflation is driven by the wage, which falls under IST $\Rightarrow$ \textbf{deflation}.
+		\item \textbf{High $\psi_u$:} larger $a''(1)$ $\Rightarrow$ steeper adjustment cost $\Rightarrow$ capital supply can't adjust; rising labor pushes $\hat r^k_t$ up so the rental channel dominates $\Rightarrow$ \textbf{inflation}.
+	\end{itemize}
+	\vspace{0.2em}
+	\centering
+	\includegraphics[width=0.92\textwidth]{figures/mc_decomposition_rk_psi_u.pdf}
+\end{frame}
+
+\begin{frame}{2. ID: inflation and wage are robustly positive}
+	\centering
+	\includegraphics[width=0.5\textwidth]{figures/inv_demand_mc_decomposition.pdf}
+	\includegraphics[width=0.9\textwidth]{figures/inv_demand_sign_robustness.pdf}
+
+\end{frame}
+
+% ==================================================
+% 3. Consumption impact
+% ==================================================
+\section{Consumption}
+
+\begin{frame}{3. Why estimated consumption response is negative}
+	\begin{itemize}
+		\item In the estimated baseline, the impact consumption response is negative, and \textbf{no single} parameter change reverses it. A positive response needs a \textbf{combination}.
+		\item Aligning with \citeauthor{nireiOriginsPropagationAnimal}'s calibration and varying $\kappa_p$, $\psi_\pi$, $\theta_w$ jointly: consumption turns positive only when \textbf{all three are low}.
+	\end{itemize}
+	\vspace{0.3em}
+	\centering
+	\includegraphics[width=0.78\textwidth]{figures/inv_demand_c1_kappa_psipi_heatmap.pdf}
+\end{frame}
+
+\begin{frame}{3. The mechanism: kill the short-run substitution effect}
+	\textbf{Intuition:} in the long run an ID shock just accumulates capital $\Rightarrow$ households are wealthier $\Rightarrow$ they consume more today. A positive impact response requires \emph{shutting down} the short-run intertemporal substitution channel.
+	\vspace{0.5em}
+	\begin{itemize}
+		\item Low $\theta_w$ $\Rightarrow$ wage barely moves $\Rightarrow$ marginal cost barely moves.
+		\item Low $\kappa_p$ (flat Phillips curve) $\Rightarrow$ inflation barely moves.
+		\item Low $\psi_\pi$ (inactive Taylor rule) $\Rightarrow$ nominal rate barely moves.
+	\end{itemize}
+	\vspace{0.5em}
+	\centering
+	Stable real interest rate $\;\Longrightarrow\;$ no shift of $c_t$ to the future $\;\Longrightarrow\;$ \textbf{positive $\hat c_1$}.
+	\\[0.5em]
+\end{frame}
+
+% ==================================================
+% 4. Smets-Wouters model
+% ==================================================
+\section{SW (2007) model}
+
+\begin{frame}{4. Smets--Wouters (2007) model: what changes}
+	Expand the baseline with: habit formation, monopolistic labor market (Erceg-type wage Phillips curve), and preference / price-markup / wage-markup shocks; add consumption and wage growth as observables.
+	\begin{itemize}
+		\item \textbf{Better hours fit:} $\mathrm{Var}(\hat N_t)$ drops from $32.2$ to $9.8$ (data $6.3$) --- the wage markup shock does the work.
+		\item \textbf{ID shock becomes marginal:} only $4.4\%$ of output and $13.6\%$ of investment FEVD; near-zero for everything else.
+		\item Estimated $\kappa_p\approx0.03$, $\kappa_w\approx0.02$ (very flat) --- partly propped up by the markup shocks.
+	\end{itemize}
+	\vspace{0.2em}
+	\centering
+	{\tiny\input{tables/variance_decomp_sw_type_no_rel.tex}}
+\end{frame}
+
+\begin{frame}{4. SW model: IRFs flip relative to the baseline}
+	\centering
+	\includegraphics[width=0.92\textwidth]{figures/compare_irf_sw_type_no_rel.pdf}
+	\\[0.3em]
+	\begin{itemize}\footnotesize
+		\item[\textbf{(i)}] ID shock now generates \emph{much smaller} fluctuations than IST (smaller estimated s.d.).
+		\item[\textbf{(ii)}] IST shock now \emph{inflationary}, with a \emph{positive} wage response (sign flip vs.\ baseline).
+		\item[\textbf{(iii)}] Consumption response to ID is much smoother: $\hat c_1$ is only $0.2\%$ of $\hat\imath_1$ (vs.\ $12\%$ in baseline).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{4. SW model: consumption sign revisited}
+	\begin{columns}[c]
+		\column{0.55\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{figures/inv_demand_c1_psiy_sigmal_heatmap.pdf}
+		\column{0.45\textwidth}
+		\footnotesize
+		Now sweep $\sigma_\ell$ (inverse Frisch) and $\psi_y$ (output-gap coefficient), because the flat Phillips/wage curves already sit near the \citeauthor{nireiOriginsPropagationAnimal} calibration.
+		\vspace{0.5em}
+
+		Same logic: a positive $\hat c_1$ needs a low real rate.
+		\begin{itemize}
+			\item Small $\psi_y$: directly lowers Taylor-rule output-gap feedback.
+			\item Small $\sigma_\ell$: suppresses the real wage $\Rightarrow$ smaller wage gap $\Rightarrow$ smaller output gap.
+		\end{itemize}
+	\end{columns}
+	\vspace{0.3em}
+\end{frame}
+
+% ==================================================
+% 5. Independent ID shock
+% ==================================================
+\section{i.i.d.\ ID shock}
+
+\begin{frame}{5. Independent (i.i.d.) investment demand shock}
+	Households learn the realized investment demand next period and undo it, so the shock may be \emph{transitory}. Set $\rho_d=0$, keep everything else at baseline.
+	\begin{itemize}
+		\item ID shock contributes \textbf{$22.95\%$ of output} and \textbf{$15.18\%$ of investment} FEVD.
+		\item Down from $\approx40\%$ / $\approx50\%$ in the baseline: zero persistence cuts off the future influence.
+	\end{itemize}
+	\vspace{0.2em}
+	\centering
+	{\scriptsize\input{tables/variance_decomp_per_add_mei.tex}}
+\end{frame}
+
+% ==================================================
+% Wrap-up
+% ==================================================
+\begin{frame}{Summary of new results}
+	\begin{enumerate}
+		\item \textbf{Hours:} excess volatility comes almost entirely ($R^2\approx82\%$) from over-volatile consumption; a wage markup shock cures the hours fit.
+		\item \textbf{Signs:} ID inflation/wage are \emph{robustly positive}; IST inflation sign is \emph{fragile}, though its wage sign is relative stable.
+		\item \textbf{Consumption:} estimated impact is negative; a positive impact needs jointly low $\kappa_p,\psi_\pi,\theta_w$ (a stable real rate).
+		\item \textbf{SW (2007):} fits hours, but shrinks the ID shock to a marginal role and flips IST to inflationary.
+		\item \textbf{i.i.d.\ ID:} importance falls (output $\approx23\%$, investment $\approx15\%$) but the shock remains a meaningful output driver.
+	\end{enumerate}
+
+	\begin{block}{Takeaways}
+		\begin{enumerate}
+			\item[\textbf{(i)}] SW model shows stronger ability to fit with the data, and delivers posteriors indicating a stickier economy.
+			\item[\textbf{(ii)}] Positive consumption impact require strict parameter values, which is not easy to reproduce in the estimation, but the logic of reducing short-run intertemporal substitution effect works.
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{References}
+	\bibliography{reference}
+\end{frame}
+
+\end{document}
