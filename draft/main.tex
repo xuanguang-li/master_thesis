@@ -45,7 +45,7 @@
 % been built yet, fall back to the plain title so main.tex still compiles.
 \IfFileExists{cover.pdf}{\includepdf[pages=-]{cover.pdf}}{\maketitle}
 
-\includepdf[pages=-]{abstract_cover.pdf}
+\input{section/abstract.tex}
 
 \newpage
 
