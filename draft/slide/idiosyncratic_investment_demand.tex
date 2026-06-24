@@ -81,11 +81,6 @@
 	\end{itemize}
 \end{frame}
 
-% ==================================================
-% 2. Lumpy investment & value function (Figure 1)
-% ==================================================
-\section{Lumpy investment}
-
 \begin{frame}{Lumpy investment and the investment threshold}
 	% --- top region: text (left) + figure pinned NE (right) ---
 	\begin{columns}[T]
@@ -144,12 +139,7 @@
 \end{frame}
 
 
-% ==================================================
-% 3. Stationary distribution & investing fraction (Figure 2)
-% ==================================================
-\section{Stationary distribution}
-
-\begin{frame}{Cross-section stationary distribution}
+\begin{frame}{Investing fraction and idiosyncratic shock}
 	% --- top region: text (left) + figure pinned NE (right) ---
 	\begin{itemize}
 		\item Assume $a_t\in\{a_L,a_H\}$ and $s_t\mid a_t\sim U[0,1)$ under stationary distribution.
@@ -169,7 +159,7 @@
 
 		\column{0.5\textwidth}
 		\centering
-		\begin{tikzpicture}[xscale=3.0,yscale=0.9]
+		\begin{tikzpicture}[xscale=3.5,yscale=1.2]
 			% axis
 			\draw[->] (-0.05,0) -- (1.25,0) node[right,font=\scriptsize]{$s_t$};
 			\draw[->] (0,-0.05) -- (0,1.9) node[above,font=\scriptsize]{density};
@@ -195,7 +185,7 @@
 	\end{columns}
 
 	% --- bottom region: full-width text wrapping under the figure ---
-	\vspace{0.em}
+	\vspace{0.3em}
 	\begin{itemize}
 		\item Since $s_t\sim U[0,1)$, $s^{*}(a,a')$ is the \textbf{investing fraction}
 		\item Add an i.i.d.\ shock $\varepsilon$ on $a'$ \emph{only} in group $(a,a')=(b,b')$:
@@ -211,16 +201,19 @@
 % ==================================================
 \section{Idiosyncratic shock \& propagation}
 
-\begin{frame}{An idiosyncratic shock in one group}
+\begin{frame}{Propagation through the threshold}
 	% --- top region: text (left) + figure pinned NE (right) ---
 	\begin{columns}[T]
-		\column{0.6\textwidth}
-		
+		\column{0.65\textwidth}
+		More investment in $(b,b')$ raises \emph{future aggregate output}:
+		\[\small
+			\Delta Y_{t+1}(\nu)=\Big(\omega(b,b')\!\!\int_{s^*}^{s^*+\nu}\!\! \big(b'(\lambda-1)k_{t}(s_t)\big)^{\frac{\eta-1}{\eta}}\,dF(s_t\mid b)\Big)^{\frac{\eta}{\eta-1}}
+		\]
 
-		\column{0.4\textwidth}
+		\column{0.35\textwidth}
 		\vspace{-0.6em}
 		\centering
-		\begin{tikzpicture}[scale=0.88]
+		\begin{tikzpicture}[scale=0.7]
 			% 2x2 groups, sizes ~ omega
 			\fill[gray!12] (0,0) rectangle (1.4,1.4);
 			\fill[gray!12] (1.4,0) rectangle (2.6,1.4);
@@ -243,58 +236,39 @@
 			\node[left,font=\scriptsize] at (0,0.7) {$a=L$};
 			\node[left,font=\scriptsize] at (0,2.0) {$a=H$};
 		\end{tikzpicture}
-		\\[0.1em]
-		{\scriptsize Figure 3. Four groups $(a,a')$ with masses
-		$\omega$; the shock hits group $(b,b')$.}
 	\end{columns}
 
 	% --- bottom region: full-width text wrapping under the figure ---
-	\vspace{0.3em}
-	More investment in $(b,b')$ raises \emph{future aggregate output}:
-	\[\small
-		Y_{t+1}(b,b',\nu)=\Big(\omega(b,b')\!\!\int_0^1\!\! \big(b'k_{t+1}(s_t)\big)^{\frac{\eta-1}{\eta}}\,dF(s_t\mid b)\Big)^{\frac{\eta}{\eta-1}},
-	\]
-	split at the cutoff $s^{*}(b,b')+\nu$ into investing firms and the rest. This output increase is \textbf{propagation}.
+	\vspace{0.5em}
+	\begin{itemize}
+		\item Higher $Y_{t+1}$ raises $k^{*}\propto Y_{t+1}$ everywhere, shifting the cutoff in \emph{every} group:
+		\[
+			s^{*}_t(a,a',\nu)=\frac{-\log(1-\delta)+(\eta-1)\log(a'/a)+\Delta \log Y_{t+1}(\nu)}{\log\lambda}.
+		\]
+		\item Per-group and aggregate \textbf{$\nu$-induced fraction}:
+		\[
+			\Delta s^{*}_t(a,a',\nu)=\frac{\Delta \log Y_{t+1}(\nu)}{\log\lambda},
+			\quad
+			\Delta s^{*}_t(\nu)=\sum_{(a,a')}\omega(a,a')\,\Delta s^{*}_t(a,a',\nu).
+		\]
+		\item The first $\nu$ of investing firms raises $Y$, which induces $\Delta s^{*}(\nu)$ more, which raises $Y$ again $\dots$ a GE multiplier that iterates to a new equilibrium.
+	\end{itemize}
 \end{frame}
 
-\begin{frame}{Propagation through the threshold, and why it does not die out}
-	Higher $Y_{t+1}$ raises $k^{*}\propto Y_{t+1}$ everywhere, shifting the cutoff in \emph{every} group:
-	\[
-		s^{*}_t(a,a',\nu)=\frac{-\log(1-\delta)+(\eta-1)\log(a'/a)+\log Y_{t+1}(\nu)-\log Y_t}{\log\lambda}.
-	\]
-	Per-group and aggregate \textbf{$\nu$-induced fraction}:
-	\[
-		\Delta s^{*}_t(a,a',\nu)=\frac{\log Y_{t+1}(\nu)-\log Y_t}{\log\lambda},
-		\qquad
-		\Delta s^{*}_t(\nu)=\sum_{(a,a')}\omega(a,a')\,\Delta s^{*}_t(a,a',\nu).
-	\]
-	\begin{itemize}\small
-		\item The first $\nu$ of investing firms raises $Y$, which induces $\Delta s^{*}(\nu)$ more, which raises $Y$ again $\dots$ a GE multiplier that iterates to a new equilibrium.
-		\item Key theoretical property (small-shock limit):
+\begin{frame}{Theoretical result and implication}
+	$$\text{Total investment} = \sum_{i=1}^{\infty} \text{ induced investing fraction}^{i} \times \text{ average investment}^{i}$$
+
+	\begin{block}{Propagation of investing fraction}
 		\[
 		 \lim_{\nu\to0}\frac{\Delta s^{*}_t(\nu)}{\omega(b,b')\,\nu}=1\
 		\]
 		the $\nu$-induced fraction has the \emph{same scale} as the original $\varepsilon$-induced fraction $\Rightarrow$ the wave does \textbf{not} attenuate across iterations.
-	\end{itemize}
-\end{frame}
+	\end{block}
 
-% ==================================================
-% 5. Macro-level investment shock
-% ==================================================
-\section{From micro to macro}
-
-\begin{frame}{Why a reduced-form macro investment demand shock is justified}
-	\textbf{The tension.} At each iteration more firms invest, but each adds only a small amount; if the per-firm amount decayed fast enough, aggregate investment would barely move.
-	$$\text{Total investment} = \sum_{i=1}^{\infty} \text{ induced investing fraction}^{i} \times \text{ average investment}^{i}$$
-	\vspace{0.4em}
-	\textbf{Where lumpiness bites.} With lumpy investment, ``if you invest, you must invest a large amount'' ($x=\lambda k$). The fraction result above ($\lim=1$) keeps the \emph{mass} of investors from shrinking, and lumpiness keeps each contribution \emph{large}.
-
-	\vspace{0.6em}
-	\begin{block}{Theoretical result}
+	\begin{block}{Magnititude}
 		As the number of firms $\to\infty$, the i.i.d.\ idiosyncratic shock $\varepsilon$ vanishes with \textbf{asymptotic variance to zero}, yet the induced aggregate investment converges to a \textbf{non-degenerate random variable}.
 	\end{block}
 
-	\vspace{0.4em}
 	\textbf{Implication for estimation.} The micro idiosyncratic shock aggregates into a well-defined, non-vanishing movement in \textbf{investment}. So it is legitimate to model it as a reduced-form shock placed \textbf{directly on investment}, rather than on technology.
 \end{frame}
 
