@@ -30,37 +30,13 @@
 \begin{frame}
 	\titlepage
 	\vspace{-1em}
-	\begin{center}\footnotesize Building on \textit{Nirei and Ragot (2025)}\end{center}
 \end{frame}
 
-% ==================================================
-% Roadmap
-% ==================================================
-\begin{frame}{What this toy model is for}
-	A micro-foundation that answers three questions for the estimation:
-	\begin{enumerate}
-		\item What do we mean by \textbf{propagation of an idiosyncratic shock}?
-		\item Why is the \textbf{lumpy-investment} assumption essential?
-		\item Why is it legitimate to use a \textbf{reduced-form investment demand shock}
-		      (a shock added directly on investment) in estimation?
-	\end{enumerate}
+\begin{frame}{A toy model of idiosyncratic shocks and lumpy investment\footnote{Building on \textit{Nirei and Ragot (2025)}}}
+	
+	\textbf{Why is it legitimate to use a reduced-form investment demand shock?}
+	\vspace{1em}
 
-	\vspace{0.8em}
-	\textbf{Logic of the argument:}
-	\begin{itemize}\small
-		\item A small i.i.d.\ shock pushes a few firms over their investment threshold.
-		\item In general equilibrium this raises output, which moves \emph{every} firm's threshold.
-		\item The induced wave does \textbf{not} die out — it is self-sustaining and, in the limit
-		      of many firms, survives as a \textbf{degenerate (non-random) aggregate} investment shock.
-	\end{itemize}
-\end{frame}
-
-% ==================================================
-% 1. Intermediate goods producers
-% ==================================================
-\section{Setup}
-
-\begin{frame}{Intermediate-goods producers}
 	Standard New-Keynesian CES aggregator and demand:
 	\[
 		Y_t=\Big(\int_0^1 y_{jt}^{\frac{\eta-1}{\eta}}\,dj\Big)^{\frac{\eta}{\eta-1}},
@@ -76,15 +52,14 @@
 	\]
 	\begin{itemize}\small
 		\item Concave in own capital ($\eta>1$): diminishing returns through the demand curve.
-		\item Revenue, hence the desired capital, scales with aggregate output $Y_t$ — the channel
-		      through which one firm's action will later spill over to all firms.
+		\item Revenue, hence the desired capital, scales with aggregate output $Y_t$ — the channel through which one firm's action will later spill over to all firms.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Lumpy investment and the investment threshold}
 	% --- top region: text (left) + figure pinned NE (right) ---
-	\begin{columns}[T]
-		\column{0.56\textwidth}
+	\begin{columns}[T,onlytextwidth]
+		\column{0.58\textwidth}
 		Firms solve
 		\[\small
 			\max_{\{x_{t+k}\}}\ \mathbb{E}_t\!\sum_{k\ge0}\Lambda_{t,t+k}\big(r_{j,t+k}-x_{j,t+k}\big),
@@ -94,7 +69,7 @@
 			&x_{j,t+k}\in\{0,\ \lambda k_{j,t+k}\}.
 		\end{aligned}$$
 
-		\column{0.44\textwidth}
+		\column{0.4\textwidth}
 		\vspace{-0.6em}
 		\centering
 		\begin{tikzpicture}[xscale=1.28,yscale=0.74]
@@ -146,10 +121,10 @@
 		\item Macro variables are constant: $Y = Y_t = Y_{t+1}$, $\Phi = \Phi_t = \Phi_{t+1}$
 	\end{itemize}
 
-	\begin{columns}[T]
-		\column{0.5\textwidth}
-		
-		Without investing, position drifts by
+	\begin{columns}[T,onlytextwidth]
+		\column{0.56\textwidth}
+
+		Without investing, under stationary distribution position drifts by
 		\[
 		\begin{aligned}
 		s_{j,t+1}&=s_{j,t}(a) \\
@@ -157,9 +132,9 @@
 		\end{aligned}
 		\]
 
-		\column{0.5\textwidth}
+		\column{0.42\textwidth}
 		\centering
-		\begin{tikzpicture}[xscale=3.5,yscale=1.2]
+		\begin{tikzpicture}[xscale=3.2,yscale=1.1]
 			% axis
 			\draw[->] (-0.05,0) -- (1.25,0) node[right,font=\scriptsize]{$s_t$};
 			\draw[->] (0,-0.05) -- (0,1.9) node[above,font=\scriptsize]{density};
@@ -203,17 +178,20 @@
 
 \begin{frame}{Propagation through the threshold}
 	% --- top region: text (left) + figure pinned NE (right) ---
-	\begin{columns}[T]
-		\column{0.65\textwidth}
-		More investment in $(b,b')$ raises \emph{future aggregate output}:
-		\[\small
-			\Delta Y_{t+1}(\nu)=\Big(\omega(b,b')\!\!\int_{s^*}^{s^*+\nu}\!\! \big(b'(\lambda-1)k_{t}(s_t)\big)^{\frac{\eta-1}{\eta}}\,dF(s_t\mid b)\Big)^{\frac{\eta}{\eta-1}}
+	\begin{columns}[T,onlytextwidth]
+		\column{0.63\textwidth}
+		More investment in $(b,b')$ raises \emph{future output} of this group, which is a part of \emph{future aggregate output}:
+		\[\begin{aligned}
+			Y_{t+1}(a, a', \nu)
+			&=\Big(\omega(b,b')\!\!\int_{0}^{s^*+\nu}\!\! \big(b'\lambda (1-\delta) k_{t}(s_t)\big)^{\frac{\eta-1}{\eta}}\,dF(s_t\mid b) \\
+			&+ \text{no investment firms}\Big)^{\frac{\eta}{\eta-1}}
+		\end{aligned}
 		\]
 
 		\column{0.35\textwidth}
-		\vspace{-0.6em}
+		\vspace{-0.3em}
 		\centering
-		\begin{tikzpicture}[scale=0.7]
+		\begin{tikzpicture}[scale=0.72]
 			% 2x2 groups, sizes ~ omega
 			\fill[gray!12] (0,0) rectangle (1.4,1.4);
 			\fill[gray!12] (1.4,0) rectangle (2.6,1.4);
@@ -241,35 +219,52 @@
 	% --- bottom region: full-width text wrapping under the figure ---
 	\vspace{0.5em}
 	\begin{itemize}
-		\item Higher $Y_{t+1}$ raises $k^{*}\propto Y_{t+1}$ everywhere, shifting the cutoff in \emph{every} group:
+		\item Higher $Y_{t+1}$ shifts the cutoff in \emph{every} group:
 		\[
-			s^{*}_t(a,a',\nu)=\frac{-\log(1-\delta)+(\eta-1)\log(a'/a)+\Delta \log Y_{t+1}(\nu)}{\log\lambda}.
+		\begin{aligned}
+			\nu^{(1)}(a, a') 
+			&\coloneq \Delta s^{*}_t(a,a',\nu)\\
+			&=s^*(a, a') + \frac{\log (Y_{t+1}(\nu)/ Y)}{\log\lambda} - \left(s^*(a, a') + \frac{\log (\overset{=Y}{Y_{t+1}(0)}/ Y)}{\log\lambda}\right)
+		\end{aligned}
 		\]
-		\item Per-group and aggregate \textbf{$\nu$-induced fraction}:
+		\item aggregate \textbf{$\nu$-induced fraction}:
 		\[
-			\Delta s^{*}_t(a,a',\nu)=\frac{\Delta \log Y_{t+1}(\nu)}{\log\lambda},
-			\quad
-			\Delta s^{*}_t(\nu)=\sum_{(a,a')}\omega(a,a')\,\Delta s^{*}_t(a,a',\nu).
+			\nu^{(1)}\coloneq \sum_{(a,a')}\omega(a,a')\,\nu^{(1)}(a, a').
 		\]
-		\item The first $\nu$ of investing firms raises $Y$, which induces $\Delta s^{*}(\nu)$ more, which raises $Y$ again $\dots$ a GE multiplier that iterates to a new equilibrium.
+		\item The first $\nu$ of investing firms raises $Y$, which induces $\nu^{(1)}$ more, which raises $Y$ again $\dots$ a GE multiplier that iterates to a new equilibrium.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Theoretical result and implication}
-	$$\text{Total investment} = \sum_{i=1}^{\infty} \text{ induced investing fraction}^{i} \times \text{ average investment}^{i}$$
+\begin{frame}{Total induced investment $\gg \nu$}
+	$$\text{Total induced investment} = \sum_{i=1}^{\infty} \text{ induced fraction}^{(i)} \times \text{ average induced investment}^{(i)}$$
 
-	\begin{block}{Propagation of investing fraction}
+	\begin{itemize}
+		\item Scale of induced fraction
 		\[
-		 \lim_{\nu\to0}\frac{\Delta s^{*}_t(\nu)}{\omega(b,b')\,\nu}=1\
+		 \lim_{\nu\to 0}\frac{\nu^{(1)}}{\omega(b,b')\,\nu}=1\
 		\]
-		the $\nu$-induced fraction has the \emph{same scale} as the original $\varepsilon$-induced fraction $\Rightarrow$ the wave does \textbf{not} attenuate across iterations.
-	\end{block}
+		\begin{itemize}
+			\small
+			\item the $\nu^{(1)}$ has the \emph{same scale} as the original fraction 
+			
+			$\Rightarrow$ each $\omega(a, a') \nu^{(1)}(a, a')$ will induce the \emph{same scale} $\nu^{(2)}(\nu^{(1)}(a, a'))$ again 
+		
+			$\Rightarrow$ induced fraction will not decay through iteration.
+		\end{itemize}
 
-	\begin{block}{Magnititude}
-		As the number of firms $\to\infty$, the i.i.d.\ idiosyncratic shock $\varepsilon$ vanishes with \textbf{asymptotic variance to zero}, yet the induced aggregate investment converges to a \textbf{non-degenerate random variable}.
-	\end{block}
-
-	\textbf{Implication for estimation.} The micro idiosyncratic shock aggregates into a well-defined, non-vanishing movement in \textbf{investment}. So it is legitimate to model it as a reduced-form shock placed \textbf{directly on investment}, rather than on technology.
+		\item Scale of average induced investment
+		\[
+			\frac{\partial \Delta x(a, a', \nu)}{\partial \nu}\Big|_{\nu=0} = (\lambda - 1)(1-\delta) \lambda^{s^*} a^{\eta - 1}\Psi Y
+		\]
+		\begin{itemize}
+			\small
+			\item $\nu$-induced average investment, $\Delta x(a, a', \nu)$, is defined as $\Delta x_t(a, a', \nu) \coloneq \int_{s^*}^{s^*+\nu} (\lambda - 1)(1-\delta) \underbrace{\lambda^{s_t} a^{\eta-1}\Phi Y}_{k_t(s_t)} \, d F(s_t\,|\, a_t = a)$
+			
+			$\Rightarrow$ the derivative says $\Delta x(a, a', \nu) = O(\nu)$
+			
+			$\Rightarrow$ average induced investment will not decay faster than $\nu$.
+		\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Takeaways}
