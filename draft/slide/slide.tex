@@ -39,10 +39,9 @@
 \begin{frame}{Motivation}
 	%content: motivation
 	\begin{itemize}
-		\item Investment is the most volatile component of the business cycle; a long literature treats \textbf{investment shocks} as a main driving force.
 		\item \textbf{Justiniano, Primiceri \& Tambalotti (2010):} an estimated DSGE attributes a large share of U.S.\ fluctuations to a \emph{supply-side} investment-specific technology (IST) shock.
 		\item \textbf{The comovement puzzle:} supply-side IST shocks struggle to reproduce the joint positive comovement of consumption, investment, and inflation seen in the data.
-		\item \textbf{Nirei (2015):} an \emph{investment demand} (ID) shock---built from firm heterogeneity and lumpy investment---\emph{can} generate this comovement, but lacks empirical evidence.
+		\item \textbf{Nirei and Ragot (2025):} proposed an \emph{investment demand} shock, which \emph{can} generate this comovement, but lacks empirical evidence.
 	\end{itemize}
 	\vspace{0.5em}
 	\begin{block}{This paper}
@@ -52,30 +51,20 @@
 
 \begin{frame}{Specifying the investment demand shock}
 	%content: specification of the investment demand shock + two-step equilibrium
-	\begin{itemize}\small
-		\item The micro origin (idiosyncratic productivity $+$ lumpy investment) appears \emph{at the aggregate level} as a deviation of investment from its shock-free decision $\Rightarrow$ a reduced-form shock $\mu_{d,t}$:
+	The reduced-form investment demand shock $\mu_{d,t}$:
 		\[
-			I_t=\mu_{d,t}\,I_t^{*},\qquad
+			I_t=\mu_{d,t}\,I_t^{*},\quad
 			\ln\mu_{d,t}=(1-\rho_d)\ln\mu_d+\rho_d\ln\mu_{d,t-1}+\varepsilon_{d,t}.
 		\]
+	\begin{itemize}
 		\item Households would otherwise undo the shock, so the equilibrium is solved in \textbf{two steps}:
 		\begin{itemize}\footnotesize
 			\item[\textbf{1.}] solve the baseline model (no ID shock) for the endogenous investment $I_t^{*}$;
 			\item[\textbf{2.}] reveal $\mu_{d,t}$, \emph{fix} $I_t=\mu_{d,t}I_t^{*}$, and re-solve the equilibrium for consumption, labor, bonds and utilization.
 		\end{itemize}
-		\item Natural output for the Taylor rule is computed from \textbf{frictionless parallel models} in each stage (next slide).
-	\end{itemize}
+
 \end{frame}
 
-\begin{frame}{The two-step solution and parallel models}
-	%content: illustrate the two-step equilibrium and the parallel models
-	\centering
-	\IfFileExists{figures/plot_model_relation.tex}
-		{\resizebox{0.95\textwidth}{!}{\input{figures/plot_model_relation.tex}}}
-		{\resizebox{0.95\textwidth}{!}{\input{../figures/plot_model_relation.tex}}}
-	\\[0.4em]
-	{\footnotesize Pre-stage solves the endogenous investment $I^{*}$ and natural output $Y^{n}$; the post-stage \emph{fixes} $I=\mu_d I^{*}$ and re-solves. Frictionless tracks ($\theta_w=0$) supply $Y^{n}$ for the Taylor rule.}
-\end{frame}
 
 \begin{frame}{A toy model of idiosyncratic shocks and lumpy investment}
 	
@@ -309,8 +298,8 @@
 
 \begin{frame}{The estimated DSGE model}
 	% list the features of the model used in estimation, like sticky wage, investment adjustment cost, etc.
-	Based on Smets--Wouters (2007) and Herbst--Schorfheide (2015), augmented with the investment demand shock (two-step equilibrium).
-	\begin{itemize}\small
+	Based on Smets and Wouters (2007) and Herbst and Schorfheide (2015), augmented with the investment demand shock (explained before).
+	\begin{itemize}
 		\item \textbf{Nominal rigidities:} Calvo price setting (no indexation); reduced-form \textbf{sticky wage}---partial adjustment of the wage toward the MRS:
 		\[
 			w_t=\Big(L_t^{\sigma_\ell}\big/C_t^{-\sigma}\Big)^{\theta_w}\,w^{\,1-\theta_w}.
@@ -319,7 +308,7 @@
 		\[
 			K_{t+1}=(1-\delta)K_t+\mu_{s,t}\big[1-S(I_t/I_{t-1})\big]I_t.
 		\]
-		\item \textbf{Policy:} Taylor rule (inflation $+$ output gap $+$ smoothing); output-stabilizing government spending.
+		\item \textbf{Policy:} Taylor rule; output-stabilizing government spending.
 		\item \textbf{Five structural shocks:} technology $\varepsilon_a$, IST $\varepsilon_s$, monetary $\varepsilon_R$, government $\varepsilon_g$, and investment demand $\varepsilon_d$.
 	\end{itemize}
 \end{frame}
@@ -330,16 +319,16 @@
 	\begin{columns}[T,onlytextwidth]
 		\column{0.5\textwidth}
 		\textbf{Method}
-		\begin{itemize}\small
+		\begin{itemize}
 			\item Bayesian estimation; methodology follows Smets--Wouters (2007) and Justiniano et al.\ (2010).
 			\item Posterior via Metropolis--Hastings: $100{,}000$ draws, $0.5$ burn-in, relatively flat priors.
 			\item \textbf{ID vs.\ IST identification} rests on their different \emph{comovement} signatures---there is no direct data series for the ID shock.
 		\end{itemize}
 		\column{0.5\textwidth}
 		\textbf{Data}
-		\begin{itemize}\small
+		\begin{itemize}
 			\item Six quarterly U.S.\ observables (FRED), \textbf{1983:Q1--2002:Q4}:
-			\begin{itemize}\footnotesize
+			\begin{itemize}\small
 				\item output growth, CPI inflation, fed funds rate,
 				\item hours, investment growth, gov.-spending growth.
 			\end{itemize}
@@ -351,14 +340,14 @@
 
 \begin{frame}{Baseline result: variance decomposition}
 	% baseline result (FEVD)
-	\begin{itemize}\small
+	\begin{itemize}
 		\item \textcolor{invest}{\textbf{ID shock}} alone explains $\approx\!\mathbf{42\%}$ of output and $\approx\!\mathbf{51\%}$ of investment FEVD---a competitive driver of the cycle.
 		\item Jointly, \textcolor{accent}{IST} $+$ \textcolor{invest}{ID} account for $\approx 92\%$ of hours and $\approx 47\%$ of inflation.
 		\item ID adds little to \emph{hours} and is less persistent than IST ($\rho_s\!\approx\!1$ vs.\ $\rho_d\!=\!0.87$; IST is also hump-shaped through the adjustment cost).
 	\end{itemize}
 	\vspace{0.5em}
 	\centering
-	\footnotesize
+	\small
 	\setlength{\tabcolsep}{1.0em}
 	\begin{tabular}{l r r r r r}
 		\hline\hline
@@ -383,8 +372,8 @@
 	\\[0.2em]
 	\begin{columns}[T,onlytextwidth]
 		\column{0.5\textwidth}
-		\footnotesize\textcolor{accent}{\textbf{IST shock $\Rightarrow$ deflationary}}
-		\begin{itemize}\scriptsize
+		\small\textcolor{accent}{\textbf{IST shock $\Rightarrow$ deflationary}}
+		\begin{itemize}\small
 			\item Wage $\downarrow$ while hours $\uparrow$, consumption $\downarrow$, output $\approx$ flat.
 			\item Strong \emph{intertemporal substitution}: cheap investment $\Rightarrow$ save more today (labor supply shifts out).
 		\end{itemize}
