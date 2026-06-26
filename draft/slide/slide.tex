@@ -11,6 +11,10 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning, decorations.pathreplacing, calc, fit, backgrounds, patterns}
 
+\usepackage{graphicx}
+% resolve figures whether the deck is compiled from draft/ or from draft/slide/
+\graphicspath{{figures/}{../figures/}}
+
 \setbeamertemplate{footline}[frame number]
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{caption}{\insertcaption}
@@ -32,14 +36,45 @@
 	\vspace{-1em}
 \end{frame}
 
-\begin{frame}
-	%content: 
-	%1. motivation 
-	% (1) finding of Justiniao 2010
-	% (2) the unresolved comovement problem)
-	%2. specification of investment demand shock
-	% (1) the equation where shock enters
-	% (2) explain the two-step equilibrium (investment is decided in the first stage, after the shock, other state variables are decided in the second stage; may use a plot)
+\begin{frame}{Motivation}
+	%content: motivation
+	\begin{itemize}
+		\item Investment is the most volatile component of the business cycle; a long literature treats \textbf{investment shocks} as a main driving force.
+		\item \textbf{Justiniano, Primiceri \& Tambalotti (2010):} an estimated DSGE attributes a large share of U.S.\ fluctuations to a \emph{supply-side} investment-specific technology (IST) shock.
+		\item \textbf{The comovement puzzle:} supply-side IST shocks struggle to reproduce the joint positive comovement of consumption, investment, and inflation seen in the data.
+		\item \textbf{Nirei (2015):} an \emph{investment demand} (ID) shock---built from firm heterogeneity and lumpy investment---\emph{can} generate this comovement, but lacks empirical evidence.
+	\end{itemize}
+	\vspace{0.5em}
+	\begin{block}{This paper}
+		Estimate a DSGE model with \textbf{both} an IST shock and an investment demand shock to quantify how important the investment demand shock is for the U.S.\ business cycle.
+	\end{block}
+\end{frame}
+
+\begin{frame}{Specifying the investment demand shock}
+	%content: specification of the investment demand shock + two-step equilibrium
+	\begin{itemize}\small
+		\item The micro origin (idiosyncratic productivity $+$ lumpy investment) appears \emph{at the aggregate level} as a deviation of investment from its shock-free decision $\Rightarrow$ a reduced-form shock $\mu_{d,t}$:
+		\[
+			I_t=\mu_{d,t}\,I_t^{*},\qquad
+			\ln\mu_{d,t}=(1-\rho_d)\ln\mu_d+\rho_d\ln\mu_{d,t-1}+\varepsilon_{d,t}.
+		\]
+		\item Households would otherwise undo the shock, so the equilibrium is solved in \textbf{two steps}:
+		\begin{itemize}\footnotesize
+			\item[\textbf{1.}] solve the baseline model (no ID shock) for the endogenous investment $I_t^{*}$;
+			\item[\textbf{2.}] reveal $\mu_{d,t}$, \emph{fix} $I_t=\mu_{d,t}I_t^{*}$, and re-solve the equilibrium for consumption, labor, bonds and utilization.
+		\end{itemize}
+		\item Natural output for the Taylor rule is computed from \textbf{frictionless parallel models} in each stage (next slide).
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The two-step solution and parallel models}
+	%content: illustrate the two-step equilibrium and the parallel models
+	\centering
+	\IfFileExists{figures/plot_model_relation.tex}
+		{\resizebox{0.95\textwidth}{!}{\input{figures/plot_model_relation.tex}}}
+		{\resizebox{0.95\textwidth}{!}{\input{../figures/plot_model_relation.tex}}}
+	\\[0.4em]
+	{\footnotesize Pre-stage solves the endogenous investment $I^{*}$ and natural output $Y^{n}$; the post-stage \emph{fixes} $I=\mu_d I^{*}$ and re-solves. Frictionless tracks ($\theta_w=0$) supply $Y^{n}$ for the Taylor rule.}
 \end{frame}
 
 \begin{frame}{A toy model of idiosyncratic shocks and lumpy investment}
@@ -272,29 +307,121 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{The estimated DSGE model}
 	% list the features of the model used in estimation, like sticky wage, investment adjustment cost, etc.
+	Based on Smets--Wouters (2007) and Herbst--Schorfheide (2015), augmented with the investment demand shock (two-step equilibrium).
+	\begin{itemize}\small
+		\item \textbf{Nominal rigidities:} Calvo price setting (no indexation); reduced-form \textbf{sticky wage}---partial adjustment of the wage toward the MRS:
+		\[
+			w_t=\Big(L_t^{\sigma_\ell}\big/C_t^{-\sigma}\Big)^{\theta_w}\,w^{\,1-\theta_w}.
+		\]
+		\item \textbf{Real frictions:} \textbf{investment adjustment cost} $S(I_t/I_{t-1})$ and \textbf{endogenous capital utilization} $u_t$. Capital law of motion carries the IST shock:
+		\[
+			K_{t+1}=(1-\delta)K_t+\mu_{s,t}\big[1-S(I_t/I_{t-1})\big]I_t.
+		\]
+		\item \textbf{Policy:} Taylor rule (inflation $+$ output gap $+$ smoothing); output-stabilizing government spending.
+		\item \textbf{Five structural shocks:} technology $\varepsilon_a$, IST $\varepsilon_s$, monetary $\varepsilon_R$, government $\varepsilon_g$, and investment demand $\varepsilon_d$.
+	\end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Estimation: method and data}
 	% 1. brief introduction on estimation method
 	% 2. Data
+	\begin{columns}[T,onlytextwidth]
+		\column{0.5\textwidth}
+		\textbf{Method}
+		\begin{itemize}\small
+			\item Bayesian estimation; methodology follows Smets--Wouters (2007) and Justiniano et al.\ (2010).
+			\item Posterior via Metropolis--Hastings: $100{,}000$ draws, $0.5$ burn-in, relatively flat priors.
+			\item \textbf{ID vs.\ IST identification} rests on their different \emph{comovement} signatures---there is no direct data series for the ID shock.
+		\end{itemize}
+		\column{0.5\textwidth}
+		\textbf{Data}
+		\begin{itemize}\small
+			\item Six quarterly U.S.\ observables (FRED), \textbf{1983:Q1--2002:Q4}:
+			\begin{itemize}\footnotesize
+				\item output growth, CPI inflation, fed funds rate,
+				\item hours, investment growth, gov.-spending growth.
+			\end{itemize}
+			\item Sample fits a constant linear trend, is comparable to JPT, and avoids the ZLB.
+			\item Measurement error ($4\%$ of each series' variance) avoids stochastic singularity.
+		\end{itemize}
+	\end{columns}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Baseline result: variance decomposition}
 	% baseline result (FEVD)
+	\begin{itemize}\small
+		\item \textcolor{invest}{\textbf{ID shock}} alone explains $\approx\!\mathbf{42\%}$ of output and $\approx\!\mathbf{51\%}$ of investment FEVD---a competitive driver of the cycle.
+		\item Jointly, \textcolor{accent}{IST} $+$ \textcolor{invest}{ID} account for $\approx 92\%$ of hours and $\approx 47\%$ of inflation.
+		\item ID adds little to \emph{hours} and is less persistent than IST ($\rho_s\!\approx\!1$ vs.\ $\rho_d\!=\!0.87$; IST is also hump-shaped through the adjustment cost).
+	\end{itemize}
+	\vspace{0.5em}
+	\centering
+	\footnotesize
+	\setlength{\tabcolsep}{1.0em}
+	\begin{tabular}{l r r r r r}
+		\hline\hline
+		Observable & $\varepsilon_g$ & \textcolor{accent}{$\varepsilon_s$} & $\varepsilon_R$ & $\varepsilon_a$ & \textcolor{invest}{$\varepsilon_d$} \\
+		\hline
+		Output         & 4.63  & 15.55 & 11.00 & 27.12 & \textbf{41.69} \\
+		Inflation      & 0.32  & 39.26 & 12.87 & 40.14 & 7.41 \\
+		Interest rate  & 0.37  & 55.06 & 5.48  & 31.22 & 7.87 \\
+		Hours          & 4.34  & 90.19 & 0.08  & 3.56  & 1.83 \\
+		Investment     & 0.11  & 36.23 & 0.15  & 12.04 & \textbf{51.48} \\
+		Gov.\ spending & 99.87 & 0.02  & 0.01  & 0.04  & 0.06 \\
+		\hline
+	\end{tabular}
+	\\[0.4em]
+	{\scriptsize Unconditional FEVD (\%). $\varepsilon_g$ gov., \textcolor{accent}{$\varepsilon_s$ IST}, $\varepsilon_R$ monetary, $\varepsilon_a$ technology, \textcolor{invest}{$\varepsilon_d$ ID}.}
 \end{frame}
 
-\begin{frame}
-	% baseline result (IRF)
-	% explain the IRF plot
+\begin{frame}{Baseline result: impulse responses}
+	% baseline result (IRF) -- explain the IRF plot
+	\centering
+	\includegraphics[width=0.82\textwidth]{compare_irf_gov_data.pdf}
+	\\[0.2em]
+	\begin{columns}[T,onlytextwidth]
+		\column{0.5\textwidth}
+		\footnotesize\textcolor{accent}{\textbf{IST shock $\Rightarrow$ deflationary}}
+		\begin{itemize}\scriptsize
+			\item Wage $\downarrow$ while hours $\uparrow$, consumption $\downarrow$, output $\approx$ flat.
+			\item Strong \emph{intertemporal substitution}: cheap investment $\Rightarrow$ save more today (labor supply shifts out).
+		\end{itemize}
+		\column{0.5\textwidth}
+		\footnotesize\textcolor{invest}{\textbf{ID shock $\Rightarrow$ inflationary}}
+		\begin{itemize}\scriptsize
+			\item Wage and hours rise \emph{together} $\Rightarrow$ labor \emph{demand} shift dominates; output rises strongly.
+			\item \emph{Wealth effect}: higher future output raises lifetime wealth, so little substitution---hence comovement.
+		\end{itemize}
+	\end{columns}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Robustness: Smets--Wouters-style model}
 	% FEVD and IRF of SW-type model
+	Add habit formation, a monopolistic labor market (Erceg wage Phillips curve), and preference / price- / wage-markup shocks; add consumption and wage growth as observables.
+	\begin{itemize}\footnotesize
+		\item \textbf{Better hours fit:} $\mathrm{Var}(\hat N_t)$ falls $32.2\!\to\!9.8$ (data $6.3$)---the \textbf{wage-markup shock} does the work.
+		\item \textbf{ID shock turns marginal:} only $4.4\%$ of output and $13.6\%$ of investment FEVD.
+		\item \textbf{IRFs flip:} IST is now \emph{inflationary} with a \emph{positive} wage response; the ID consumption response is far smoother ($\hat c_1$ is $0.2\%$ of $\hat\imath_1$, vs.\ $12\%$ in the baseline).
+	\end{itemize}
+	\vspace{0.2em}
+	\centering
+	\includegraphics[width=0.82\textwidth]{compare_irf_sw_type_no_rel.pdf}
 \end{frame}
 
-\begin{frame}
+\begin{frame}{Conclusion}
 	% Conclusion
+	\begin{itemize}
+		\item Revisits Justiniano et al.\ (2010) by testing Nirei's \textbf{investment demand shock} in an estimated DSGE with \emph{both} IST and ID shocks.
+		\item \textbf{Baseline:} the ID shock alone explains $\approx 40\%$ of output and $\approx 50\%$ of investment FEVD---a competitive driver---and generates an \emph{inflationary} expansion with comovement (vs.\ deflationary IST).
+		\item \textbf{Limitations / fragility:}
+		\begin{itemize}\small
+			\item no direct data identifies the ID shock---identification leans on comovement differences, hard to test over the whole parameter space;
+			\item imperfect fit and some extreme posteriors in the baseline;
+			\item results are specification-sensitive: the SW-style model shrinks the ID shock, and an i.i.d.\ ID shock weakens it.
+		\end{itemize}
+		\item \textbf{Takeaway:} structural estimation gives genuine insight into investment-side shocks, but the model specification must be chosen carefully.
+	\end{itemize}
 \end{frame}
 \end{document}
