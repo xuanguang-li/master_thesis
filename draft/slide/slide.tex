@@ -2,7 +2,7 @@
 
 % --- Packages ---
 \usepackage{amsmath, amssymb}
-
+\usepackage{bm}
 % (Optional) compile with XeLaTeX/LuaLaTeX for fonts
 \usepackage{fontspec}
 \setmainfont{Times New Roman}
@@ -39,13 +39,13 @@
 \begin{frame}{Motivation}
 	%content: motivation
 	\begin{itemize}
-		\item \textbf{Justiniano, Primiceri \& Tambalotti (2010):} an estimated DSGE attributes a large share of U.S.\ fluctuations to a \emph{supply-side} investment-specific technology (IST) shock.
-		\item \textbf{The comovement puzzle:} supply-side IST shocks struggle to reproduce the joint positive comovement of consumption, investment, and inflation seen in the data.
-		\item \textbf{Nirei and Ragot (2025):} proposed an \emph{investment demand} shock, which \emph{can} generate this comovement, but lacks empirical evidence.
+		\item \textbf{Justiniano, Primiceri \& Tambalotti (2010):} an estimated DSGE attributes a large share of U.S.\ fluctuations to a \textbf{investment-specific technology (IST) shock} ($K_{t+1}=(1-\delta)K_t+\mu_{s,t}I_t$).
+		\item \textbf{The comovement puzzle:} IST shocks struggle to reproduce the joint positive comovement of consumption, investment, and inflation seen in the data.
+		\item \textbf{Nirei and Ragot (2025):} proposed an \textbf{investment demand shock}, which can generate this comovement, but lacks empirical test.
 	\end{itemize}
 	\vspace{0.5em}
 	\begin{block}{This paper}
-		Estimate a DSGE model with \textbf{both} an IST shock and an investment demand shock to quantify how important the investment demand shock is for the U.S.\ business cycle.
+		Estimate a DSGE model with both an IST shock and an investment demand shock to quantify how important the investment demand shock is for the U.S.\ business cycle.
 	\end{block}
 \end{frame}
 
@@ -57,58 +57,74 @@
 			\ln\mu_{d,t}=(1-\rho_d)\ln\mu_d+\rho_d\ln\mu_{d,t-1}+\varepsilon_{d,t}.
 		\]
 	\begin{itemize}
-		\item Households would otherwise undo the shock, so the equilibrium is solved in \textbf{two steps}:
-		\begin{itemize}\footnotesize
-			\item[\textbf{1.}] solve the baseline model (no ID shock) for the endogenous investment $I_t^{*}$;
-			\item[\textbf{2.}] reveal $\mu_{d,t}$, \emph{fix} $I_t=\mu_{d,t}I_t^{*}$, and re-solve the equilibrium for consumption, labor, bonds and utilization.
-		\end{itemize}
-
+		\item \textbf{Step 1:} Optimal problem with $i_t$
+		\[\begin{aligned}
+            V^{pre}(b_t, k_t, A_t) &= \max_{c_t, b_{t+1}, i_t} u(c_t)
+            + \beta \mathbb{E}_t  \left( V^{pre}(b_{t+1}, k_{t+1}, A_{t+1})\right) \\
+            s.t. \quad &c_t + b_{t+1} + i_t = R_t(A_t) b_t + r_t^k(A_t) k_t\\
+            &  k_{t+1} = (1 - \delta) k_t + i_t
+        \end{aligned}
+		\]
+		\item Denote the investment choice of the first optimal problem by $i_t^*$.
+		\item \textbf{Step 2}: Given $i_t^*$
+		\[
+		\begin{aligned}
+            V^{post}(b_t, k_t, A_t, \mu_{d, t}) &= \max_{c_t, b_{t+1}} u(c_t) + \beta \mathbb{E}_t  \left( V^{pre}  (b_{t+1}, k_{t+1}, A_{t+1})\right) \\
+            s.t. \quad & c_t + b_{t+1} + i_t^* \mu_{d,t} = R_t(A_t) b_t + r_t^k(A_t) k_t\\
+            & k_{t+1} = (1 - \delta) k_t + i_t^* \mu_{d,t}
+        \end{aligned}
+		\]
+	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{A toy model of idiosyncratic shocks and lumpy investment}
 	
 	\textbf{Why is it legitimate to use a reduced-form investment demand shock?}
+
 	\vspace{1em}
 
-	Standard New-Keynesian CES aggregator and demand:
+	\textbf{Intuition:} (i) firms decide their investment according to the aggregate output because aggregate ouput influence the demand for their own product; (ii) if some firms increase their investment, future output will increase as well; (iii) thus other firms will response to invest more.
+	\vspace{1em}
+
+	Standard New-Keynesian CES aggregator and demand; $a_{j,t}\in\{a_L,a_H\}$ is deterministic:
 	\[
-		Y_t=\Big(\int_0^1 y_{jt}^{\frac{\eta-1}{\eta}}\,dj\Big)^{\frac{\eta}{\eta-1}},
-		\qquad
-		y_{jt}=\Big(\frac{p_{jt}}{P_t}\Big)^{-\eta}Y_t,
-		\qquad
-		y_{jt}=a_{jt}k_{jt}.
+		Y_t=\Big(\int_0^1 y_{j,t}^{\frac{\eta-1}{\eta}}\,dj\Big)^{\frac{\eta}{\eta-1}},
+		\quad
+		y_{j,t}=\Big(\frac{p_{j,t}}{P_t}\Big)^{-\eta}Y_t,
+		\quad
+		y_{j,t}=a_{j,t}k_{j,t}.
 	\]
-	Linear-in-capital technology $y_{jt}=a_{jt}k_{jt}$. Combining demand and production, real revenue is
+	Combining demand and production, real revenue is
 	\[
-		r_{jt}(a_{jt},k_{jt})=\frac{p_{jt}y_{jt}}{P_t}
-		=\big(a_{jt}k_{jt}\big)^{1-\frac1\eta}\,Y_t^{\frac1\eta}.
+		r_{j,t}(a_{j,t},k_{j,t})=\frac{p_{j,t}y_{j,t}}{P_t}
+		=\big(a_{j,t}k_{j,t}\big)^{1-\frac1\eta}\,Y_t^{\frac1\eta}.
 	\]
 	\begin{itemize}\small
 		\item Concave in own capital ($\eta>1$): diminishing returns through the demand curve.
-		\item Revenue, hence the desired capital, scales with aggregate output $Y_t$ — the channel through which one firm's action will later spill over to all firms.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Lumpy investment and the investment threshold}
 	% --- top region: text (left) + figure pinned NE (right) ---
 	\begin{columns}[T,onlytextwidth]
-		\column{0.58\textwidth}
+		\column{0.5\textwidth}
+		\vspace{0.2em}
 		Firms solve
-		\[\small
-			\max_{\{x_{t+k}\}}\ \mathbb{E}_t\!\sum_{k\ge0}\Lambda_{t,t+k}\big(r_{j,t+k}-x_{j,t+k}\big),
+		\[
+			\max_{\{i_{t+\tau}\}}\ \underbrace{\sum_{\tau\ge0}\Lambda_{t,t+\tau}\big(r_{j,t+\tau}-i_{j,t+\tau}\big)}_{\coloneq V},
 		\]
 		$$\begin{aligned}
-			\text{s.t. }&k_{j,t+1}=(1-\delta)k_{j,t}+x_{j,t},\\
-			&x_{j,t+k}\in\{0,\ \lambda k_{j,t+k}\}.
+			\text{s.t. }&k_{j,t+\tau+1}=(1-\delta)k_{j,t+\tau}+i_{j,t+\tau},\\
+			&i_{j,t+\tau}\in\{0,\ \lambda k_{j,t+\tau}\},\, \lambda>1.
 		\end{aligned}$$
 
-		\column{0.4\textwidth}
+		\column{0.5\textwidth}
 		\vspace{-0.6em}
 		\centering
 		\begin{tikzpicture}[xscale=1.28,yscale=0.74]
 			% axes
-			\draw[->] (0,0) -- (3.4,0) node[below]{$k_{t+1}$};
+			\draw[->] (0,0) -- (3.4,0) node[below]{$k_{j, t+1}$};
 			\draw[->] (0,0) -- (0,3.6) node[above]{$V$};
 			% hump: peak at sqrt(lambda)*k*, k*=1, lambda=2.5 -> peak 1.58
 			\draw[thick,accent,domain=0.34:3.25,samples=140,smooth,variable=\x]
@@ -132,95 +148,99 @@
 
 	% --- bottom region: full-width text wrapping under the figure ---
 	\vspace{0.3em}
-	Indifference at $k^*$ (the firm knows its next-period technology) pins down the threshold:
+	Indifference at $k^*$ pins down the threshold:
 	\[
-		k_{j,t+1}^{*}=a_{j,t+1}^{\,\eta-1}\,\Phi_t(\Lambda_t, \Lambda_{t+1})\,Y_{t+1}\,
+		k_{j,t+1}^{*}=a_{j,t+1}^{\,\eta-1}\,\Phi_t(\Lambda_t, \Lambda_{t+1})\,Y_{t+1}
 	\]
-	\begin{itemize}\small
-		\item Desired capital scales with aggregate output $Y_{t+1}$ — the spillover channel that will carry one firm's action to all firms.
-	\end{itemize}
+	
 	\vspace{0.4em}
 	Normalize a firm's position by its \textbf{distance to the threshold}
 	\[
-		s_{jt}=\frac{\log\!\big(k_{jt}/k_{jt}^{*}\big)}{\log\lambda},
+		s_{j,t+1}=\frac{\log\!\big(k_{j,t+1}/k_{j,t+1}^{*}\big)}{\log\lambda}\implies
+		i_{j,t}=
+		\begin{cases}
+			\lambda k_{j,t}, & s_{j,t+1}<0\\
+			0, & s_{j,t+1} \geq 0
+		\end{cases}
 	\]
-	so that investing means jumping up exactly one notch ($s\mapsto s+1$) in these units.
 \end{frame}
 
 
-\begin{frame}{Investing fraction and idiosyncratic shock}
+\begin{frame}{Idiosyncratic shock $\to$ investing fraction}
 	% --- top region: text (left) + figure pinned NE (right) ---
-	\begin{itemize}
-		\item Assume $a_t\in\{a_L,a_H\}$ and $s_t\mid a_t\sim U[0,1)$ under stationary distribution.
-		\item Macro variables are constant: $Y = Y_t = Y_{t+1}$, $\Phi = \Phi_t = \Phi_{t+1}$
-	\end{itemize}
-
+	\vspace{1em}
 	\begin{columns}[T,onlytextwidth]
-		\column{0.56\textwidth}
+		\column{0.61\textwidth}
 
-		Without investing, under stationary distribution position drifts by
+		Without investing, under stationary distribution ($Y = Y_t = Y_{t+1}$, $\Phi = \Phi_t = \Phi_{t+1}$), $s_{j,t+1}$ drifts:
 		\[
 		\begin{aligned}
-		s_{j,t+1}&=s_{j,t}(a) \\
-		&-\underbrace{\frac{-\log(1-\delta)+(\eta-1)\log\frac{a'}{a}}{\log\lambda}}_{s^{*}(a,a')}.
+		s_{j,t+1} = &s_{j,t} \\
+		&-\underbrace{\frac{-\log(1-\delta)+(\eta-1)\log\left(a_{t+1}/a_t\right)}{\log\lambda}}_{\coloneq s^{*}(a_t,a_{t+1})}
 		\end{aligned}
 		\]
 
-		\column{0.42\textwidth}
+		\column{0.39\textwidth}
 		\centering
-		\begin{tikzpicture}[xscale=3.2,yscale=1.1]
+		\begin{tikzpicture}[xscale=3,yscale=1.1]
 			% axis
-			\draw[->] (-0.05,0) -- (1.25,0) node[right,font=\scriptsize]{$s_t$};
-			\draw[->] (0,-0.05) -- (0,1.9) node[above,font=\scriptsize]{density};
+			\draw[->] (-0.05,0) -- (1.1,0) node[right,font=\scriptsize]{$s_t$};
+			\draw[->] (0,-0.05) -- (0,1.7) node[above,font=\scriptsize]{density};
 			% uniform density box on [0,1)
-			\fill[accent!12] (0,0) rectangle (1,1.2);
-			\draw[accent,thick] (0,1.2) -- (1,1.2);
-			\draw[accent,thick] (0,0)--(0,1.2);
-			\draw[accent,thick,dashed] (1,0)--(1,1.2);
+			\fill[accent!12] (0,0) rectangle (1,1);
+			\draw[accent,thick] (0,1) -- (1,1);
+			\draw[accent,thick] (0,0)--(0,1);
+			\draw[accent,thick] (1,0)--(1,1);
 			% investing region [0,s*]
-			\fill[invest!30] (0,0) rectangle (0.35,1.2);
-			\draw[invest,thick] (0.35,0)--(0.35,1.45);
-			\node[invest,font=\scriptsize,above] at (0.35,1.45) {$s^{*}$};
+			\fill[invest!30] (0,0) rectangle (0.35,1);
+			\draw[invest,thick] (0.35,0)--(0.35,1);
+			\node[invest,font=\footnotesize,below] at (0.35,0) {$s^{*}$};
 			% epsilon shifted threshold
 			\draw[shockc,thick,->] (0.35,0.55)--(0.55,0.55);
-			\draw[shockc,thick,dashed] (0.55,0)--(0.55,1.2);
-			\node[shockc,font=\scriptsize,above] at (0.62,1.18) {$s^{*}\!+\!\nu$};
+			\draw[shockc,thick,dashed] (0.55,0)--(0.55,1);
+			\node[shockc,font=\footnotesize,below] at (0.55, 0) {$s^{*}\!+\!\nu$};
 			% labels
-			\node[invest,font=\scriptsize] at (0.17,0.55) {invest};
-			\node[font=\scriptsize] at (0.78,0.55) {stay};
+			\node[invest,font=\footnotesize] at (0.17,0.55) {invest};
+			\node[font=\footnotesize] at (0.78,0.55) {stay};
 			\node[below,font=\scriptsize] at (0,0) {$0$};
 			\node[below,font=\scriptsize] at (1,0) {$1$};
+			\node[left,font=\scriptsize] at (0,1) {$1$};
 		\end{tikzpicture}
 	\end{columns}
 
 	% --- bottom region: full-width text wrapping under the figure ---
-	\vspace{0.3em}
+	\vspace{1em}
+
+	\textbf{Assume} $s_t\mid a_t\sim U[0,1)$ under stationary distribution.
+
+	\vspace{1em}
+
 	\begin{itemize}
-		\item Since $s_t\sim U[0,1)$, $s^{*}(a,a')$ is the \textbf{investing fraction}
-		\item Add an i.i.d.\ shock $\varepsilon$ on $a'$ \emph{only} in group $(a,a')=(b,b')$:
-		\[\small
-			s^{*}(b,\varepsilon b')=s^{*}(b,b')+\underbrace{\frac{(\eta-1)\log\varepsilon}{\log\lambda}}_{\nu}.
+		\item Then $s^{*}(a_t,a_{t+1}) \times 1$ is the \textbf{stationary investing fraction}
+		\item Add an $i.i.d.$\ shock $\varepsilon$ on $a_{t+1}$ for the firms in group $(a_t = b, a_{t+1} = b')$:
+		\[
+			s^{*}(b,\varepsilon b')=s^{*}(b,b')+\underbrace{\frac{(\eta-1)\log\varepsilon}{\log\lambda}}_{\coloneq \nu}.
 		\]
-		\item The cutoff in that group rises by $\nu$, so an extra $\nu$-mass invests.
+		\item The cutoff in that group rises by $\nu$, so an extra $\nu \times 1$ fraction invests.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Propagation through the threshold}
+\begin{frame}{Investing fraction $\to$ aggregate output $\to$ investing fraction}
 	% --- top region: text (left) + figure pinned NE (right) ---
 	\begin{columns}[T,onlytextwidth]
-		\column{0.63\textwidth}
-		More investment in $(b,b')$ raises \emph{future output} of this group, which is a part of \emph{future aggregate output}:
+		\column{0.8\textwidth}
+		More investment in $(b,b')$ raises \textbf{future output} of this group, which is a part of future aggregate output:
 		\[\begin{aligned}
-			Y_{t+1}(a, a', \nu)
-			&=\Big(\omega(b,b')\!\!\int_{0}^{s^*+\nu}\!\! \big(b'\lambda (1-\delta) k_{t}(s_t)\big)^{\frac{\eta-1}{\eta}}\,dF(s_t\mid b) \\
-			&+ \text{no investment firms}\Big)^{\frac{\eta}{\eta-1}}
+			Y_{t+1}(b, b', \nu)
+			=\Big(\omega(b,b')\!\!\int_{0}^{s^*+\nu}\!\! \big(b'\lambda (1-\delta) k_{t}(s_t)\big)^{\frac{\eta-1}{\eta}}\,dF(s_t\mid b)& \\
+			+ \text{no investment firms}\Big)^{\frac{\eta}{\eta-1}}&
 		\end{aligned}
 		\]
 
-		\column{0.35\textwidth}
+		\column{0.2\textwidth}
 		\vspace{-0.3em}
 		\centering
-		\begin{tikzpicture}[scale=0.72]
+		\begin{tikzpicture}[scale=0.65]
 			% 2x2 groups, sizes ~ omega
 			\fill[gray!12] (0,0) rectangle (1.4,1.4);
 			\fill[gray!12] (1.4,0) rectangle (2.6,1.4);
@@ -233,83 +253,65 @@
 			\draw (1.4,0)--(1.4,2.6);
 			\draw (0,1.4)--(2.6,1.4);
 			% labels of omega
-			\node[font=\scriptsize] at (0.7,0.7) {$\omega(L,L)$};
-			\node[font=\scriptsize] at (2.0,0.7) {$\omega(L,H)$};
-			\node[font=\scriptsize] at (0.7,2.0) {$\omega(H,L)$};
+
 			\node[font=\scriptsize,shockc] at (2.0,2.0) {$\omega(b,b')$};
 			% axis labels
-			\node[below,font=\scriptsize] at (0.7,0) {$a'=L$};
-			\node[below,font=\scriptsize] at (2.0,0) {$a'=H$};
-			\node[left,font=\scriptsize] at (0,0.7) {$a=L$};
-			\node[left,font=\scriptsize] at (0,2.0) {$a=H$};
+			\node[below,font=\scriptsize] at (1.5,0) {$a'$};
+			\node[left,font=\scriptsize] at (0,1.3) {$a$};
 		\end{tikzpicture}
 	\end{columns}
 
 	% --- bottom region: full-width text wrapping under the figure ---
 	\vspace{0.5em}
 	\begin{itemize}
-		\item Higher $Y_{t+1}$ shifts the cutoff in \emph{every} group:
+		\item Higher $Y_{t+1}$ shifts the cutoff in every group, and induce an extra investing fraction:
 		\[
 		\begin{aligned}
-			\nu^{(1)}(a, a') 
-			&\coloneq \Delta s^{*}_t(a,a',\nu)\\
-			&=s^*(a, a') + \frac{\log (Y_{t+1}(\nu)/ Y)}{\log\lambda} - \left(s^*(a, a') + \frac{\log (\overset{=Y}{Y_{t+1}(0)}/ Y)}{\log\lambda}\right)
+			\nu^{(1)}(a, a') = \frac{\log (Y_{t+1}(\nu)/ Y_{t+1}(0))}{\log\lambda},\quad \nu^{(1)}\coloneq \sum_{(a,a')}\omega(a,a')\,\nu^{(1)}(a, a').
 		\end{aligned}
-		\]
-		\item aggregate \textbf{$\nu$-induced fraction}:
-		\[
-			\nu^{(1)}\coloneq \sum_{(a,a')}\omega(a,a')\,\nu^{(1)}(a, a').
 		\]
 		\item The first $\nu$ of investing firms raises $Y$, which induces $\nu^{(1)}$ more, which raises $Y$ again $\dots$ a GE multiplier that iterates to a new equilibrium.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Total induced investment $\gg \nu$}
-	$$\text{Total induced investment} = \sum_{i=1}^{\infty} \text{ induced fraction}^{(i)} \times \text{ average induced investment}^{(i)}$$
+	$$\text{Total induced inv.} = \sum_{i=1}^{\infty} \text{ induced fraction}^{(i)} \times \text{ average induced inv.}^{(i)}$$
 
 	\begin{itemize}
-		\item Scale of induced fraction
+		\item \textbf{Scale of induced fraction}
 		\[
 		 \lim_{\nu\to 0}\frac{\nu^{(1)}}{\omega(b,b')\,\nu}=1\
 		\]
-		\begin{itemize}
-			\small
-			\item the $\nu^{(1)}$ has the \emph{same scale} as the original fraction 
-			
-			$\Rightarrow$ each $\omega(a, a') \nu^{(1)}(a, a')$ will induce the \emph{same scale} $\nu^{(2)}(\nu^{(1)}(a, a'))$ again 
 		
-			$\Rightarrow$ induced fraction will not decay through iteration.
-		\end{itemize}
+		The $\nu^{(1)}$ has the \textbf{same scale} as the original fraction 
+			
+		$\implies$ each $\omega(a, a') \nu^{(1)}(a, a')$ will induce the same scale $\nu^{(2)}(\nu^{(1)}(a, a'))$ again.
 
-		\item Scale of average induced investment
+		\vspace{0.2em}
+
+		\item \textbf{Scale of average induced investment}
 		\[
 			\frac{\partial \Delta x(a, a', \nu)}{\partial \nu}\Big|_{\nu=0} = (\lambda - 1)(1-\delta) \lambda^{s^*} a^{\eta - 1}\Psi Y
 		\]
-		\begin{itemize}
-			\small
-			\item $\nu$-induced average investment, $\Delta x(a, a', \nu)$, is defined as $\Delta x_t(a, a', \nu) \coloneq \int_{s^*}^{s^*+\nu} (\lambda - 1)(1-\delta) \underbrace{\lambda^{s_t} a^{\eta-1}\Phi Y}_{k_t(s_t)} \, d F(s_t\,|\, a_t = a)$
-			
-			$\Rightarrow$ the derivative says $\Delta x(a, a', \nu) = O(\nu)$
-			
-			$\Rightarrow$ average induced investment will not decay faster than $\nu$.
-		\end{itemize}
+		
+		The derivative says $\Delta x(a, a', \nu) = O(\nu)$.
+		
+		$\implies$ average induced investment will not decay faster than $\nu$.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{The estimated DSGE model}
 	% list the features of the model used in estimation, like sticky wage, investment adjustment cost, etc.
-	Based on Smets and Wouters (2007) and Herbst and Schorfheide (2015), augmented with the investment demand shock (explained before).
+	Based on Smets and Wouters (2007), Herbst and Schorfheide (2015), augmented with the investment demand shock.
 	\begin{itemize}
-		\item \textbf{Nominal rigidities:} Calvo price setting (no indexation); reduced-form \textbf{sticky wage}---partial adjustment of the wage toward the MRS:
+		\item \textbf{Nominal rigidities:} Calvo price setting; reduced-form sticky wage---partial adjustment of the wage toward the MRS:
 		\[
 			w_t=\Big(L_t^{\sigma_\ell}\big/C_t^{-\sigma}\Big)^{\theta_w}\,w^{\,1-\theta_w}.
 		\]
-		\item \textbf{Real frictions:} \textbf{investment adjustment cost} $S(I_t/I_{t-1})$ and \textbf{endogenous capital utilization} $u_t$. Capital law of motion carries the IST shock:
-		\[
-			K_{t+1}=(1-\delta)K_t+\mu_{s,t}\big[1-S(I_t/I_{t-1})\big]I_t.
-		\]
+		\item \textbf{Other frictions:} investment adjustment cost $S(I_t/I_{t-1})$ and endogenous capital utilization $u_t$. 
 		\item \textbf{Policy:} Taylor rule; output-stabilizing government spending.
 		\item \textbf{Five structural shocks:} technology $\varepsilon_a$, IST $\varepsilon_s$, monetary $\varepsilon_R$, government $\varepsilon_g$, and investment demand $\varepsilon_d$.
+
 	\end{itemize}
 \end{frame}
 
@@ -321,8 +323,9 @@
 		\textbf{Method}
 		\begin{itemize}
 			\item Bayesian estimation; methodology follows Smets--Wouters (2007) and Justiniano et al.\ (2010).
-			\item Posterior via Metropolis--Hastings: $100{,}000$ draws, $0.5$ burn-in, relatively flat priors.
-			\item \textbf{ID vs.\ IST identification} rests on their different \emph{comovement} signatures---there is no direct data series for the ID shock.
+			\begin{itemize}
+				\item Posterior via Metropolis--Hastings: $100{,}000$ draws.
+			\end{itemize}
 		\end{itemize}
 		\column{0.5\textwidth}
 		\textbf{Data}
@@ -332,8 +335,6 @@
 				\item output growth, CPI inflation, fed funds rate,
 				\item hours, investment growth, gov.-spending growth.
 			\end{itemize}
-			\item Sample fits a constant linear trend, is comparable to JPT, and avoids the ZLB.
-			\item Measurement error ($4\%$ of each series' variance) avoids stochastic singularity.
 		\end{itemize}
 	\end{columns}
 \end{frame}
@@ -343,7 +344,6 @@
 	\begin{itemize}
 		\item \textcolor{invest}{\textbf{ID shock}} alone explains $\approx\!\mathbf{42\%}$ of output and $\approx\!\mathbf{51\%}$ of investment FEVD---a competitive driver of the cycle.
 		\item Jointly, \textcolor{accent}{IST} $+$ \textcolor{invest}{ID} account for $\approx 92\%$ of hours and $\approx 47\%$ of inflation.
-		\item ID adds little to \emph{hours} and is less persistent than IST ($\rho_s\!\approx\!1$ vs.\ $\rho_d\!=\!0.87$; IST is also hump-shaped through the adjustment cost).
 	\end{itemize}
 	\vspace{0.5em}
 	\centering
@@ -368,49 +368,63 @@
 \begin{frame}{Baseline result: impulse responses}
 	% baseline result (IRF) -- explain the IRF plot
 	\centering
-	\includegraphics[width=0.82\textwidth]{compare_irf_gov_data.pdf}
+	\includegraphics[width=0.77\textwidth]{compare_irf_gov_data.pdf}
 	\\[0.2em]
 	\begin{columns}[T,onlytextwidth]
 		\column{0.5\textwidth}
-		\small\textcolor{accent}{\textbf{IST shock $\Rightarrow$ deflationary}}
-		\begin{itemize}\small
-			\item Wage $\downarrow$ while hours $\uparrow$, consumption $\downarrow$, output $\approx$ flat.
-			\item Strong \emph{intertemporal substitution}: cheap investment $\Rightarrow$ save more today (labor supply shifts out).
+		\textcolor{accent}{\textbf{IST shock $\Rightarrow$ deflationary}}
+		\begin{itemize}
+			\item Wage $\downarrow$ while hours $\uparrow$ $\Rightarrow$ labor supply shift dominates.
+			\item \textbf{Intertemporal substitution}: cheap investment $\Rightarrow$ save more today (labor supply shifts out).
 		\end{itemize}
 		\column{0.5\textwidth}
-		\footnotesize\textcolor{invest}{\textbf{ID shock $\Rightarrow$ inflationary}}
-		\begin{itemize}\scriptsize
-			\item Wage and hours rise \emph{together} $\Rightarrow$ labor \emph{demand} shift dominates; output rises strongly.
-			\item \emph{Wealth effect}: higher future output raises lifetime wealth, so little substitution---hence comovement.
+		\textcolor{invest}{\textbf{ID shock $\Rightarrow$ inflationary}}
+		\begin{itemize}
+			\item Wage $\uparrow$ and hours $\uparrow$  $\Rightarrow$ labor demand shift dominates.
+			\item \textbf{Wealth effect}: higher future output raises lifetime wealth $\Rightarrow$ less impactful substitution effect.
 		\end{itemize}
 	\end{columns}
 \end{frame}
 
 \begin{frame}{Robustness: Smets--Wouters-style model}
 	% FEVD and IRF of SW-type model
-	Add habit formation, a monopolistic labor market (Erceg wage Phillips curve), and preference / price- / wage-markup shocks; add consumption and wage growth as observables.
-	\begin{itemize}\footnotesize
-		\item \textbf{Better hours fit:} $\mathrm{Var}(\hat N_t)$ falls $32.2\!\to\!9.8$ (data $6.3$)---the \textbf{wage-markup shock} does the work.
+	Add habit formation, Erceg wage Phillips curve, and preference / price- / wage-markup shocks; add consumption and wage growth as observables.
+	\begin{itemize}
 		\item \textbf{ID shock turns marginal:} only $4.4\%$ of output and $13.6\%$ of investment FEVD.
-		\item \textbf{IRFs flip:} IST is now \emph{inflationary} with a \emph{positive} wage response; the ID consumption response is far smoother ($\hat c_1$ is $0.2\%$ of $\hat\imath_1$, vs.\ $12\%$ in the baseline).
 	\end{itemize}
 	\vspace{0.2em}
 	\centering
-	\includegraphics[width=0.82\textwidth]{compare_irf_sw_type_no_rel.pdf}
+	\footnotesize
+	\begin{tabular}{l r r r r r r r r}
+		\hline\hline
+		Observable & $\varepsilon_g$ & \textcolor{accent}{$\varepsilon_{s}$} & $\varepsilon_R$ & $\varepsilon_a$ & $\varepsilon_b$ & $\varepsilon_p$ & $\varepsilon_w$ & \textcolor{invest}{$\varepsilon_{d}$} \\ 
+		\hline
+		Output & 6.15 & 10.31 & 7.86 & 43.58 & 17.21 & 5.00 & 5.52 & \textbf{4.37} \\ 
+		Inflation & 0.05 & 1.78 & 0.82 & 18.85 & 0.40 & 53.05 & 25.04 & 0.00 \\ 
+		Interest rate & 0.19 & 7.16 & 30.37 & 26.67 & 4.51 & 10.39 & 20.72 & 0.00 \\ 
+		Hours & 2.00 & 20.43 & 7.10 & 34.85 & 7.86 & 1.10 & 26.35 & 0.30 \\ 
+		Investment & 0.25 & 54.98 & 2.43 & 18.59 & 3.19 & 0.62 & 6.33 & \textbf{13.62} \\ 
+		Wage & 0.00 & 0.12 & 0.14 & 18.25 & 0.30 & 16.96 & 64.23 & 0.00 \\ 
+		Consumption & 0.25 & 2.36 & 6.48 & 43.49 & 42.01 & 1.92 & 3.49 & 0.00 \\ 
+		Gov. spending & 99.90 & 0.01 & 0.01 & 0.05 & 0.02 & 0.01 & 0.01 & 0.00 \\ 
+		\hline
+	\end{tabular}
+	\\[0.4em]
+	{\scriptsize Unconditional FEVD (\%): Smets--Wouters-style model. $\varepsilon_g$ gov., \textcolor{accent}{$\varepsilon_s$ IST}, $\varepsilon_R$ monetary, $\varepsilon_a$ technology, $\varepsilon_b$ preference, $\varepsilon_p$ price-markup, $\varepsilon_w$ wage-markup, \textcolor{invest}{$\varepsilon_d$ ID}.}
 \end{frame}
 
 \begin{frame}{Conclusion}
 	% Conclusion
 	\begin{itemize}
-		\item Revisits Justiniano et al.\ (2010) by testing Nirei's \textbf{investment demand shock} in an estimated DSGE with \emph{both} IST and ID shocks.
-		\item \textbf{Baseline:} the ID shock alone explains $\approx 40\%$ of output and $\approx 50\%$ of investment FEVD---a competitive driver---and generates an \emph{inflationary} expansion with comovement (vs.\ deflationary IST).
-		\item \textbf{Limitations / fragility:}
-		\begin{itemize}\small
+		\item Revisits investment-side shocks by testing \textbf{investment demand shock} in an estimated DSGE model.
+		\item \textbf{Baseline:} the ID shock alone explains $\approx 40\%$ of output and $\approx 50\%$ of investment FEVD---a competitive driver---and generates an inflationary expansion with comovement (vs.\ deflationary IST).
+		\item \textbf{Limitations:}
+		\begin{itemize}
 			\item no direct data identifies the ID shock---identification leans on comovement differences, hard to test over the whole parameter space;
 			\item imperfect fit and some extreme posteriors in the baseline;
-			\item results are specification-sensitive: the SW-style model shrinks the ID shock, and an i.i.d.\ ID shock weakens it.
+			\item results are specification-sensitive: the SW-style model shrinks the ID shock.
 		\end{itemize}
-		\item \textbf{Takeaway:} structural estimation gives genuine insight into investment-side shocks, but the model specification must be chosen carefully.
+		\item \textbf{Takeaway:} structural estimation gives insight into investment-side shocks, but the model specification must be chosen carefully.
 	\end{itemize}
 \end{frame}
 \end{document}
