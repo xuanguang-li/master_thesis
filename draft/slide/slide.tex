@@ -78,13 +78,13 @@
 \end{frame}
 
 
-\begin{frame}{A toy model of idiosyncratic shocks and lumpy investment}
-	
-	\textbf{Why is it legitimate to use a reduced-form investment demand shock?}
+\begin{frame}{Why we can specify investment demand shock in this way?}
 
-	\vspace{1em}
+	\textbf{Short answer:} this shock comes from the amplified idiosyncratic productivity shock.
 
-	\textbf{Intuition:} (i) firms decide their investment according to the aggregate output because aggregate ouput influence the demand for their own product; (ii) if some firms increase their investment, future output will increase as well; (iii) thus other firms will response to invest more.
+	\vspace{0.5em}
+
+	\textbf{Intuition:} Firms decide their investment according to the its own \textbf{productivity} and \textbf{aggregate output}; (i) if some firms receive positive productivity shock, they will increase their investment; (ii) the increase in investment means more future output; (iii) thus firms not influenced by the shock will also invest more.
 	\vspace{1em}
 
 	Standard New-Keynesian CES aggregator and demand; $a_{j,t}\in\{a_L,a_H\}$ is deterministic:
@@ -166,7 +166,7 @@
 \end{frame}
 
 
-\begin{frame}{Idiosyncratic shock $\to$ investing fraction}
+\begin{frame}{(i): Idiosyncratic shock $\to$ investing fraction}
 	% --- top region: text (left) + figure pinned NE (right) ---
 	\vspace{1em}
 	\begin{columns}[T,onlytextwidth]
@@ -225,7 +225,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Investing fraction $\to$ aggregate output $\to$ investing fraction}
+\begin{frame}{(ii)\&(iii): Investing fraction $\to$ aggregate output $\to$ investing fraction}
 	% --- top region: text (left) + figure pinned NE (right) ---
 	\begin{columns}[T,onlytextwidth]
 		\column{0.8\textwidth}
@@ -322,7 +322,7 @@
 		\column{0.5\textwidth}
 		\textbf{Method}
 		\begin{itemize}
-			\item Bayesian estimation; methodology follows Smets--Wouters (2007) and Justiniano et al.\ (2010).
+			\item Bayesian estimation; methodology follows Smets and Wouters (2007),  Justiniano et al.\ (2010).
 			\begin{itemize}
 				\item Posterior via Metropolis--Hastings: $100{,}000$ draws.
 			\end{itemize}
@@ -413,18 +413,17 @@
 	{\scriptsize Unconditional FEVD (\%): Smets--Wouters-style model. $\varepsilon_g$ gov., \textcolor{accent}{$\varepsilon_s$ IST}, $\varepsilon_R$ monetary, $\varepsilon_a$ technology, $\varepsilon_b$ preference, $\varepsilon_p$ price-markup, $\varepsilon_w$ wage-markup, \textcolor{invest}{$\varepsilon_d$ ID}.}
 \end{frame}
 
-\begin{frame}{Conclusion}
+\begin{frame}{Takeaway}
 	% Conclusion
 	\begin{itemize}
 		\item Revisits investment-side shocks by testing \textbf{investment demand shock} in an estimated DSGE model.
 		\item \textbf{Baseline:} the ID shock alone explains $\approx 40\%$ of output and $\approx 50\%$ of investment FEVD---a competitive driver---and generates an inflationary expansion with comovement (vs.\ deflationary IST).
 		\item \textbf{Limitations:}
 		\begin{itemize}
+			\item results are specification-sensitive: the SW-style model shrinks the ID shock.
 			\item no direct data identifies the ID shock---identification leans on comovement differences, hard to test over the whole parameter space;
 			\item imperfect fit and some extreme posteriors in the baseline;
-			\item results are specification-sensitive: the SW-style model shrinks the ID shock.
 		\end{itemize}
-		\item \textbf{Takeaway:} structural estimation gives insight into investment-side shocks, but the model specification must be chosen carefully.
 	\end{itemize}
 \end{frame}
 \end{document}
