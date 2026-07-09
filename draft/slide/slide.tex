@@ -39,7 +39,7 @@
 \begin{frame}{Motivation}
 	%content: motivation
 	\begin{itemize}
-		\item \textbf{Justiniano, Primiceri \& Tambalotti (2010):} an estimated DSGE attributes a large share of U.S.\ fluctuations to a \textbf{investment-specific technology (IST) shock} ($K_{t+1}=(1-\delta)K_t+\mu_{s,t}I_t$).
+		\item \textbf{Justiniano, Primiceri and Tambalotti (2010):} an estimated DSGE attributes a large share of U.S.\ fluctuations to a \textbf{investment-specific technology (IST) shock} ($K_{t+1}=(1-\delta)K_t+\mu_{s,t}I_t$).
 		\item \textbf{The comovement puzzle:} IST shocks struggle to reproduce the joint positive comovement of consumption, investment, and inflation seen in the data.
 		\item \textbf{Nirei and Ragot (2025):} proposed an \textbf{investment demand shock}, which can generate this comovement, but lacks empirical test.
 	\end{itemize}
@@ -49,38 +49,238 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}{Specifying the investment demand shock}
-	%content: specification of the investment demand shock + two-step equilibrium
+
+
+
+\begin{frame}{Investment demand shock and its origin}
+	Reduced-form \textbf{investment demand (ID) shock}:
+	\[
+		I_t=\mu_{d,t}\,I_t^{*},\qquad
+		\ln\mu_{d,t}=(1-\rho_d)\ln\mu_d+\rho_d\ln\mu_{d,t-1}+\varepsilon_{d,t}.
+	\]
+
+	A toy New-Keynesian model with \textbf{lumpy investment assumption}, 
+	$$i_{j,t}\in\{0,\ (\lambda-1)(1-\delta)k_{j,t}\}.$$
+
+	\begin{columns}[T,onlytextwidth]
+		\column{0.6\textwidth}
+		\begin{itemize}
+			\item Invest iff future capital below a threshold,
+			$$k^{*}_{j,t+1}=a_{j,t+1}^{\,\eta-1}\Phi_t\,Y_{t+1}.$$
+			\item Decision rule in terms of current capital:
+			$$ i_{j,t}=
+			\begin{cases}
+				(\lambda-1)(1-\delta)k_{j,t}, \, k_{j,t}<\frac{k^{*}_{j,t+1}}{1-\delta}\\
+				0,\, \text{otherwise}
+			\end{cases}
+			$$
+		\end{itemize}
+
+		\column{0.4\textwidth}
+		
+		\vspace{0.5em}
+
+		\centering
+		\begin{tikzpicture}[xscale=1.5,yscale=1.5]
+			% axes
+			\draw[->] (0.8,0) -- (3.0,0) node[right,font=\small,inner sep=1.5pt]{$k_{j,t}$};
+			\draw[->] (0.8,-0.02) -- (0.8,1.3) node[above,font=\small,inner sep=1pt]{density};
+			% support fill under the 1/k curve
+			\fill[accent!12] plot[domain=1:2.7,samples=60] ({\x},{1/\x}) -- (2.7,0) -- (1,0) -- cycle;
+			% invest region
+			\fill[invest!30] plot[domain=1:1.55,samples=30] ({\x},{1/\x}) -- (1.55,0) -- (1,0) -- cycle;
+			% density curve and support edges
+			\draw[accent,thick,domain=1:2.7,samples=80,smooth] plot ({\x},{1/\x});
+			\draw[accent,thick] (1,0)--(1,1);
+			\draw[accent,thick] (2.7,0)--(2.7,{1/2.7});
+			% cutoff
+			\draw[invest,thick] (1.55,0)--(1.55,{1/1.55});
+			% epsilon-shifted cutoff
+			\draw[shockc,thick,->] (1.55,0.4)--(1.95,0.4) node[below,midway,font=\small]{$\varepsilon$};
+			\draw[shockc,thick,dashed] (1.95,0)--(1.95,{1/1.95});
+			% labels
+			\node[below,font=\small] at (1,0) {$k^{*}_{j,t}$};
+			\node[below,font=\small] at (2.7,0) {$\lambda k^{*}_{j,t}$};
+			\node[invest,font=\small,below] at (1.62,0) {$\tfrac{k^{*}_{j,t+1}}{1-\delta}$};
+			\node[accent,font=\small] at (2.15,0.85) {$f(k)=\tfrac{1}{k\log\lambda}$};
+			\node[invest,font=\footnotesize] at (1.25,0.28) {invest};
+			\node[font=\footnotesize] at (2.35,0.22) {stay};
+		\end{tikzpicture}
+	\end{columns}
+
+	\vspace{1em}
+
+	\textbf{Idiosyncratic technology shock} $\varepsilon$ increases threshold:
+	$$ k_{j,t+1}^*(\varepsilon) = (\varepsilon a_{j,t+1})^{\eta-1}\Phi_t Y_{t+1}$$
+\end{frame}
+
+\begin{frame}{Why idiosyncratic shocks do not wash out: a GE multiplier}
+	\centering
+	\begin{tikzpicture}[
+		box/.style={draw, rounded corners, align=center, font=\footnotesize, inner sep=5pt},
+		arr/.style={-{Stealth}, thick},
+		scale=0.8
+	]
+		\node[box, shockc, draw=shockc] (shock) at (0,1.3) {idiosyncratic shock $\varepsilon$\\ on a few firms};
+		\node[box, invest, draw=invest] (inv) at (4.1,1.3) {extra fraction $\nu$ crosses\\ threshold $\Rightarrow$ lumpy spikes};
+		\node[box, accent, draw=accent] (Y) at (8.3,1.3) {future output\\ $Y_{t+1}\uparrow$};
+		\node[box] (thr) at (6.2,-0.5) {\emph{every} firm's threshold rises\\ ($k^{*}\propto Y_{t+1}$)};
+		\draw[arr, shockc] (shock) -- (inv);
+		\draw[arr] (inv) -- (Y);
+		\draw[arr] (Y.south) |- (thr);
+		\draw[arr] (thr.west) -| (inv.south);
+		\node[font=\scriptsize\itshape, gray] at (6.2,0.45) {GE multiplier};
+	\end{tikzpicture}
+
+
+	$$\text{Total induced inv.} = \sum_{i=1}^{\infty} \text{ induced fraction}^{(i)} \times \text{ average induced inv.}^{(i)}$$
+	\begin{itemize}
+		\item The induced fraction and average induced investing do not decay due to the lumpy investment assumption.
+		\item With many firms, the idiosyncratic risk itself averages out, but the multiplied response does not. 
+		
+		$\implies$ Aggregate investment behaves as if hit by a common shock:
+		\[\; I_t=\mu_{d,t}\,I_t^{*}.\]
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The estimated DSGE model}
+	% list the features of the model used in estimation, like sticky wage, investment adjustment cost, etc.
+	Based on Smets and Wouters (2007), Herbst and Schorfheide (2015), augmented with the investment demand shock.
+	\begin{itemize}
+		\item \textbf{Nominal rigidities:} Calvo price setting; Erceg nominal wage rigidity.
+		\item \textbf{Other frictions:} investment adjustment cost and endogenous capital utilization. 
+		\item \textbf{Policy:} Taylor rule; output-stabilizing government spending.
+		\item \textbf{Five structural shocks:} technology $\varepsilon_a$, IST $\varepsilon_s$, monetary $\varepsilon_R$, government $\varepsilon_g$, and investment demand $\varepsilon_d$.
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Estimation: method and data}
+	% 1. brief introduction on estimation method
+	% 2. Data
+	\begin{columns}[T,onlytextwidth]
+		\column{0.5\textwidth}
+		\textbf{Method}
+		\begin{itemize}
+			\item Bayesian estimation; methodology follows Smets and Wouters (2007),  Justiniano et al.\ (2010).
+			\begin{itemize}
+				\item Posterior via Metropolis--Hastings: $100{,}000$ draws.
+			\end{itemize}
+		\end{itemize}
+		\column{0.5\textwidth}
+		\textbf{Data}
+		\begin{itemize}
+			\item Six quarterly U.S.\ observables (FRED), \textbf{1983:Q1--2002:Q4}:
+			\begin{itemize}\small
+				\item output growth, CPI inflation, fed funds rate,
+				\item hours, investment growth, gov.-spending growth.
+			\end{itemize}
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Baseline result: variance decomposition}
+	% baseline result (FEVD)
+	\textcolor{invest}{\textbf{ID shock}} alone explains $\approx\!\mathbf{29\%}$ of output and $\approx\!\mathbf{38\%}$ of investment FEVD.
+
+	\vspace{1em}
+
+	\centering
+	\small
+	\setlength{\tabcolsep}{1.0em}
+	\begin{tabular}{l r r r r r r}
+		\hline\hline
+		Observable & $\varepsilon_g$ & \textcolor{accent}{$\varepsilon_{ist}$} & $\varepsilon_R$ & $\varepsilon_a$ & \textcolor{invest}{$\varepsilon_{id}$} & $\mathrm{meas}$ \\ 
+		\hline
+		Output & 2.47 & 31.47 & 3.88 & 31.67 & \textbf{29.03} & 1.48 \\ 
+		Inflation & 0.41 & 12.67 & 10.15 & 63.11 & 11.96 & 1.70 \\ 
+		Interest rate & 0.47 & 16.81 & 21.34 & 46.30 & 11.84 & 3.24 \\ 
+		Hours & 3.07 & 40.36 & 3.94 & 9.19 & \textbf{36.16} & 7.27 \\ 
+		Investment & 0.59 & 48.72 & 0.42 & 11.27 & \textbf{37.55} & 1.45 \\ 
+		Gov. spending & 95.68 & 0.03 & 0.01 & 0.04 & 0.05 & 4.18 \\ 
+		\hline
+	\end{tabular}
+
+	\vspace{0.4em}
+	
+	Frequency-domain FEVD (\%), business-cycle band \textbf{6--32} quarters (500 frequency bins).\\
+	 $\varepsilon_g$ gov., \textcolor{accent}{$\varepsilon_s$ IST}, $\varepsilon_R$ monetary, $\varepsilon_a$ technology, \textcolor{invest}{$\varepsilon_d$ ID}.
+\end{frame}
+
+\begin{frame}{Baseline result: impulse responses}
+	% baseline result (IRF) -- explain the IRF plot
+	\centering
+	\includegraphics[width=0.77\textwidth]{compare_irf_delete_shock.pdf}
+	\\[0.2em]
+	\begin{columns}[T,onlytextwidth]
+		\column{0.5\textwidth}
+		\textcolor{accent}{\textbf{IST shock $\Rightarrow$ deflationary}}
+		\begin{itemize}
+			\item \textbf{Intertemporal substitution}: cheap investment $\Rightarrow$ save more today.
+			\item labor supply shift dominates $\Rightarrow$ Wage $\downarrow$ while hours $\uparrow$.
+		\end{itemize}
+		\column{0.5\textwidth}
+		\textcolor{invest}{\textbf{ID shock $\Rightarrow$ inflationary}}
+		\begin{itemize}
+			\item \textbf{Wealth effect}: higher future output raises lifetime wealth $\Rightarrow$ less impactful substitution effect.
+			\item labor demand shift dominates  $\Rightarrow$ Wage $\uparrow$ and hours $\uparrow$.
+		\end{itemize}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Robustness: Smets--Wouters-style model}
+	% FEVD and IRF of SW-type model
+	\begin{itemize}
+		\item Add habit formation, preference / price- / wage-markup shocks, and consumption and wage growth as observables.
+		\item \textbf{ID shock turns marginal:} only $4.4\%$ of output and $13.6\%$ of investment FEVD.
+	\end{itemize}
+	\vspace{0.2em}
+	\centering
+	\footnotesize
+	\begin{tabular}{l r r r r r r r r}
+		\hline\hline
+		Observable & $\varepsilon_g$ & \textcolor{accent}{$\varepsilon_{s}$} & $\varepsilon_R$ & $\varepsilon_a$ & $\varepsilon_b$ & $\varepsilon_p$ & $\varepsilon_w$ & \textcolor{invest}{$\varepsilon_{d}$} \\ 
+		\hline
+		Output & 6.15 & 10.31 & 7.86 & 43.58 & 17.21 & 5.00 & 5.52 & \textbf{4.37} \\ 
+		Inflation & 0.05 & 1.78 & 0.82 & 18.85 & 0.40 & 53.05 & 25.04 & 0.00 \\ 
+		Interest rate & 0.19 & 7.16 & 30.37 & 26.67 & 4.51 & 10.39 & 20.72 & 0.00 \\ 
+		Hours & 2.00 & 20.43 & 7.10 & 34.85 & 7.86 & 1.10 & 26.35 & 0.30 \\ 
+		Investment & 0.25 & 54.98 & 2.43 & 18.59 & 3.19 & 0.62 & 6.33 & \textbf{13.62} \\ 
+		Wage & 0.00 & 0.12 & 0.14 & 18.25 & 0.30 & 16.96 & 64.23 & 0.00 \\ 
+		Consumption & 0.25 & 2.36 & 6.48 & 43.49 & 42.01 & 1.92 & 3.49 & 0.00 \\ 
+		Gov. spending & 99.90 & 0.01 & 0.01 & 0.05 & 0.02 & 0.01 & 0.01 & 0.00 \\ 
+		\hline
+	\end{tabular}
+	\\[0.4em]
+	{\scriptsize Unconditional FEVD (\%): Smets--Wouters-style model. $\varepsilon_g$ gov., \textcolor{accent}{$\varepsilon_s$ IST}, $\varepsilon_R$ monetary, $\varepsilon_a$ technology, $\varepsilon_b$ preference, $\varepsilon_p$ price-markup, $\varepsilon_w$ wage-markup, \textcolor{invest}{$\varepsilon_d$ ID}.}
+\end{frame}
+
+\begin{frame}{Takeaway}
+	% Conclusion
+	\begin{itemize}
+		\item Revisits investment-side shocks by testing \textbf{investment demand shock} in an estimated DSGE model.
+		\item \textbf{Baseline:} the ID shock alone explains $\approx 40\%$ of output and $\approx 50\%$ of investment FEVD---a competitive driver---and generates an inflationary expansion with comovement (vs.\ deflationary IST).
+		\item \textbf{Limitations:}
+		\begin{itemize}
+			\item results are specification-sensitive: the SW-style model shrinks the ID shock.
+			\item no direct data identifies the ID shock---identification leans on comovement differences, hard to test over the whole parameter space;
+			\item imperfect fit and some extreme posteriors in the baseline;
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\appendix
+\begin{frame}[c]{}
+	\centering
+	{\Large\textbf{Backup: toy model details}}
+\end{frame}
+
+\begin{frame}{From idiosyncratic shock to investment demand shock}
 	The reduced-form investment demand shock $\mu_{d,t}$:
 		\[
 			I_t=\mu_{d,t}\,I_t^{*},\quad
 			\ln\mu_{d,t}=(1-\rho_d)\ln\mu_d+\rho_d\ln\mu_{d,t-1}+\varepsilon_{d,t}.
 		\]
-	\begin{itemize}
-		\item \textbf{Step 1:} Optimal problem with $i_t$
-		\[\begin{aligned}
-            V^{pre}(b_t, k_t, A_t) &= \max_{c_t, b_{t+1}, i_t} u(c_t)
-            + \beta \mathbb{E}_t  \left( V^{pre}(b_{t+1}, k_{t+1}, A_{t+1})\right) \\
-            s.t. \quad &c_t + b_{t+1} + i_t = R_t(A_t) b_t + r_t^k(A_t) k_t\\
-            &  k_{t+1} = (1 - \delta) k_t + i_t
-        \end{aligned}
-		\]
-		\item Denote the investment choice of the first optimal problem by $i_t^*$.
-		\item \textbf{Step 2}: Given $i_t^*$
-		\[
-		\begin{aligned}
-            V^{post}(b_t, k_t, A_t, \mu_{d, t}) &= \max_{c_t, b_{t+1}} u(c_t) + \beta \mathbb{E}_t  \left( V^{pre}  (b_{t+1}, k_{t+1}, A_{t+1})\right) \\
-            s.t. \quad & c_t + b_{t+1} + i_t^* \mu_{d,t} = R_t(A_t) b_t + r_t^k(A_t) k_t\\
-            & k_{t+1} = (1 - \delta) k_t + i_t^* \mu_{d,t}
-        \end{aligned}
-		\]
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Why we can specify investment demand shock in this way?}
-
-	\textbf{Short answer:} this shock comes from the amplified idiosyncratic productivity shock.
 
 	\vspace{0.5em}
 
@@ -116,7 +316,8 @@
 		\]
 		$$\begin{aligned}
 			\text{s.t. }&k_{j,t+\tau+1}=(1-\delta)k_{j,t+\tau}+i_{j,t+\tau},\\
-			&i_{j,t+\tau}\in\{0,\ \lambda k_{j,t+\tau}\},\, \lambda>1.
+			&i_{j,t+\tau}\in\{0,\ (\lambda-1)(1-\delta)k_{j,t+\tau}\},\\
+			&\lambda>1.
 		\end{aligned}$$
 
 		\column{0.5\textwidth}
@@ -159,7 +360,7 @@
 		s_{j,t+1}=\frac{\log\!\big(k_{j,t+1}/k_{j,t+1}^{*}\big)}{\log\lambda}\implies
 		i_{j,t}=
 		\begin{cases}
-			\lambda k_{j,t}, & s_{j,t+1}<0\\
+			(\lambda-1)(1-\delta)k_{j,t}, & s_{j,t+1}<0\\
 			0, & s_{j,t+1} \geq 0
 		\end{cases}
 	\]
@@ -297,133 +498,6 @@
 		The derivative says $\Delta x(a, a', \nu) = O(\nu)$.
 		
 		$\implies$ average induced investment will not decay faster than $\nu$.
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{The estimated DSGE model}
-	% list the features of the model used in estimation, like sticky wage, investment adjustment cost, etc.
-	Based on Smets and Wouters (2007), Herbst and Schorfheide (2015), augmented with the investment demand shock.
-	\begin{itemize}
-		\item \textbf{Nominal rigidities:} Calvo price setting; reduced-form sticky wage---partial adjustment of the wage toward the MRS:
-		\[
-			w_t=\Big(L_t^{\sigma_\ell}\big/C_t^{-\sigma}\Big)^{\theta_w}\,w^{\,1-\theta_w}.
-		\]
-		\item \textbf{Other frictions:} investment adjustment cost $S(I_t/I_{t-1})$ and endogenous capital utilization $u_t$. 
-		\item \textbf{Policy:} Taylor rule; output-stabilizing government spending.
-		\item \textbf{Five structural shocks:} technology $\varepsilon_a$, IST $\varepsilon_s$, monetary $\varepsilon_R$, government $\varepsilon_g$, and investment demand $\varepsilon_d$.
-
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Estimation: method and data}
-	% 1. brief introduction on estimation method
-	% 2. Data
-	\begin{columns}[T,onlytextwidth]
-		\column{0.5\textwidth}
-		\textbf{Method}
-		\begin{itemize}
-			\item Bayesian estimation; methodology follows Smets and Wouters (2007),  Justiniano et al.\ (2010).
-			\begin{itemize}
-				\item Posterior via Metropolis--Hastings: $100{,}000$ draws.
-			\end{itemize}
-		\end{itemize}
-		\column{0.5\textwidth}
-		\textbf{Data}
-		\begin{itemize}
-			\item Six quarterly U.S.\ observables (FRED), \textbf{1983:Q1--2002:Q4}:
-			\begin{itemize}\small
-				\item output growth, CPI inflation, fed funds rate,
-				\item hours, investment growth, gov.-spending growth.
-			\end{itemize}
-		\end{itemize}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Baseline result: variance decomposition}
-	% baseline result (FEVD)
-	\begin{itemize}
-		\item \textcolor{invest}{\textbf{ID shock}} alone explains $\approx\!\mathbf{42\%}$ of output and $\approx\!\mathbf{51\%}$ of investment FEVD---a competitive driver of the cycle.
-		\item Jointly, \textcolor{accent}{IST} $+$ \textcolor{invest}{ID} account for $\approx 92\%$ of hours and $\approx 47\%$ of inflation.
-	\end{itemize}
-	\vspace{0.5em}
-	\centering
-	\small
-	\setlength{\tabcolsep}{1.0em}
-	\begin{tabular}{l r r r r r}
-		\hline\hline
-		Observable & $\varepsilon_g$ & \textcolor{accent}{$\varepsilon_s$} & $\varepsilon_R$ & $\varepsilon_a$ & \textcolor{invest}{$\varepsilon_d$} \\
-		\hline
-		Output         & 4.63  & 15.55 & 11.00 & 27.12 & \textbf{41.69} \\
-		Inflation      & 0.32  & 39.26 & 12.87 & 40.14 & 7.41 \\
-		Interest rate  & 0.37  & 55.06 & 5.48  & 31.22 & 7.87 \\
-		Hours          & 4.34  & 90.19 & 0.08  & 3.56  & 1.83 \\
-		Investment     & 0.11  & 36.23 & 0.15  & 12.04 & \textbf{51.48} \\
-		Gov.\ spending & 99.87 & 0.02  & 0.01  & 0.04  & 0.06 \\
-		\hline
-	\end{tabular}
-	\\[0.4em]
-	{\scriptsize Unconditional FEVD (\%). $\varepsilon_g$ gov., \textcolor{accent}{$\varepsilon_s$ IST}, $\varepsilon_R$ monetary, $\varepsilon_a$ technology, \textcolor{invest}{$\varepsilon_d$ ID}.}
-\end{frame}
-
-\begin{frame}{Baseline result: impulse responses}
-	% baseline result (IRF) -- explain the IRF plot
-	\centering
-	\includegraphics[width=0.77\textwidth]{compare_irf_gov_data.pdf}
-	\\[0.2em]
-	\begin{columns}[T,onlytextwidth]
-		\column{0.5\textwidth}
-		\textcolor{accent}{\textbf{IST shock $\Rightarrow$ deflationary}}
-		\begin{itemize}
-			\item Wage $\downarrow$ while hours $\uparrow$ $\Rightarrow$ labor supply shift dominates.
-			\item \textbf{Intertemporal substitution}: cheap investment $\Rightarrow$ save more today (labor supply shifts out).
-		\end{itemize}
-		\column{0.5\textwidth}
-		\textcolor{invest}{\textbf{ID shock $\Rightarrow$ inflationary}}
-		\begin{itemize}
-			\item Wage $\uparrow$ and hours $\uparrow$  $\Rightarrow$ labor demand shift dominates.
-			\item \textbf{Wealth effect}: higher future output raises lifetime wealth $\Rightarrow$ less impactful substitution effect.
-		\end{itemize}
-	\end{columns}
-\end{frame}
-
-\begin{frame}{Robustness: Smets--Wouters-style model}
-	% FEVD and IRF of SW-type model
-	Add habit formation, Erceg wage Phillips curve, and preference / price- / wage-markup shocks; add consumption and wage growth as observables.
-	\begin{itemize}
-		\item \textbf{ID shock turns marginal:} only $4.4\%$ of output and $13.6\%$ of investment FEVD.
-	\end{itemize}
-	\vspace{0.2em}
-	\centering
-	\footnotesize
-	\begin{tabular}{l r r r r r r r r}
-		\hline\hline
-		Observable & $\varepsilon_g$ & \textcolor{accent}{$\varepsilon_{s}$} & $\varepsilon_R$ & $\varepsilon_a$ & $\varepsilon_b$ & $\varepsilon_p$ & $\varepsilon_w$ & \textcolor{invest}{$\varepsilon_{d}$} \\ 
-		\hline
-		Output & 6.15 & 10.31 & 7.86 & 43.58 & 17.21 & 5.00 & 5.52 & \textbf{4.37} \\ 
-		Inflation & 0.05 & 1.78 & 0.82 & 18.85 & 0.40 & 53.05 & 25.04 & 0.00 \\ 
-		Interest rate & 0.19 & 7.16 & 30.37 & 26.67 & 4.51 & 10.39 & 20.72 & 0.00 \\ 
-		Hours & 2.00 & 20.43 & 7.10 & 34.85 & 7.86 & 1.10 & 26.35 & 0.30 \\ 
-		Investment & 0.25 & 54.98 & 2.43 & 18.59 & 3.19 & 0.62 & 6.33 & \textbf{13.62} \\ 
-		Wage & 0.00 & 0.12 & 0.14 & 18.25 & 0.30 & 16.96 & 64.23 & 0.00 \\ 
-		Consumption & 0.25 & 2.36 & 6.48 & 43.49 & 42.01 & 1.92 & 3.49 & 0.00 \\ 
-		Gov. spending & 99.90 & 0.01 & 0.01 & 0.05 & 0.02 & 0.01 & 0.01 & 0.00 \\ 
-		\hline
-	\end{tabular}
-	\\[0.4em]
-	{\scriptsize Unconditional FEVD (\%): Smets--Wouters-style model. $\varepsilon_g$ gov., \textcolor{accent}{$\varepsilon_s$ IST}, $\varepsilon_R$ monetary, $\varepsilon_a$ technology, $\varepsilon_b$ preference, $\varepsilon_p$ price-markup, $\varepsilon_w$ wage-markup, \textcolor{invest}{$\varepsilon_d$ ID}.}
-\end{frame}
-
-\begin{frame}{Takeaway}
-	% Conclusion
-	\begin{itemize}
-		\item Revisits investment-side shocks by testing \textbf{investment demand shock} in an estimated DSGE model.
-		\item \textbf{Baseline:} the ID shock alone explains $\approx 40\%$ of output and $\approx 50\%$ of investment FEVD---a competitive driver---and generates an inflationary expansion with comovement (vs.\ deflationary IST).
-		\item \textbf{Limitations:}
-		\begin{itemize}
-			\item results are specification-sensitive: the SW-style model shrinks the ID shock.
-			\item no direct data identifies the ID shock---identification leans on comovement differences, hard to test over the whole parameter space;
-			\item imperfect fit and some extreme posteriors in the baseline;
-		\end{itemize}
 	\end{itemize}
 \end{frame}
 \end{document}

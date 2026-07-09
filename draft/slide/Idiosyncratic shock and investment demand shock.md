@@ -34,7 +34,7 @@ $$\frac{\partial V}{\partial k_{t+k}} = \mathbb{E}_t\left[\Lambda_{t,t+k}\left(\
 This derivative is strictly decreasing, approaching to infinity when $k_{t+k}$ approaches to zero, and approaching to negative infinity when $k_{t+k}$ approaches to infinity *(instruction: check my argument)*. Thus, the plot of this function looks like this (*instruction: please add one tikzplot, also consider the following usage of the plot, Figure 1).
 
 However, they also face lumpy investment constraint, and for simplicity, I assume firms can't invest multiple $\lambda^n$.
-$$x_{j,t+k} \in \{0,\, \lambda k_{j, t+k}\}$$
+$$x_{j,t+k} \in \{0,\, (\lambda-1)(1-\delta) k_{j, t+k}\}$$
 We leverage the plot to find out the investment threshold:
 1. We find an interval $[k^*, \lambda k^*]$ around the unique peak such that $k^*$ and $\lambda k^*$ receive the same value.
 2. If $(1-\delta)k_{j,t}$ sit the left hand side of $k^*$, $\lambda k^*$ leads us to the side of the peak, but the value of the objective function is the same
