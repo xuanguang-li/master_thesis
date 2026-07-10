@@ -147,8 +147,15 @@
 	% list the features of the model used in estimation, like sticky wage, investment adjustment cost, etc.
 	Based on Smets and Wouters (2007), Herbst and Schorfheide (2015), augmented with the investment demand shock.
 	\begin{itemize}
-		\item \textbf{Nominal rigidities:} Calvo price setting; Erceg nominal wage rigidity.
-		\item \textbf{Other frictions:} investment adjustment cost and endogenous capital utilization. 
+		\item \textbf{Nominal rigidities:} Calvo price setting.
+		\item \textbf{Other frictions:} 
+		\begin{itemize}
+			\item Investment adjustment cost and endogenous capital utilization.
+			\item reduced-form sticky real wage:
+			\(
+				w_t=\Big(L_t^{\sigma_\ell}\big/C_t^{-\sigma}\Big)^{\theta_w}\,w^{\,1-\theta_w}.
+			\)
+		\end{itemize}
 		\item \textbf{Policy:} Taylor rule; output-stabilizing government spending.
 		\item \textbf{Five structural shocks:} technology $\varepsilon_a$, IST $\varepsilon_s$, monetary $\varepsilon_R$, government $\varepsilon_g$, and investment demand $\varepsilon_d$.
 
@@ -181,7 +188,7 @@
 
 \begin{frame}{Baseline result: variance decomposition}
 	% baseline result (FEVD)
-	\textcolor{invest}{\textbf{ID shock}} alone explains $\approx\!\mathbf{29\%}$ of output and $\approx\!\mathbf{38\%}$ of investment FEVD.
+	\textcolor{invest}{\textbf{ID shock}} alone explains $\approx\!\mathbf{20\%}$ of output, $\approx\!\mathbf{27\%}$ of hours worked and $\approx\!\mathbf{25\%}$ of investment FEVD.
 
 	\vspace{1em}
 
@@ -214,7 +221,7 @@
 \begin{frame}{Baseline result: impulse responses}
 	% baseline result (IRF) -- explain the IRF plot
 	\centering
-	\includegraphics[width=0.77\textwidth]{compare_irf_delete_shock.pdf}
+	\includegraphics[width=0.77\textwidth]{compare_irf_gov_data.pdf}
 	\\[0.2em]
 	\begin{columns}[T,onlytextwidth]
 		\column{0.5\textwidth}
@@ -263,12 +270,16 @@
 	% Conclusion
 	\begin{itemize}
 		\item Revisits investment-side shocks by testing \textbf{investment demand shock} in an estimated DSGE model.
-		\item \textbf{Baseline:} the ID shock alone explains $\approx 40\%$ of output and $\approx 50\%$ of investment FEVD---a competitive driver---and generates an inflationary expansion with comovement (vs.\ deflationary IST).
+		\item \textbf{Baseline:} 
+		\begin{itemize}
+			\item The investment demand shock alone explains $\approx 29\%$ of output, $\approx 27\%$ hours worked and $\approx 25\%$ of investment FEVD, which isa competitive driver.
+			\item The investment demand shock generates an inflationary expansion with comovement (vs.\ deflationary IST).
+		\end{itemize}
 		\item \textbf{Limitations:}
 		\begin{itemize}
-			\item results are specification-sensitive: the SW-style model shrinks the ID shock.
-			\item no direct data identifies the ID shock---identification leans on comovement differences, hard to test over the whole parameter space;
-			\item imperfect fit and some extreme posteriors in the baseline;
+			\item Results are specification-sensitive: the SW-style model shrinks the ID shock.
+			\item No direct data identifies the ID shock: identification leans on comovement differences, hard to test over the whole parameter space;
+			\item Imperfect fit and some extreme posteriors in the baseline;
 		\end{itemize}
 	\end{itemize}
 \end{frame}
