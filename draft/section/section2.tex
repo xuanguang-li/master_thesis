@@ -9,9 +9,12 @@
             \max\limits_{c, b, i, k, l, u} \,\mathbb{E}_t \sum_{k=0}^{\infty} \beta^k \left(\frac{(c_{t+k} / \gamma^{t+k})^{1-\sigma} - 1}{1 - \sigma} - \chi\frac{\ell_{t+k}^{\sigma_\ell + 1}(j)}{\sigma_\ell + 1}\right)
         \end{equation}
     
-    In the objective function, $\gamma$ is the growth rate of the labor-augmented technology, which is used to generate a trend in the state variables. Usually, if we use detrended data, there is no need to add this term. However, the process of detrending itself includes some operations on the data, which are not explained in the model. To maintain the integrity of the estimation process, I use $\gamma$ to fit the non-detrended data.
+    In the objective function, $\gamma$ is the growth rate of the labor-augmented technology, which is used to generate a trend in the state variables. Usually, if we use detrended data, there is no need to add this term. However, the process of detrending itself includes some operations on the data, which are not explained in the model. Therefore, $\gamma$ is used to fit the non-detrended data.
 
-    Following \cite{herbstBayesianEstimationDSGE2015}, I assume the representative household derives utility from effective consumption, defined as absolute consumption scaled by the trend in labor-augmenting technology. This formulation mathematically guarantees the existence of a balanced growth path and the convenience of representing the marginal utility, as we can directly define the detrended consumption $\tilde{c}_{t+k} = c_{t+k} / \gamma^{t+k}$ within it.
+    Following \cite{herbstBayesianEstimationDSGE2015}, I assume the representative household derives utility from effective consumption, defined as absolute consumption scaled by the trend in labor-augmenting technology. This formulation mathematically guarantees the existence of a balanced growth path, and facilitates the derivation of the detrended equations. For example, we can write the stochastic discount factor as following by defining the detrended consumption $\tilde{c}_{t+k} = c_{t+k} / \gamma^{t+k}$:
+    \[\mathbb{E}_t\left(\beta \frac{u'(c_{t+1})}{u'(c_t)}\right) 
+    = \mathbb{E}_t\left(\beta \frac{c_{t+1}/\gamma^{t+1}}{c_t/\gamma^t}\frac{\gamma^t}{\gamma^{t+1}}\right) 
+    = \mathbb{E}_t\left(\beta \frac{\tilde{c}_{t+1}}{\tilde{c}_{t}}\frac{1}{\gamma}\right)\]
     
     The budget constraint appears in the following equation:
     \begin{equation}
@@ -24,12 +27,12 @@
         k_{t+1} = (1 - \delta) k_t + \mu_{s, t}\left[1 - S\left(\frac{i_t}{i_{t-1}}\right)\right] i_t
     \end{equation}
 
-    The first one is the investment specific technology shock $\mu_{s, t}$, which can be assumed to follow a stationary AR(1) process without incorporating the relative price of investment.
+    The first one is the investment specific technology shock $\mu_{s, t}$, which is assumed to follow a stationary AR(1) process.
     \begin{equation}
         \ln \mu_{s, t} = (1 - \rho_{i}) \ln \mu_{s} + \rho_{s}\ln \mu_{s, t-1} + \varepsilon_{s, t}, \,\, \varepsilon_{s, t} \sim \text{i.i.d. } \mathcal{N}(0, \sigma_s^2)
     \end{equation}
-
-    The second one is the investment adjustment cost $S\left(\frac{i_t}{i_{t-1}}\right)$. I use the function form $S(x) = \frac{\phi_i}{2}(x - \gamma)^2$, indicating that if the growth of the investment is above or below the balanced path growth rate, then an additional adjustment cost should be charged. The setting is important because the investment would otherwise be very sensitive to the shocks, which fails to match the comovement in the data \citep{winberryLumpyInvestmentBusiness2021} and causes unrealistic impulse response functions.
+    
+    The second one is the investment adjustment cost $S\left(\frac{i_t}{i_{t-1}}\right)$. I set the form of $S(x)$ as $S(x) = \frac{\phi_i}{2}(x - \gamma)^2$, indicating that if the growth of the investment is above or below the balanced path growth rate, then an additional adjustment cost should be charged. The setting is important because the investment would otherwise be very sensitive to the shocks, which fails to match the comovement in the data \citep{winberryLumpyInvestmentBusiness2021} and causes unrealistic impulse response functions.
 
     From the household's optimal problem, we obtain the following first-order conditions. Let $Q_t$ denote the ratio of the Lagrange multiplier on the law of motion of capital to the Lagrange multiplier on the budget constraint, which captures the relative marginal utility between consumption and investment. $Q_t$ has the following relation to Tobin's $Q$: $\text{Tobin's }Q = Q_t \mu_{s, t}$. Define gross inflation as $\pi_{t+1}\equiv P_{t+1}/P_t$.
     \begin{align}
@@ -55,7 +58,7 @@
     \begin{equation}
         \begin{aligned}
              \max\limits_{Y_t, y_t(j)}\, & P_t Y_t - \int_{0}^{1} p_t(j)y_t(j)\, dj \\
-             \text{s.t.  } & Y_t = \left(\int_{0}^{1} y_{t}(j)^{\nu - 1}\, dj\right)^{\frac{1}{\nu - 1}}.
+             \text{s.t.  } & Y_t = \left(\int_{0}^{1} y_{t}(j)^{\frac{\nu - 1}{\nu}}\, dj\right)^{\frac{\nu}{\nu - 1}}.
         \end{aligned}
     \end{equation}
     
@@ -86,7 +89,7 @@
         \ln \mu_{a, t} = (1 - \rho_a) \ln \mu_{a} + \rho_a \ln \mu_{a, t-1} + \varepsilon_{a, t}, \,\, \varepsilon_{a, t} \sim \text{i.i.d. } \mathcal{N}(0, \sigma_a^2).
     \end{equation}
 
-    $\gamma^t$ ($\gamma>1$) is the labor-augmented technology, which helps derive the balanced growth path. In addition, $K^s_t$ denotes the capital service, which will be influenced by the capital utilization $u_t$ under general equilibrium conditions.
+    $\gamma^t$ ($\gamma>1$) is the labor-augmented technology, which helps derive the balanced growth path. In addition, $k^s_t$ denotes the capital service, which will be influenced by the capital utilization $u_t$ under general equilibrium conditions.
 
     Cost minimization yields the cost function. However, as the production function has constant returns to scale, the marginal cost is solved as well:
     \begin{equation}
@@ -109,9 +112,7 @@
     \begin{equation}
         w_t = \left(\frac{L_t^{\sigma_\ell}}{C_t^{-\sigma}}\right)^{\theta_w} w^{1 - \theta_w}
     \end{equation}
-    where $w$ is the steady-state real wage. Similar to the Calvo pricing problem, the equation roughly means that only a $\theta_w \in (0,1)$ part of wage contracts can be reset to match the current marginal rate of substitution between hours worked and consumption. Meanwhile, the rest of the $1 - \theta_w$ part can only keep the steady-state real wage.
-
-    Comparing with the standard sticky wage setting in \cite{erceg2000optimal}, this simplified wage-setting equation assumes a perfectly competitive labor market, and thus there is no wage markup if the firms are allowed to reset the wage contract. In addition, the trapped wage is on the steady-state level, which can be taken as the optimal wage setting before a shock has happened.
+    where $w$ is the steady-state real wage. Similar to the Calvo pricing problem, the equation roughly means that only a $\theta_w \in (0,1)$ part of wage contracts can be reset to match the current marginal rate of substitution between hours worked and consumption. Meanwhile, the rest of the $1 - \theta_w$ part can only keep the steady-state real wage. Comparing with the standard sticky wage setting in \cite{erceg2000optimal}, this simplified wage-setting equation assumes a perfectly competitive labor market, and thus there is no wage markup if the firms are allowed to reset the wage contract.
 
     Another property of this equation is that the implied wage markup is not constant. To see this, we can simply calculate 
     
